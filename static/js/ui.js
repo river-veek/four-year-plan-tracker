@@ -1,7 +1,12 @@
-function toggleShow(){
+function toggleShow (){
   document.getElementById('dropdown-list').classList.toggle('show')
 }
-
+function classInfo (id) {
+	toggleShow ()
+	var currentSpace = document.getElementById('init')
+	var matrix = NaN
+	document.body.insertBefore(matrix, currentSpace);
+}
 window.onclick = function (event) {
   if (!event.target.matches('.dropbtn')) {
     const dropdowns = document.getElementsByClassName('dropdown-content')
