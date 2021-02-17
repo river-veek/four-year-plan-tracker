@@ -123,7 +123,9 @@
 
 	 tr:nth-child(even) {background-color: green;}
 	 
-	 tr:nth-child(1){background-color: #f71111}
+	 tr:nth-child(odd) {background-color:#FBE021}
+	 
+	 tr:nth-child(4n+1){background-color: #f71111}
 	 
 	 
 	 
