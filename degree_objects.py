@@ -18,18 +18,19 @@ class Degree():
 
         self.name = name
         self.courses = []
-        self.required_courses = []
+        self.core_courses = []
+        self.required_electives = []
 
     def calc_pre_rec_nums(self):
         """
-        Function to calculate and set the number of cources each cources within
+        Function to calculate and set the number of courses each courses within
         the Degree are required for (Course.pre_reqs_num)
 
         Returns:
             None
         """
 
-        #loop through cources in the major
+        #loop through courses in the major
         for course in self.courses:
             #loop through pre_reqs for the currnt course
             for pre_req in course.pre_reqs:
@@ -40,7 +41,7 @@ class Degree():
 
 class Course():
 
-    def __init__(self, self.name: str, course_num: int, pre_reqs: list, terms: list):
+    def __init__(self, name: str, course_num: int, pre_reqs: list, terms: list):
         """
         Function to initialize a Course object
 
@@ -49,7 +50,7 @@ class Course():
             course_num - (int) is the identifier number for the course
             pre_reqs - (list) is a list of Course objects that are required to
                         be taken by a Student before this one
-            terms - (list) is a list of
+            terms - (list) is a list of Term enums
 
         """
 
