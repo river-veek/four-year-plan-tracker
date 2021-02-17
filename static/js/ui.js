@@ -50,6 +50,7 @@ function buildMatrix(id)
 		["CIS 425", "MThF", "1530-1630", "3", "a Win"],
 		["CIS 110", "MWF", "0230-0400", "3", "a Win"],
 		["Summer 2020","Days","Time","Credits","Difficulty"],
+		["","","","",""]
 		//["CIS 410", "MTWF", "0830-1000", "3", "a Win"]		
 	]
 	//Create table
