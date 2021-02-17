@@ -16,7 +16,7 @@
         -webkit-font-smoothing: antialiased;
         overflow: -moz-scrollbars-none;
         -ms-overflow-style: none;
-        background-color: grey
+        background-color:rgba(180, 176, 176, 0.53)
       }
 
 	  .page_wrapper
@@ -46,6 +46,7 @@
 	  {
 		left:50%;
 		top: 50%;
+		width: 100px;
 		background-color: #004F39;
 		color: white;
 		padding: 16px;
@@ -104,7 +105,25 @@
 		/* -height/2 */
 		width: 20px;
 		height: 20px;
-  	  }
+  	 }
+  	 
+  	 table 
+  	 {
+  	 	font-family: arial, sans-serif;
+  	 	border-collapse: collapse;
+  	 	width: 100%;
+	 }
+
+	 td, th 
+	 {
+	 	border: 1px solid black;
+	 	text-align: left;
+	 	padding: 8px;
+	 }
+
+	 tr:nth-child(even) {background-color: green;}
+	 
+	 tr:nth-child(1){background-color: #f71111}
 	 
 	 
 	 
