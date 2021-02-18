@@ -3,11 +3,119 @@ function toggleShow() {
   document.getElementById('dropdown-list').classList.toggle('show')
 }
 
-function toggleButton() {
+function toggleLogin() {
 	 var button = document.getElementById('log-in');
+	 var add = document.getElementById('add');
+	 var save = document.getElementById('save');
 	 if(button.style.display === "none")
-	 {button.style.display = "inline-block";}
-	 else{button.style.display = "none";}
+	 {
+		 button.style.display = "inline-block";
+		 var clist=document.getElementById('choice-list');
+		 var tlist=document.getElementById('term-list');
+		 var ylist=document.getElementById('year-list');
+		 clist.remove();
+		 tlist.remove();
+		 ylist.remove();
+		 
+		 add.style.display = "none";
+		 save.style.display = "none";
+		 
+		 }
+	 else{
+		 button.style.display = "none";
+		 createLists()
+		 add.style.display = "inline";
+		 save.style.display = "inline";
+
+	 }
+	 //getElementsByClassName('functions').style.display='inline';
+}
+
+function createLists(){
+	createCourseList()
+	createTermList()
+	createYearList()
+	//addTexts()
+	
+}
+
+function addTexts(){
+	var h_1 = document.createElement('H4');
+	h_1.setAttribute('class', 'term-list');
+	var termText = document.createTextNode("Cources");
+	h_1.appendChild(termText);
+	var h_2 = document.createElement('H4');
+	h_2.setAttribute('class', 'term-list');
+	termText = document.createTextNode("Terms");
+	h_2.appendChild(termText);
+	var h_3 = document.createElement('H4');
+	h_3.setAttribute('class', 'term-list');
+	termText = document.createTextNode("Years");
+	h_3.appendChild(termText);
+
+	document.getElementById('lists').appendChild(h_1);
+	document.getElementById('lists').appendChild(h_2);
+	document.getElementById('lists').appendChild(h_3);
+	
+	}
+
+function createCourseList(){
+	var classesList = ["Courses", "210: Computer Science I","211: Computer Science II","212: Computer Science III","313: Intermediate Data Structures","314: Computer Organization",
+	"315: Intermediate Algorithms","322: Introduction to Software Engineering","330: C/C++ & Unix","399: Applied Cryptography"]
+	var list = document.createElement('select');
+	list.name = "Courses";
+	list.id="choice-list";
+	list.class="c-list";
+	for(const val of classesList){
+		var option = document.createElement("option");
+		option.value = val;
+		option.text = val;
+		list.appendChild(option);
+	}
+	document.getElementById('init').appendChild(list);
+}
+
+function createTermList() {
+	var termList = ["Terms","Fall", "Winter", "Spring", "Summer"]
+	var tlist = document.createElement('select');
+	tlist.name = "Term";
+	tlist.id="term-list";
+	tlist.class="t-list";
+	for(const val of termList){
+		var option = document.createElement("option");
+		option.value = val;
+		option.text = val;
+		tlist.appendChild(option);
+	}
+	document.getElementById('init').appendChild(tlist);
+	
+}
+
+function createYearList(){
+	var yearList = ["Year","1st","2nd","3rd","4th","5th"]
+	var ylist = document.createElement('select');
+	ylist.name = "Year";
+	ylist.id="year-list";
+	ylist.class="y-list";
+	for(const val of yearList){
+		var option = document.createElement("option");
+		option.value = val;
+		option.text = val;
+		ylist.appendChild(option);
+	}
+	document.getElementById('init').appendChild(ylist);
+}
+
+function toggleMatrix (){
+	var matrix = document.getElementById('class-list')
+	if(matrix)
+	{
+		matrix.remove()
+		var button = document.getElementById('log-in');
+		button.style.display = 'inline-block';
+	}
+	var button = document.getElementById('log-in');
+		button.style.display = 'inline-block';
 }
 
 function classInfo (id) {
@@ -56,6 +164,7 @@ function buildMatrix(id)
 	//Create table
 	let table = document.createElement('table');
 	table.setAttribute("id", "class-list");
+	//table.setAttribute("display", "table");
 	//loop through each sub array in tableArr
 	for(let row of tableArr)
 	{
