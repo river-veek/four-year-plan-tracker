@@ -112,6 +112,7 @@
   	 	font-family: arial, sans-serif;
   	 	border-collapse: collapse;
   	 	width: 100%;
+  	 	display: table;
 	 }
 
 	 td, th 
@@ -120,7 +121,30 @@
 	 	text-align: left;
 	 	padding: 8px;
 	 }
+	 
+	 #choice-list, #term-list, #year-list
+	 {
+		 width: 130px;
+		 display: inline-block;
+		 text-align: center;
+		 margin: 50px;
+	 }
+	 	 
+	 .resetbtn
+	 {
+		justify-content: flex-end;
+		display: flex;
+	 }
 
+
+	 .functions
+	 {
+		 position: relative;
+		 left: 50%;
+		 margin-top: 40%;
+		 align-content: center;
+		 transform: translate(-4.5%,-70%);
+	 }
 	 tr:nth-child(even) {background-color: green;}
 	 
 	 tr:nth-child(odd) {background-color:#FBE021}
