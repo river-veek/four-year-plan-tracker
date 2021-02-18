@@ -17,25 +17,19 @@
 	    <script type="text/javascript" src="../static/js/ui.js"></script>
 	    <div class=dropdown id="init">
 		    <div id="lists">
-		    <button onclick="toggleShow()" class="dropbtn" id="log-in"> Log-in </button>
-		    <div id="dropdown-list" class="dropdown-content">
-				<!Temporary Dropdown data for testing>
-			    <a onclick="toggleLogin()">9557593</a>
-				<a onclick="">9573834</a>
-				<a onclick="">9502340</a>
-				<a onclick="">9557593</a>
-				<a onclick="">9573834</a>
-				<a onclick="">9502340</a>
-				<a onclick="">9557593</a>
-				<a onclick="">9573834</a>
-				<a onclick="">9502340</a>
+		    	<button onclick="toggleShow()" class="dropbtn" id="log-in"> Log-in </button>
+				<div id="dropdown-list" class="dropdown-content">
+					<!Temporary Dropdown data for testing>
+					<a onclick="toggleLogin()">9557593</a>
+		    	</div>
 		    </div>
-		    </div>
-	    	</div>
-	    	<div class="functions">
-		    <button id="add" style="display: none;">Add Class</button>
-		 <button id="save" style="display: none;">Save</button>
 	    </div>
+	    	<div class="functions">
+		    	<button id="add" style="display: none;" onclick="demoAddClass()">Add Class</button>
+				<button id="remove" style="display: none;" onclick="demoRemoveClass()">Remove Class</button>
+				<button id="save" style="display: none;">Save</button>
+				<button id="display" style="display: none;" onclick="buildMatrix()">Display</button>
+	    	</div>
 
-	       </body>
+	</body>
     </html>
