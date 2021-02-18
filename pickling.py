@@ -9,6 +9,7 @@ Last Modified - 2/17/21
 """
 
 import pickle
+import os
 
 def save_record(student_id, student_object):
     """
@@ -36,11 +37,27 @@ def load_record(student_id):
     pickle_in.close()
     return student
 
+def delete_record(student_id):
+    """
+    :student_id: Student.identifier string
+
+    No return value. Deletes the file named <student_id> if it exists.
+    """
+    path = './pickles/' + student_id
+    if os.path.exists(path):
+        os.remove(path)
+    else:
+        print("File doesn't exist\n")
+    return
+
 def testing():
+    id = "951234567"
     test_obj = {"test1": 4, "test2": 16}
-    save_record("951234567", test_obj)
-    loaded_obj = load_record("951234567")
+    save_record(id, test_obj)
+    loaded_obj = load_record(id)
     assert loaded_obj["test1"] == 4
+    delete_record(id)
+    return
 
 def main():
     print("----------- Begin testing ------------\n")
