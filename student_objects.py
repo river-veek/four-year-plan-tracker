@@ -10,7 +10,11 @@ Last Modified - 2/16/21
 from degree_objects import *
 
 class Student():
-    #need to figure out how we want to store degree (list or single degree object)
+    """
+    Class object to store a student's infomation such a desired graduation date,
+    if they are willing to take classes over the summer, and what courses they
+    completed
+    """
 
     def __init__(self,
                  identifier: str,
@@ -42,6 +46,15 @@ class Student():
         pass
 
     def remove_degree(self, degree_name: str):
+        """
+        Function for removing a degree from the student.degree_list
+
+        Inputs:
+            degree_name - (str) the name of the degree to be removed
+
+        Returns:
+            None
+        """
         pass
 
     def add_course(self, course_name: str, year: str, term: int):
@@ -50,13 +63,42 @@ class Student():
         determined by inputed "year" and "term"
 
         Inputs:
+            course_name -
+            year -
+            term -
 
         """
-        self.plan[year][term].append(course_name)
+        added_course = None
+        #get course object that coresponds to the inputed course_name
+        for course in self.degree_list:
+            if course.name == course_name:
+                added_course = course
+                break
 
-    def remove_course(self, cource_name: str, year: str, term: int):
-        #need check to confirm cource is in self.plan
-        pass
+        #add course object into self.plan
+        self.plan[year][term].append(course)
+
+    def remove_course(self, course_name: str, year: str, term: int):
+        """
+        Function remove a course object from self.student plan with position
+        being determined by inputed "year" and "term"
+
+        Inputs:
+            course_name -
+            year -
+            term -
+
+        """
+
+        #check to confirm course is in self.plan
+        course_found = False
+        for course in self.plan[year][term]:
+            if course.name == course_name:
+                course_found = True
+                self.plan[year][term].remove(course)
+
+        if course_found == False:
+            print("Error")
 
     def generate_plan(self):
 
