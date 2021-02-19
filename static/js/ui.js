@@ -1,24 +1,30 @@
 
 function toggleShow() {
-  document.getElementById('dropdown-list').classList.toggle('show')
+  document.getElementById('dropdown-list').classList.toggle('show');
 }
 
 function toggleLogin() {
 	 var button = document.getElementById('log-in');
 	 var add = document.getElementById('add');
 	 var save = document.getElementById('save');
+	 var displaybtn = document.getElementById('display');
+	 var remove = document.getElementById('remove');
 	 if(button.style.display === "none")
 	 {
 		 button.style.display = "inline-block";
 		 var clist=document.getElementById('choice-list');
 		 var tlist=document.getElementById('term-list');
 		 var ylist=document.getElementById('year-list');
+		 var matr = document.getElementById('matrix');
+		 matr.remove();
 		 clist.remove();
 		 tlist.remove();
 		 ylist.remove();
 		 
 		 add.style.display = "none";
 		 save.style.display = "none";
+		 remove.style.display ="none";
+		 displaybtn.style.display = "none";
 		 
 		 }
 	 else{
@@ -26,6 +32,8 @@ function toggleLogin() {
 		 createLists()
 		 add.style.display = "inline";
 		 save.style.display = "inline";
+		 remove.style.display ="inline";
+		 displaybtn.style.display = "inline";
 
 	 }
 	 //getElementsByClassName('functions').style.display='inline';
@@ -39,25 +47,38 @@ function createLists(){
 	
 }
 
-function addTexts(){
-	var h_1 = document.createElement('H4');
-	h_1.setAttribute('class', 'term-list');
-	var termText = document.createTextNode("Cources");
-	h_1.appendChild(termText);
-	var h_2 = document.createElement('H4');
-	h_2.setAttribute('class', 'term-list');
-	termText = document.createTextNode("Terms");
-	h_2.appendChild(termText);
-	var h_3 = document.createElement('H4');
-	h_3.setAttribute('class', 'term-list');
-	termText = document.createTextNode("Years");
-	h_3.appendChild(termText);
-
-	document.getElementById('lists').appendChild(h_1);
-	document.getElementById('lists').appendChild(h_2);
-	document.getElementById('lists').appendChild(h_3);
+function demoAddClass(){
+	arr = [
+	["Courses Added"],
+	["210: Computer Science I"]
+	]
 	
+	let prev = document.getElementById('matrix');
+	if(prev)
+	{
+		prev.remove();
 	}
+	let table = document.createElement('table');
+	table.setAttribute("id", "matrix");
+	//table.setAttribute("display", "table");
+	//loop through each sub array in tableArr
+	for(let row of arr)
+	{
+		//Create new Rows
+		table.insertRow();
+		//for each index of subarray 
+		for(let cell of row){
+			//create cell in row and add subarray value into cell
+			let newCell = table.rows[table.rows.length - 1].insertCell();
+			newCell.textContent = cell;
+		}
+	}
+	//ID use #~
+	const dropdownloc =document.querySelector('#init');
+	dropdownloc.parentNode.insertBefore(table, dropdownloc);
+	//document.body.appendChild(table);
+
+}
 
 function createCourseList(){
 	var classesList = ["Courses", "210: Computer Science I","211: Computer Science II","212: Computer Science III","313: Intermediate Data Structures","314: Computer Organization",
@@ -119,12 +140,13 @@ function toggleMatrix (){
 }
 
 function classInfo (id) {
+	//ID is useless for now 
 	toggleShow ()
 	toggleButton()
-	//var currentSpace = document.getElementById('init')
 	buildMatrix(id)
 
 }
+
 window.onclick = function (event) {
   if (!event.target.matches('.dropbtn')) {
     const dropdowns = document.getElementsByClassName('dropdown-content')
@@ -137,6 +159,20 @@ window.onclick = function (event) {
   }
 }
 
+function demoRemoveClass(){
+   let mat = document.getElementById('matrix');
+   mat.deleteRow(1);
+   let len = mat.rows.length;
+   console.log(len);
+   if(len == 1)
+   	{
+	   	arr = ["No Courses Added"]
+	   	mat.insertRow().insertCell(0).textContent = arr[0];
+	   	mat.deleteRow(0);
+	}
+}
+
+
 
 function buildMatrix(id)
 {
@@ -144,22 +180,12 @@ function buildMatrix(id)
 	future reference - possibly iterate through students class list and insert them
 	into Matrix and create on page
 	*/
+	var prevtable = document.getElementById('matrix');
+	prevtable.remove();
 	var tableArr=[
-		["Fall 2019","Days","Time","Credits", "Difficulty"],
+		["Courses","Term","Year"],
 		//["Class, Days, Time", "Credits, Difficulty (out of 4)"],
-		["CIS 422", "WF", "1400-1600", "4","an L"],
-		["CIS 415", "MWF", "0800-1000","3", "an L"],
-		["CIS 212", "MWThF", "1200-1400", "2", "a Win"],
-		["Winter 2020","Days","Time","Credits","Difficulty"],
-		["CIS 407", "WF", "1400-1600", "4","an L"],
-		["CIS 410", "MWF", "1000-1200","3", "an L"],
-		["CIS 314", "MWThF", "1800-0200", "2", "a Win"],
-		["Spring 2020","Days","Time","Credits","Difficulty"],
-		["CIS 425", "MThF", "1530-1630", "3", "a Win"],
-		["CIS 110", "MWF", "0230-0400", "3", "a Win"],
-		["Summer 2020","Days","Time","Credits","Difficulty"],
-		["","","","",""]
-		//["CIS 410", "MTWF", "0830-1000", "3", "a Win"]		
+		["210: Computer Science I", "Fall", "1st"]
 	]
 	//Create table
 	let table = document.createElement('table');
@@ -177,24 +203,6 @@ function buildMatrix(id)
 			newCell.textContent = cell;
 		}
 	}
-	//Need to go through and find row[0] == "Fall" | "Spring" | "Summer" | "Winter" ? 
-	// More research into dealing with Tables, find possible work around instead of brute force search 
-	//for(let x = 0; x < table.rows.length; x++)
-	//{
-	//	console.log(table.rows);
-	//}
-	
-	
+		
 	document.body.appendChild(table);
-	
-	
-	//for(let x = 0; x < 10; x++)
-	//{
-	//	tableArr.push(["row " + x])
-	//}
-	//console.log(tableArr.length)
-	//for(let x = 0; x < tableArr.length; x++)
-	//{
-	//	console.log(tableArr)
-		//}	
 }
