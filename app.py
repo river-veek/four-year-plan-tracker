@@ -1,3 +1,13 @@
+"""
+--------------------------------------------------------------------------------
+File containing the routing for application logic
+
+Author: JT Kashuba
+Group: TBD
+Last Modified: 2/15/21
+--------------------------------------------------------------------------------
+"""
+
 from flask import Flask, render_template, abort, request
 import random
 

@@ -1,3 +1,9 @@
+--------------------------------------------------------------------------------
+Author: JT Kashuba
+Group: TBD
+Last Modified: 2/15/21
+--------------------------------------------------------------------------------
+
 # Getting Started
 
 If you haven't used docker before, here are a couple useful tips to get started.
