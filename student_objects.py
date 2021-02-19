@@ -32,13 +32,13 @@ class Student():
         """
 
         self.identifier = identifier
-        self.degree_list = []
+        self.degree_list = [] # list of degree objects in the case that a student has more than 1 major (or a minor)
         self.plan = {"First": [[], [], [], []],
                      "Second": [[], [], [], []],
                      "Third": [[], [], [], []],
                      "Fourth": [[], [], [], []],
                      "Fifth": [[], [], [], []]
-                     }
+                     } # first, second, etc refer to the year in the students college experience
         self.summer = summer
         self.desired_grad_date = desired_grad_date
 
