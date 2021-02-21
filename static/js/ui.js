@@ -9,8 +9,7 @@ function toggleLogin() {
 	 var save = document.getElementById('save');
 	 var displaybtn = document.getElementById('display');
 	 var remove = document.getElementById('remove');
-	 if(button.style.display === "none")
-	 {
+	 if(button.style.display === "none") {
 		 button.style.display = "inline-block";
 		 var clist=document.getElementById('choice-list');
 		 var tlist=document.getElementById('term-list');
@@ -20,14 +19,13 @@ function toggleLogin() {
 		 clist.remove();
 		 tlist.remove();
 		 ylist.remove();
-		 
+
 		 add.style.display = "none";
 		 save.style.display = "none";
 		 remove.style.display ="none";
 		 displaybtn.style.display = "none";
-		 
-		 }
-	 else{
+	 }
+	 else {
 		 button.style.display = "none";
 		 createLists()
 		 add.style.display = "inline";
@@ -44,15 +42,16 @@ function createLists(){
 	createTermList()
 	createYearList()
 	//addTexts()
-	
+
 }
 
 function demoAddClass(){
+	// Should be populating based on the dropdown info (not doing that yet)
 	arr = [
 	["Courses Added"],
 	["210: Computer Science I"]
 	]
-	
+
 	let prev = document.getElementById('matrix');
 	if(prev)
 	{
@@ -66,7 +65,7 @@ function demoAddClass(){
 	{
 		//Create new Rows
 		table.insertRow();
-		//for each index of subarray 
+		//for each index of subarray
 		for(let cell of row){
 			//create cell in row and add subarray value into cell
 			let newCell = table.rows[table.rows.length - 1].insertCell();
@@ -81,6 +80,7 @@ function demoAddClass(){
 }
 
 function createCourseList(){
+	// Populate from our Python data structures in the future
 	var classesList = ["Courses", "210: Computer Science I","211: Computer Science II","212: Computer Science III","313: Intermediate Data Structures","314: Computer Organization",
 	"315: Intermediate Algorithms","322: Introduction to Software Engineering","330: C/C++ & Unix","399: Applied Cryptography"]
 	var list = document.createElement('select');
@@ -109,7 +109,6 @@ function createTermList() {
 		tlist.appendChild(option);
 	}
 	document.getElementById('init').appendChild(tlist);
-	
 }
 
 function createYearList(){
@@ -140,11 +139,10 @@ function toggleMatrix (){
 }
 
 function classInfo (id) {
-	//ID is useless for now 
+	//ID is useless for now
 	toggleShow ()
 	toggleButton()
 	buildMatrix(id)
-
 }
 
 window.onclick = function (event) {
@@ -196,13 +194,12 @@ function buildMatrix(id)
 	{
 		//Create new Rows
 		table.insertRow();
-		//for each index of subarray 
+		//for each index of subarray
 		for(let cell of row){
 			//create cell in row and add subarray value into cell
 			let newCell = table.rows[table.rows.length - 1].insertCell();
 			newCell.textContent = cell;
 		}
 	}
-		
 	document.body.appendChild(table);
 }

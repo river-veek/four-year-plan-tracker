@@ -1,35 +1,77 @@
 <!DOCTYPE html>
-    <html>
 
-    <head>
-        <meta charset="utf-8">
-        <title>To Be Decided</title>
-        
-        <link rel="stylesheet" href="../static/css/ui.css">
-    </head>
-   <header> 
-	   <div class="top-section">
-		    <h4 class="header-text"> Create your own 4-Year Plan!</h4>
-		    <div class="resetbtn"><button onclick="toggleLogin()">Reset</button></div>
-	    </div>
-	    </header>
-    <body>
-	    <script type="text/javascript" src="../static/js/ui.js"></script>
-	    <div class=dropdown id="init">
-		    <div id="lists">
-		    	<button onclick="toggleShow()" class="dropbtn" id="log-in"> Log-in </button>
-				<div id="dropdown-list" class="dropdown-content">
-					<!Temporary Dropdown data for testing>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FYPT</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/css/ui.css">
+  </head>
+
+  <header>
+	  <div class="top-section">
+		  <h4 class="header-text">Create your own 4-Year Plan!</h4>
+
+			<!-- This reset button is a little buggy -->
+		  <div class="resetbtn"><button onclick="toggleLogin()">Reset</button></div>
+	  </div>
+	</header>
+
+  <body>
+	  <script type="text/javascript" src="../static/js/ui.js"></script>
+	  <div class=dropdown id="init">
+		  <div id="lists">
+		    <button onclick="toggleShow()" class="dropbtn" id="log-in"> Log-in </button>
+			  <div id="dropdown-list" class="dropdown-content">
+					<!--Temporary Dropdown data for testing-->
 					<a onclick="toggleLogin()">9557593</a>
-		    	</div>
 		    </div>
-	    </div>
-	    	<div class="functions">
-		    	<button id="add" style="display: none;" onclick="demoAddClass()">Add Class</button>
-				<button id="remove" style="display: none;" onclick="demoRemoveClass()">Remove Class</button>
-				<button id="save" style="display: none;">Save</button>
-				<button id="display" style="display: none;" onclick="buildMatrix()">Display</button>
-	    	</div>
+		  </div>
+	  </div>
 
-	</body>
-    </html>
+		<!-- Testing Bootstrap functionality (proof of concept)-->
+		<div class="col-12">
+			<h4>3 columns</h4>
+			<hr>
+			<div class="container-fluid padding">
+				<div class="row">
+					<div class="col-md-4 my-4">
+						<p><strong>Header 1</strong></p>
+						<hr>
+						<p>
+							Body 1
+						</p>
+					</div>
+
+					<div class="col-md-4 my-4">
+						<p><strong>Header 2</strong></p>
+						<hr>
+						<p>
+							Body 2
+						</p>
+					</div>
+
+					<div class="col-md-4 my-4">
+						<p><strong>Header 3</strong></p>
+						<hr>
+						<p>
+							Body 3
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	  <div class="functions">
+		  <button id="add" style="display: none;" onclick="demoAddClass()">Add Class</button>
+			<button id="remove" style="display: none;" onclick="demoRemoveClass()">Remove Class</button>
+			<button id="save" style="display: none;">Save</button>
+			<button id="display" style="display: none;" onclick="buildMatrix()">Display</button>
+	  </div>
+
+  </body>
+</html>
