@@ -29,6 +29,9 @@ class Degree():
         Returns:
             None
         """
+        #insure everything is zeroed out
+        for course in self.courses:
+            course.pre_reqs_num = 0
 
         #loop through courses in the major
         for course in self.courses:
@@ -37,6 +40,68 @@ class Degree():
                 pre_req.pre_reqs_num += 1
 
         return None
+
+    def add_course(self,
+                   name: str,
+                   course_num: int,
+                   pre_reqs: list,
+                   terms: list,
+                   is_core_course: bool,
+                   is_elective: bool):
+        """
+        Function for creating a new Course object and adding it to the degree
+
+        Inputs:
+            name - (str) is the unique name for the course
+            course_num - (int) is the identifier number for the course
+            pre_reqs - (list) is a list of Course objects that are required to
+                        be taken by a Student before this one
+            terms - (list) is a list of Term enums
+
+        Outputs:
+            None
+        """
+        #generate Course object
+        new_course = Course(name, course_num, pre_reqs, terms)
+
+        #add Cource into list of possible cources
+        self.courses.append(new_course)
+
+        #if core requirment add it to the list
+        if is_core_course:
+            self.core_courses.append(new_course)
+
+        if is_elective:
+            self.required_electives.append(new_course)
+
+    def remove_course(self, name: str):
+        """
+        Function to remove a course with course.name == name from degree object
+
+        Inputs:
+            name - (str) is the unique name for the course
+
+        Outputs:
+            None
+        """
+
+        #remove from general list
+        for course in self.courses:
+            if course.name == name:
+                self.courses.remove(course)
+
+        #remove from core list
+        for course in self.core_courses:
+            if course.name == name:
+                self.courses.remove(course)
+
+        #remove from elective list
+        for course in self.required_electives:
+            if course.name == name:
+                self.courses.remove(course)
+
+    def save_degree(self):
+        pass
 
 
 class Course():
