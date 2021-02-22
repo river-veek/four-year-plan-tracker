@@ -32,7 +32,10 @@ class Student():
         """
 
         self.identifier = identifier
-        self.degree_list = [] # list of degree objects in the case that a student has more than 1 major (or a minor)
+
+        # list of degree objects in the case that a student has more than 1 major (or a minor)
+        self.degree_list = []
+
         self.plan = {"First": [[], [], [], []],
                      "Second": [[], [], [], []],
                      "Third": [[], [], [], []],
@@ -42,8 +45,18 @@ class Student():
         self.summer = summer
         self.desired_grad_date = desired_grad_date
 
-    def add_degree(self, degree_name: str):
-        pass
+    def add_degree(self, degree_obj: Degree):
+        """
+        Function for adding a degree from the student.degree_list
+
+        Inputs:
+            degree_obj - (Degree) the Degree object to be added
+
+        Returns:
+            None
+        """
+
+        self.degree_list.append(degree_obj)
 
     def remove_degree(self, degree_name: str):
         """
@@ -55,7 +68,10 @@ class Student():
         Returns:
             None
         """
-        pass
+
+        for degree in self.degree_list:
+            if degree.name == degree_name:
+                self.degree_list.remove(degree)
 
     def add_course(self, course_name: str, year: str, term: int):
         """
@@ -63,14 +79,16 @@ class Student():
         determined by inputed "year" and "term"
 
         Inputs:
-            course_name -
-            year -
-            term -
+            course_name - (str) identifier of the course to add
+            year - (str) indicates the year in which to add the course in self.plan
+            term - (int) indicats the term in which to add the course in self.plan
 
         """
         added_course = None
+
         #get course object that coresponds to the inputed course_name
-        for course in self.degree_list:
+        for degree in  self.degree_list:
+        for course in degree:
             if course.name == course_name:
                 added_course = course
                 break
@@ -84,9 +102,9 @@ class Student():
         being determined by inputed "year" and "term"
 
         Inputs:
-            course_name -
-            year -
-            term -
+            course_name - (str) identifier of the course to add
+            year - (str) indicates the year in which to find the course in self.plan
+            term - (int) indicats the term in which to find the course in self.plan
 
         """
 
@@ -100,13 +118,34 @@ class Student():
         if course_found == False:
             print("Error")
 
-    def generate_plan(self):
+    def generate_plan(self, year: str, term: int):
+        #TODO
 
         #create copy of self.plan
+        forecast_plan = self.plan.copy()
 
-        #add cources to plan_copy untill all requirements have been met
+        ###figure out which requirments have not been met and put them all in a list
 
-        #return course copy
+        #initialize unmet_courses
+        unmet_courses = []
+        for degree in self.degree_list:
+
+        #remove courses from unmet_courses if in student plan
+        for key in self.plan:
+            for term in self.plan[key]:
+                for course in term:
+                    if course in unmet_courses:
+                        unmet_courses.remove(course)
+
+        ###sort this list by pre_rec_nums
+
+        ###figure out the number of terms remaining before the desired grad date
+
+        ###based off this number determine number of courses that need to be taken per term
+
+        ###loop through unmet list popping off the from of the list and adding to the plan
+
+        return forecast_plan
 
     def checkcompetion(self):
         """
