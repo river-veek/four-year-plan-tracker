@@ -50,3 +50,12 @@ def create_CIS_major():
     CIS_major.add_course("CIS 471 Introduction to Artificial Intelligence", 471, ["CIS 315 Intermediate Algorithms"], [Term("Fall"), Term("Winter")])
     CIS_major.add_course("CIS 472 Machine Learning", 472, ["CIS 315 Intermediate Algorithms"], [Term("Fall"), Term("Spring")])
     CIS_major.add_course("CIS 473 Probabilistic Methods", 473, ["CIS 315 Intermediate Algorithms"], [Term("Winter")])
+
+    # (I think) this particular case doesn't cause issues, but we should probably
+    # consider how the int "231" for example, might overlap with CIS 231 and how to handle that.
+
+    # another thing to consider: the pre-req is specified as "MATH 112 or satisfactory placement test score"
+    # so for students who have NOT taken MATH 112 but DO have a satisfactory placement test, we need this "requirement"
+    # to be waived, essentially
+    CIS_major.add_course("MATH 231 Elements of Discrete Mathematics I", 231, ["MATH 112 Elementary Functions"], [Term("Fall"), Term("Winter"), Term("Spring")])
+    CIS_major.add_course("MATH 232 Elements of Discrete Mathematics II", 232, ["MATH 231 Elements of Discrete Mathematics I"], [Term("Fall"), Term("Winter"), Term("Spring")])
