@@ -51,6 +51,33 @@ function addClass()
 	currRow[2].textContent = currTerm.value;
 }
 
+function removeClass(){
+	//get the current option values selected
+	let currCourse = document.getElementById("choice-list").value;
+	let currTerm = document.getElementById("term-list").value;
+	let currYear = document.getElementById("year-list").value;
+	//get table
+	var currTable = document.getElementById('added-list');
+	let len = currTable.rows.length - 1
+	let found = false;
+	var idx = 1;
+	while(!found && idx <= len)
+	{
+		var currRow = currTable.rows[idx].cells
+		if(currRow[0].innerHTML == currCourse && currRow[1].innerHTML == currYear && currRow[2].innerHTML == currTerm)
+		{
+			found = true;
+			currTable.deleteRow(idx);
+		}
+		else
+		{
+			idx++;
+		}
+	}
+	
+
+}
+
 //Builds course list for now - used for testing
 function createCourseList(){
 	var classesList = ["Courses", "210: Computer Science I","211: Computer Science II","212: Computer Science III","313: Intermediate Data Structures","314: Computer Organization",
