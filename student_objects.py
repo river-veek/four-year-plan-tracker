@@ -2,9 +2,9 @@
 ----------------------------------------------------------------------------------------
 File for defining Student class object and a class for storing a list of students
 
-Author - Noah Kruss
+Authors - JT Kashuba, Noah Kruss
 Group - TBD
-Last Modified - 2/16/21
+Last Modified - 2/22/21
 ----------------------------------------------------------------------------------------
 """
 from degree_objects import *
@@ -75,8 +75,8 @@ class Student():
 
     def add_course(self, course_name: str, year: str, term: int):
         """
-        Function add a course object into self.student plan with position being
-        determined by inputed "year" and "term"
+        Function adds a course to the course object into self.student plan with
+        position being determined by inputted "year" and "term"
 
         Inputs:
             course_name - (str) identifier of the course to add
@@ -86,7 +86,7 @@ class Student():
         """
         added_course = None
 
-        #get course object that coresponds to the inputed course_name
+        #get course object that coresponds to the inputted course_name
         for degree in  self.degree_list:
         for course in degree:
             if course.name == course_name:
@@ -98,8 +98,8 @@ class Student():
 
     def remove_course(self, course_name: str, year: str, term: int):
         """
-        Function remove a course object from self.student plan with position
-        being determined by inputed "year" and "term"
+        Function removes a course from the course object from self.student plan
+        with position being determined by inputted "year" and "term"
 
         Inputs:
             course_name - (str) identifier of the course to add
@@ -124,7 +124,7 @@ class Student():
         #create copy of self.plan
         forecast_plan = self.plan.copy()
 
-        ###figure out which requirments have not been met and put them all in a list
+        ###figure out which requirements have not been met and put them all in a list
 
         #initialize unmet_courses
         unmet_courses = []
@@ -149,6 +149,6 @@ class Student():
 
     def checkcompetion(self):
         """
-        check if all degrees for the student has had their requirments met
+        check if all degrees for the student has had their requirements met
         """
         pass

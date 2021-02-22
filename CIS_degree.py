@@ -2,7 +2,7 @@
 ----------------------------------------------------------------------------------------
 File for generating the standard CIS degree
 
-Author - Noah Kruss, JT Kashuba, River Veek
+Author - JT Kashuba, Noah Kruss, River Veek
 Group - TBD
 Last Modified - 2/22/21
 ----------------------------------------------------------------------------------------
@@ -10,7 +10,6 @@ Last Modified - 2/22/21
 from degree_objects import *
 
 def create_CIS_major():
-    # Short Example
     CIS_major = Degree()
     CIS_major.add_course("CIS 110 Fluency with Information Technology", 110, [], [Term("Fall")])
     CIS_major.add_course("CIS 210 Computer Science I", 210, ["MATH 112 Elementary Functions"], [Term("Fall"), Term("Winter")])
@@ -57,5 +56,10 @@ def create_CIS_major():
     # another thing to consider: the pre-req is specified as "MATH 112 or satisfactory placement test score"
     # so for students who have NOT taken MATH 112 but DO have a satisfactory placement test, we need this "requirement"
     # to be waived, essentially
+
+    # other things to consider, for "optional elective pairs" [(MATH 251, MATH 252), (MATH 261, MATH 262), (MATH 246, MATH 247)], mapped to their
+    # corresponding pre-reqs? seems messy if we're handling everything in the backend rather than allowing the student to hit "MATH elective" twice
+    # in the add_course dropdown button and simply note that they have 3 options of "2-class pairs" to pick from. This also gets messy quick w/ terms electives
+    # are offered.
     CIS_major.add_course("MATH 231 Elements of Discrete Mathematics I", 231, ["MATH 112 Elementary Functions"], [Term("Fall"), Term("Winter"), Term("Spring")])
     CIS_major.add_course("MATH 232 Elements of Discrete Mathematics II", 232, ["MATH 231 Elements of Discrete Mathematics I"], [Term("Fall"), Term("Winter"), Term("Spring")])

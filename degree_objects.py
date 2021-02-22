@@ -2,9 +2,9 @@
 ----------------------------------------------------------------------------------------
 File for the defining the Degree class object and Course class object
 
-Author - Noah Kruss
+Authors - JT Kashuba, Noah Kruss
 Group - TBD
-Last Modified - 2/21/21
+Last Modified - 2/22/21
 ----------------------------------------------------------------------------------------
 """
 
@@ -17,7 +17,7 @@ class Degree():
 
         self.name = name
         self.courses = []
-        self.course_requirments = {}
+        self.course_requirements = {}
 
     def calc_pre_rec_nums(self):
         """
@@ -27,13 +27,13 @@ class Degree():
         Returns:
             None
         """
-        #insure everything is zeroed out
+        #ensure everything is zeroed out
         for course in self.courses:
             course.pre_reqs_num = 0
 
         #loop through courses in the major
         for course in self.courses:
-            #loop through pre_reqs for the currnt course
+            #loop through pre_reqs for the current course
             for pre_req in course.pre_reqs:
                 pre_req.pre_reqs_num += 1
 
@@ -44,11 +44,11 @@ class Degree():
                    course_num: int,
                    pre_reqs: list,
                    terms: list,
-                   requirment_type = None):
+                   requirement_type = None):
         """
         Function for creating a new Course object and adding it to the degree
 
-        Note: Course must have all pre-reqs alreay added to the degree
+        Note: Course must have all pre-reqs already added to the degree
 
         Inputs:
             name - (str) is the unique name for the course
@@ -56,7 +56,7 @@ class Degree():
             pre_reqs - (list) is a list of course names that are required to
                         be taken by a Student before this one
             terms - (list) is a list of Term enums
-            requirment_type - (str) a string denoting what type of requirment the
+            requirement_type - (str) a string denoting what type of requirement the
                               course is. Defaults to None
 
         Outputs:
@@ -69,7 +69,7 @@ class Degree():
             if course.name is in pre_reqs:
                 pre_req_objects.append(course)
 
-        #error check to confim all pre_req were found in the degree object
+        #error check to confirm all pre_req were found in the degree object
         if len(pre_req_objects) != len(pre_reqs):
             print("Error loading pre-reqs could not find all of them in the degree")
             return None
@@ -77,15 +77,15 @@ class Degree():
         #generate Course object
         new_course = Course(name, course_num, pre_req_objects, terms)
 
-        #add Cource into list of possible cources
+        #add Course into list of possible courses
         self.courses.append(new_course)
 
-        if requirment_type == None:
+        if requirement_type == None:
             pass
-        elif self.required_courses.has_key(requirment_type):
-            self.required_courses[requirment_type].append(new_course)
+        elif self.required_courses.has_key(requirement_type):
+            self.required_courses[requirement_type].append(new_course)
         else:
-            self.required_courses[requirment_type] = [new_course]
+            self.required_courses[requirement_type] = [new_course]
 
         #THOUGHTS!!!!!!!!!!!!!!!!!!!
         #recalc pre reqs num
@@ -108,7 +108,7 @@ class Degree():
                 self.courses.remove(course)
 
         #remove from required_courses
-        for requirment_type in self.required_courses:
+        for requirement_type in self.required_courses:
             for course in self.core_courses:
                 if course.name == name:
                     self.courses.remove(course)
