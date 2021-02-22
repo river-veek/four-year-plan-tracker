@@ -69,6 +69,7 @@ class Degree():
             if course.name is in pre_reqs:
                 pre_req_objects.append(course)
 
+        #error check to confim all pre_req were found in the degree object
         if len(pre_req_objects) != len(pre_reqs):
             print("Error loading pre-reqs could not find all of them in the degree")
             return None
