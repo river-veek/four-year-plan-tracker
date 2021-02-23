@@ -27,27 +27,24 @@
 		<div class="container-fluid padding">
 			<div class="row text-center padding">
 				<div class="col-12">
-
-
 					<h2>Welcome to the Four-Year Plan Tracker!</h2>
 					<hr>
-
-					<div class="dropdown" id="init">
-					  <div id="lists">
-					    <button data-toggle="dropdown" onclick="toggleShow()" class="dropbtn" id="log-in">Select Student</button>
-						  <div id="dropdown-list" class="dropdown-content">
-								<!--Temporary Dropdown data for testing-->
-								<a onclick="toggleLogin()">955759321</a>
-					    </div>
-					  </div>
-				  </div>
+					<!--Dropdown button containing Student ID # -->
+					<div class="dropdown-container" id="main-space">
+						<button data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-xs" type="button" aria-expanded="true" id="log-in">Log in <span class="caret"></span>
+						</button>
+						<ul role="menu" class="dropdown-menu">
+						<!--when clicked will remove button and display class options and buttons -->
+						<li><a onclick="toggleLogin()">Some 95 Num</a> </li>
+  						</ul>
+					</div>
 
 				</div>
 			</div>
 		</div>
 
 		<div class="functions">
-			<table id="added-list" style="display: block;">
+			<table id="added-list" style="display: none;">
 				<tr>
 					<th>Course Name</th>
 					<th>Year</th>
