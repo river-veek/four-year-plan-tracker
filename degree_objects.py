@@ -17,7 +17,7 @@ class Degree():
 
         self.name = name
         self.courses = []
-        self.course_requirements = {}
+        self.core_courses = []
 
     def calc_pre_rec_nums(self):
         """
@@ -44,7 +44,7 @@ class Degree():
                    course_num: int,
                    pre_reqs: list,
                    terms: list,
-                   requirement_type = None):
+                   is_core = False):
         """
         Function for creating a new Course object and adding it to the degree
 
@@ -56,8 +56,8 @@ class Degree():
             pre_reqs - (list) is a list of course names that are required to
                         be taken by a Student before this one
             terms - (list) is a list of Term enums
-            requirement_type - (str) a string denoting what type of requirement the
-                              course is. Defaults to None
+            is_core - (bool) a string denoting what type of requirment the
+                            core course to complete the major. Defaults to False
 
         Outputs:
             None
@@ -80,16 +80,8 @@ class Degree():
         #add Course into list of possible courses
         self.courses.append(new_course)
 
-        if requirement_type == None:
-            pass
-        elif self.required_courses.has_key(requirement_type):
-            self.required_courses[requirement_type].append(new_course)
-        else:
-            self.required_courses[requirement_type] = [new_course]
-
-        #THOUGHTS!!!!!!!!!!!!!!!!!!!
-        #recalc pre reqs num
-        self.calc_pre_rec_nums()
+        if is_core:
+            self.core_courses.append(new_course)
 
     def remove_course(self, name: str):
         """
@@ -113,11 +105,9 @@ class Degree():
                 if course.name == name:
                     self.courses.remove(course)
 
-        #THOUGHTS!!!!!!!!!!!!!!!!!!!
-        #recalc pre reqs num
-        self.calc_pre_rec_nums()
 
     def save_degree(self):
+        self.calc_pre_rec_nums()
         pass
 
 
