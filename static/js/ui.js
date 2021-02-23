@@ -41,7 +41,8 @@ function addClass () {
   }
   else {
     // insert new row
-    table.insertRow()
+    var row = table.insertRow()
+    row.className = "table-warning"    // Example of how to set Bootstrap class dynamically
     // always add 3 cells as only inserting choice, term and year
     for (let x = 0; x < 3; x++) {
     // insert new cell into row
@@ -66,8 +67,8 @@ function removeClass () {
   let found = false
   let idx = 1
   while (!found && idx <= len) {
-    const currRow = currTable.rows[idx].cells  
-    
+    const currRow = currTable.rows[idx].cells
+
     if (currRow[0].innerText === currCourse && currRow[1].innerText === currYear && currRow[2].innerText === currTerm) {
       found = true
       currTable.deleteRow(idx)

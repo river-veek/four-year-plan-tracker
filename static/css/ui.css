@@ -43,19 +43,33 @@ body {
 
 .show {display:block;}
 
-
+/* Table stuff that may be superseded by Bootstrap classes
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
   display: table;
 }
+*/
 
+/*
 td, th {
 	border: 1px solid black;
 	text-align: left;
 	padding: 8px;
 }
+*/
+
+/* May be replaced by table-striped
+tr:nth-child(even) {background-color: green;} */
+	 /*
+	 tr:nth-child(odd) {background-color:#FBE021}
+
+	 tr:nth-child(4n+1){background-color: #f71111}
+
+	 */
+/*
+tr:nth-child(4n+1){background-color: #FBE021} */
 
 #choice-list, #term-list, #year-list {
 	width: 130px;
@@ -68,18 +82,6 @@ td, th {
 #matrix {
 	width: 200px;
 }
-
-tr:nth-child(even) {background-color: green;}
-	 /*
-	 tr:nth-child(odd) {background-color:#FBE021}
-
-	 tr:nth-child(4n+1){background-color: #f71111}
-
-	 */
-tr:nth-child(4n+1){background-color: #FBE021}
-
-
-
 
 /*--- Bootstrap Padding Fix --*/
 [class*="col-"] {
