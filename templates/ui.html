@@ -30,7 +30,7 @@
 							<li class="dropdown-content"><a onclick="toggleLogin()">951234567</a> </li>
   					</ul>
 					</div>
-					<!-- Will need a create new student button -->
+					<!-- TODO Will need a create new student button -->
 
 				</div>
 			</div>
@@ -40,24 +40,24 @@
 			<div class="row">
 
 					<div class="col-md-6 my-4">
-						<button class="btn btn-secondary" id="save" style="display: none;" onclick="">Save</button>
-						<button class="btn btn-secondary" id="display" style="display: none;" onclick="">Display</button>
+						<button class="btn btn-primary" id="save" style="display: none;" onclick="">Save</button>
+						<button class="btn btn-primary" id="display" style="display: none;" onclick="">Save and Display</button>
+						<!-- Perhaps a clear changes button? May be a future addition -->
 						<br><br>
-
-						<!-- Striping doesn't seem to be working right, trying to get table to fill full width at all times -->
-						<table class="table table-striped table-bordered" id="added-list" style="display: none;">
-							<thead>
-							<tr class="table-success">
-								<th scope="col" style="width: 50%">Course Name</th>
-								<th scope="col" style="width: 25%">Year</th>
-								<th scope="col" style="width: 25%">Term</th>
-							</tr>
-							</thead>
-							<!-- <tbody>
-
-							</tbody> -->
-						</table>
-
+						<div class="table-responsive">
+							<table class="table table-bordered" id="added-list" style="display: none;">
+								<thead>
+								<tr class="table-success">
+									<th scope="col" style="width: 50%">Course Name</th>
+									<th scope="col" style="width: 25%">Year</th>
+									<th scope="col" style="width: 25%">Term</th>
+								</tr>
+								</thead>
+								<tbody id="course-rows">
+									<!-- Filled by JS when user inputs courses -->
+								</tbody>
+							</table>
+						</div>
 					</div>
 
 					<div class="col-md-6 my-4">

@@ -34,7 +34,7 @@ function addClass () {
   const currTerm = document.getElementById('term-list')
   const currYear = document.getElementById('year-list')
   // get table
-  const table = document.getElementById('added-list')
+  const table = document.getElementById('course-rows') // was added-list, but referencing the tbody now
   if(currCourse.value === 'Courses' || currTerm.value === 'Terms' || currYear.value === 'Year') {
 	// dont do anything
 	// will impliment a pop up possibly or show warning not an option
