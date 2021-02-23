@@ -4,26 +4,27 @@ function toggleShow () {
 }
 
 function toggleLogin () {
-  const button = document.getElementById('log-in')
+  // get elements of DOM
+  const btn = document.getElementById('log-in')
   const add = document.getElementById('add')
   const save = document.getElementById('save')
   const displaybtn = document.getElementById('display')
   const remove = document.getElementById('remove')
-
-  button.style.display = 'none'
+  // create source elements - set buttons to appear - set log in to disappear
   createLists()
+  btn.style.display = 'none'
   add.style.display = 'inline'
   save.style.display = 'inline'
   remove.style.display = 'inline'
   displaybtn.style.display = 'inline'
-  // getElementsByClassName('functions').style.display='inline';
 }
 
 function createLists () {
+  // create source buttons / toggle log in
   createCourseList()
   createTermList()
   createYearList()
-  // addTexts()
+  document.getElementById('added-list').style.display = 'block'
 }
 
 // Takes current option value - adds it to table
@@ -34,18 +35,24 @@ function addClass () {
   const currYear = document.getElementById('year-list')
   // get table
   const table = document.getElementById('added-list')
-  // insert new row
-  table.insertRow()
-  // always add 3 cells as only inserting choice, term and year
-  for (let x = 0; x < 3; x++) {
-  // insert new cell into row
-    table.rows[table.rows.length - 1].insertCell()
+  if(currCourse.value === 'Courses' || currTerm.value === 'Terms' || currYear.value === 'Year') {
+	// dont do anything
+	// will impliment a pop up possibly or show warning not an option
   }
-  const currRow = table.rows[table.rows.length - 1].cells
-  // Set each cell to correct value;
-  currRow[0].textContent = currCourse.value
-  currRow[1].textContent = currYear.value
-  currRow[2].textContent = currTerm.value
+  else {
+    // insert new row
+    table.insertRow()
+    // always add 3 cells as only inserting choice, term and year
+    for (let x = 0; x < 3; x++) {
+    // insert new cell into row
+      table.rows[table.rows.length - 1].insertCell()
+    }
+    const currRow = table.rows[table.rows.length - 1].cells
+    // Set each cell to correct value;
+    currRow[0].textContent = currCourse.value
+    currRow[1].textContent = currYear.value
+    currRow[2].textContent = currTerm.value
+  }
 }
 
 function removeClass () {
@@ -59,7 +66,8 @@ function removeClass () {
   let found = false
   let idx = 1
   while (!found && idx <= len) {
-    const currRow = currTable.rows[idx].cells
+    const currRow = currTable.rows[idx].cells  
+    
     if (currRow[0].innerText === currCourse && currRow[1].innerText === currYear && currRow[2].innerText === currTerm) {
       found = true
       currTable.deleteRow(idx)
@@ -80,7 +88,7 @@ function createCourseList () {
     option.text = val
     list.appendChild(option)
   }
-  document.getElementById('init').appendChild(list)
+  document.getElementById('main-space').appendChild(list)
 }
 // Builds term list for now - used for testing
 function createTermList () {
@@ -96,7 +104,7 @@ function createTermList () {
     option.text = val
     tlist.appendChild(option)
   }
-  document.getElementById('init').appendChild(tlist)
+  document.getElementById('main-space').appendChild(tlist)
 }
 // Builds year list for now - used for testing
 function createYearList () {
@@ -112,18 +120,5 @@ function createYearList () {
     option.text = val
     ylist.appendChild(option)
   }
-  document.getElementById('init').appendChild(ylist)
-}
-
-// toggles dropdown for log in
-window.onclick = function (event) {
-  if (!event.target.matches('.dropbtn')) {
-    const dropdowns = document.getElementsByClassName('dropdown-content')
-    for (let i = 0; i < dropdowns.length; i++) {
-      const openDropdown = dropdowns[i]
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show')
-      }
-    }
-  }
+  document.getElementById('main-space').appendChild(ylist)
 }
