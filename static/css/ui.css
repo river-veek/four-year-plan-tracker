@@ -17,75 +17,17 @@ body {
 	height:auto;
 }
 
-/*
-.top-section {
-	text-align: center;
-	padding: 1px;
-	background: #1a1515;
-	border: #ca2727;
-	color: #FBE021;
-}
-
-.header-txt {
-	text-align: center;
-	position: relative;
-	margin: 0;
-	align-content: center
-}
-*/
-
-.dropbtn {
-	left:50%;
-	top: 50%;
-	width: 200px;
-	background-color: #004F39;
-	color: white;
-	padding: 16px;
-	font-size: 16px;
-	border: none;
-	cursor: pointer;
-	right: 50px;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-	background-color: #FBE021;
-}
-
-/* This section was bugging the button in some cases and preventing interaction
-.dropdown {
-	left: 50%;
-	top: 50%;
-	align-content: center;
-	justify-content:inherit;
-	position:absolute;
-	align-self: center;
-	display: inline-block;
-	transform: translate(-50%,-50%);
-}
-*/
-
-.dropdown-content {
-	display: none;
-	/*
-	position: fixed;
-	*/
-	background-color: #f1f1f1;
-	min-width: 100px;
-	max-width: 200px;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	z-index: 1;
-}
-
 .dropdown-content a {
 	color: black;
-	padding: 12px 16px;
+	padding: 4px 10px;
 	text-decoration: none;
 	display: block;
+	cursor: pointer;
+	min-width: 150px;
 }
 
 .dropdown-content a:hover {background-color: #ddd}
 
-/* Sample css for Bootstrap button
 .dropdown-container {
   position: relative;
 }
@@ -93,21 +35,13 @@ body {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  right: 0;
-  margin-left: -100px;
 }
-*/
+
+.dropdown-toggle {
+	min-width: 150px;
+}
 
 .show {display:block;}
-
-.box {
-	position: relative;
-	top: 50%;
-	margin: -10px auto;
-		 /*-height/2 */
-	width: 20px;
-	height: 20px;
-}
 
 
 table {
@@ -131,19 +65,8 @@ td, th {
 	position: relative;
 }
 
-.resetbtn {
-	justify-content: flex-end;
-  display: flex;
-}
-
 #matrix {
 	width: 200px;
-}
-
-.functions {
-  position: relative;
-	left: 40%;
-	align-content: center;
 }
 
 tr:nth-child(even) {background-color: green;}

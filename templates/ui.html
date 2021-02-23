@@ -12,15 +12,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../static/css/ui.css">
   </head>
-<!--
-  <header>
-	  <div class="top-section">
-		  <h4 class="header-text">Create your own 4-Year Plan!</h4>
 
-		  <div class="resetbtn"><button onclick="toggleLogin()">Reset</button></div>
-	  </div>
-	</header>
--->
   <body>
 	  <script type="text/javascript" src="../static/js/ui.js"></script>
 
@@ -31,18 +23,43 @@
 					<hr>
 					<!--Dropdown button containing Student ID # -->
 					<div class="dropdown-container" id="main-space">
-						<button data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-xs" type="button" aria-expanded="true" id="log-in">Log in <span class="caret"></span>
+						<button data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-xs" type="button" id="log-in">Student Select<span class="caret"></span>
 						</button>
 						<ul role="menu" class="dropdown-menu">
-						<!--when clicked will remove button and display class options and buttons -->
-						<li><a onclick="toggleLogin()">Some 95 Num</a> </li>
-  						</ul>
+							<!--when clicked will remove button and display class options and buttons -->
+							<li class="dropdown-content"><a onclick="toggleLogin()">951234567</a> </li>
+  					</ul>
 					</div>
+					<!-- Will need a create new student button -->
 
 				</div>
 			</div>
 		</div>
 
+		<div class="container-fluid padding">
+			<div class="row">
+
+					<div class="col-md-6 my-4">
+						<button class="btn btn-secondary" id="save" style="display: none;" onclick="">Save</button>
+						<button class="btn btn-secondary" id="display" style="display: none;" onclick="">Display</button>
+						<br><br>
+						<table id="added-list" style="display: none;">
+							<tr>
+								<th>Course Name</th>
+								<th>Year</th>
+								<th>Term</th>
+							</tr>
+						</table>
+					</div>
+
+					<div class="col-md-6 my-4">
+						<button class="btn btn-primary" id="add" style="display: none;" onclick="addClass()">Add Course</button>
+						<button class="btn btn-primary" id="remove" style="display: none;" onclick="removeClass()">Remove Course</button>
+					</div>
+			</div>
+		</div>
+
+<!--
 		<div class="functions">
 			<table id="added-list" style="display: none;">
 				<tr>
@@ -51,56 +68,13 @@
 					<th>Term</th>
 				</tr>
 			</table>
+
 			<button id="add" style="display: none;" onclick="addClass()">Add Class</button>
 			<button id="remove" style="display: none;" onclick="removeClass()">Remove Class</button>
 			<button id="save" style="display: none;" onclick="">Save</button>
 			<button id="display" style="display: none;" onclick="">Display</button>
 		</div>
-
-<!-- Sample button Bootstrap
-		<div class="dropdown-container">
-  		<button data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-xs" type="button" aria-expanded="true">Success <span class="caret"></span>
-  		</button>
-  		<ul role="menu" class="dropdown-menu">
-    		<li><a href="#">Action</a> </li>
-
-  		</ul>
-		</div>
 -->
-
-		<!-- Testing Bootstrap functionality (proof of concept)
-		<div class="col-12">
-			<h4>3 columns</h4>
-			<hr>
-			<div class="container-fluid padding">
-				<div class="row">
-					<div class="col-md-4 my-4">
-						<p><strong>Header 1</strong></p>
-						<hr>
-						<p>
-							Body 1
-						</p>
-					</div>
-
-					<div class="col-md-4 my-4">
-						<p><strong>Header 2</strong></p>
-						<hr>
-						<p>
-							Body 2
-						</p>
-					</div>
-
-					<div class="col-md-4 my-4">
-						<p><strong>Header 3</strong></p>
-						<hr>
-						<p>
-							Body 3
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	-->
 
 
 
