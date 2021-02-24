@@ -1,3 +1,4 @@
+const NUM_OF_CELLS = 3
 
 function toggleShow () {
   document.getElementById('dropdown-list').classList.toggle('show')
@@ -11,14 +12,17 @@ function toggleLogin () {
   const displaybtn = document.getElementById('display')
   const remove = document.getElementById('remove')
   // create source elements - set buttons to appear - set log in to disappear
-  createLists()
+  //createLists()
   btn.style.display = 'none'
   add.style.display = 'inline'
   save.style.display = 'inline'
   remove.style.display = 'inline'
   displaybtn.style.display = 'inline'
+  document.getElementById('added-list').style.display = 'block'
+  document.getElementById('button-row').style.display = 'inline-flex'
 }
 
+/*
 function createLists () {
   // create source buttons / toggle log in
   createCourseList()
@@ -26,16 +30,19 @@ function createLists () {
   createYearList()
   document.getElementById('added-list').style.display = 'block'
 }
-
+*/
 // Takes current option value - adds it to table
 function addClass () {
-  // get the current option values selected
-  const currCourse = document.getElementById('choice-list')
-  const currTerm = document.getElementById('term-list')
-  const currYear = document.getElementById('year-list')
-  // get table
-  const table = document.getElementById('course-rows') // was added-list, but referencing the tbody now
-  if(currCourse.value === 'Courses' || currTerm.value === 'Terms' || currYear.value === 'Year') {
+	
+  const course_opt = document.getElementById('courses')
+  const c_option = course_opt.options[course_opt.selectedIndex].value
+  const term_opt = document.getElementById('terms')
+  const t_option = term_opt.options[term_opt.selectedIndex].value
+  const y_opt = document.getElementById('year')
+  const y_option = y_opt.options[y_opt.selectedIndex].value
+  const table = document.getElementById('course-rows')
+ 
+  if(c_option === 'Course Name' || t_option === 'Term' || y_option === 'Year') {
 	// dont do anything
 	// will impliment a pop up possibly or show warning not an option
   }
@@ -44,15 +51,16 @@ function addClass () {
     var row = table.insertRow()
     row.className = "table-warning"    // Example of how to set Bootstrap class dynamically
     // always add 3 cells as only inserting choice, term and year
-    for (let x = 0; x < 3; x++) {
+    for (let x = 0; x < NUM_OF_CELLS; x++) {
     // insert new cell into row
       table.rows[table.rows.length - 1].insertCell()
     }
     const currRow = table.rows[table.rows.length - 1].cells
     // Set each cell to correct value;
-    currRow[0].textContent = currCourse.value
-    currRow[1].textContent = currYear.value
-    currRow[2].textContent = currTerm.value
+    currRow[0].textContent = c_option
+    currRow[1].textContent = t_option
+    currRow[2].textContent = y_option
+    
   }
 }
 
