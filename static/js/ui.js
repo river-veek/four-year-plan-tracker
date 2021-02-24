@@ -52,7 +52,7 @@ function addClass () {
     row.className = "table-warning"    // Example of how to set Bootstrap class dynamically
     // always add 3 cells as only inserting choice, term and year
     for (let x = 0; x < NUM_OF_CELLS; x++) {
-    // insert new cell into row
+    // insert new cell into row - 0 indexed
       table.rows[table.rows.length - 1].insertCell()
     }
     const currRow = table.rows[table.rows.length - 1].cells
@@ -60,28 +60,34 @@ function addClass () {
     currRow[0].textContent = c_option
     currRow[1].textContent = t_option
     currRow[2].textContent = y_option
-    
+    console.log(table.rows.length)
   }
 }
 
 function removeClass () {
   // get the current option values selected
-  const currCourse = document.getElementById('choice-list').value
-  const currTerm = document.getElementById('term-list').value
-  const currYear = document.getElementById('year-list').value
-  // get table
-  const currTable = document.getElementById('added-list')
-  const len = currTable.rows.length - 1
-  let found = false
-  let idx = 1
-  while (!found && idx <= len) {
-    const currRow = currTable.rows[idx].cells
+  const course_opt = document.getElementById('courses')
+  const c_option = course_opt.options[course_opt.selectedIndex].value
+  const term_opt = document.getElementById('terms')
+  const t_option = term_opt.options[term_opt.selectedIndex].value
+  const y_opt = document.getElementById('year')
+  const y_option = y_opt.options[y_opt.selectedIndex].value
+  const currTable = document.getElementById('course-rows')
+  
+  const len = currTable.rows.length
+  console.log(len)
+  if(len > 0) {
+    let found = false
+    let idx = 0
+    while (!found && idx < len) {
+      const currRow = currTable.rows[idx].cells
 
-    if (currRow[0].innerText === currCourse && currRow[1].innerText === currYear && currRow[2].innerText === currTerm) {
-      found = true
-      currTable.deleteRow(idx)
-    } else { idx++ }
-  }
+      if (currRow[0].innerText === c_option && currRow[1].innerText === y_option && currRow[2].innerText === t_option) {
+        found = true
+        currTable.deleteRow(idx)
+       } else { idx++ }
+     }
+   }
 }
 // Builds course list for now - used for testing
 function createCourseList () {
