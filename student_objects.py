@@ -20,7 +20,7 @@ class Student():
     def __init__(self,
                  identifier: str,
                  summer = False,
-                 desired_grad_date = ("Fourth", 2),
+                 desired_grad_date = (4, 2),
                  max_credits_per_term = 12
                  ):
         """
@@ -38,16 +38,15 @@ class Student():
         # list of degree objects in the case that a student has more than 1 major (or a minor)
         self.degree_list = []
 
-        self.plan = {"First": [[], [], [], []],
-                     "Second": [[], [], [], []],
-                     "Third": [[], [], [], []],
-                     "Fourth": [[], [], [], []],
-                     "Fifth": [[], [], [], []]
-                     } # first, second, etc refer to the year in the students college experience
+        self.plan = {1: [[], [], [], []],
+                     2: [[], [], [], []],
+                     3: [[], [], [], []],
+                     4: [[], [], [], []]
+                     } # 1, 2, etc refer to the year in the students college experience
         self.summer = summer
         self.desired_grad_date = desired_grad_date
         self.note = ""
-        self.max_credits_per_term = 12
+        self.max_credits_per_term = max_credits_per_term
 
     def add_degree(self, degree_obj: Degree):
         """
@@ -77,14 +76,14 @@ class Student():
             if degree.name == degree_name:
                 self.degree_list.remove(degree)
 
-    def add_course(self, course_name: str, year: str, term: int):
+    def add_course(self, course_name: str, year: int, term: int):
         """
         Function adds a course to the course object into self.student plan with
         position being determined by inputted "year" and "term"
 
         Inputs:
             course_name - (str) identifier of the course to add
-            year - (str) indicates the year in which to add the course in self.plan
+            year - (int) indicates the year in which to add the course in self.plan
             term - (int) indicats the term in which to add the course in self.plan
 
         """
@@ -100,14 +99,14 @@ class Student():
         #add course object into self.plan
         self.plan[year][term].append(course)
 
-    def remove_course(self, course_name: str, year: str, term: int):
+    def remove_course(self, course_name: str, year: int, term: int):
         """
         Function removes a course from the course object from self.student plan
         with position being determined by inputted "year" and "term"
 
         Inputs:
             course_name - (str) identifier of the course to add
-            year - (str) indicates the year in which to find the course in self.plan
+            year - (int) indicates the year in which to add the course in self.plan
             term - (int) indicats the term in which to find the course in self.plan
 
         """

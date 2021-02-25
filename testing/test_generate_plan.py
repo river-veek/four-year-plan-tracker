@@ -43,9 +43,9 @@ def test_create_plan():
     pass
 
 def main():
-    student_A = Student("student_A")
+    student_A = Student("student_A", summer=True)
     student_A.add_degree(CIS_major)
-    student_A.add_course("MATH 112 Elementary Functions", "First", 0)
-    student_A.get_plan("First", 0)
+    student_A.add_course("MATH 112 Elementary Functions", 1, 0)
+    student_A.get_plan()
 
 main()
