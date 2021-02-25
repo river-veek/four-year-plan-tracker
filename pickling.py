@@ -50,6 +50,7 @@ def delete_record(student_id):
         print("File doesn't exist\n")
     return
 
+"""
 def testing():
     id = "951234567"
     test_obj = {"test1": 4, "test2": 16}
@@ -63,7 +64,7 @@ def main():
     print("----------- Begin testing ------------\n")
     testing()
     print("---------- All tests passed ----------\n")
-
+"""
 
 if __name__ == '__main__':
     main()
