@@ -3,22 +3,33 @@ const NUM_OF_CELLS = 3
 
 function toggleLogin () {
   // get elements of DOM
-  const btn = document.getElementById('log-in')
+  const main = document.getElementById('main-space')
   const add = document.getElementById('add')
   const save = document.getElementById('save')
   const displaybtn = document.getElementById('display')
   const remove = document.getElementById('remove')
+  const dInfo = document.getElementById('helperDropdownInfo')
+  const tInfo = document.getElementById('helperTableInfo')
+
+  const currStudentText = document.getElementById('currStudentText')
+  const studentIDMenu = document.getElementById('log-in-menu')
+
+  currStudentText.innerText = studentIDMenu.innerText
 
   // Hide log-in
-  btn.style.display = 'none'
+  main.style.display = 'none'
+
   // display main feature dropdowns
   add.style.display = 'inline'
   save.style.display = 'inline'
   remove.style.display = 'inline'
   displaybtn.style.display = 'inline'
-  // display add/remove buttons 
+
+  // display add/remove buttons
   document.getElementById('added-list').style.display = 'block'
   document.getElementById('button-row').style.display = 'inline-flex'
+  dInfo.style.display = 'inline'
+  tInfo.style.display = 'inline'
 }
 
 // Takes current option value - adds it to table
@@ -37,7 +48,7 @@ function addClass () {
   const yVal = yearOption.options[yearOption.selectedIndex].value
   // access table in DOM
   const table = document.getElementById('course-rows')
-  
+
   // if Trying to add dummy value - display not an option
   if (cVal === 'Course Name' || tVal === 'Term' || yVal === 'Year') {
      alert("Not an Available Option :)");
@@ -93,5 +104,3 @@ function removeClass () {
     }
   }
 }
-
-

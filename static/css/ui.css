@@ -41,6 +41,12 @@ body {
 	min-width: 150px;
 }
 
+.form-group input {
+	width: 150px;
+	margin: 0 auto;
+	float: 0;
+}
+
 .show {display:block;}
 
 /* Table stuff that may be superseded by Bootstrap classes

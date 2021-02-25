@@ -21,16 +21,40 @@
 				<div class="col-12">
 					<h2>Welcome to the Four-Year Plan Tracker!</h2>
 					<hr>
-					<!--Dropdown button containing Student ID # -->
-					<div class="dropdown-container" id="main-space">
-						<button data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-xs" type="button" id="log-in">Student Select<span class="caret"></span>
-						</button>
-						<ul role="menu" class="dropdown-menu">
-							<!--when clicked will remove button and display class options and buttons -->
-							<li class="dropdown-content"><a onclick="toggleLogin()">951234567</a> </li>
-  					</ul>
+
+					<!-- Show current student ID- can be used later to retrieve the ID perhaps -->
+					<p style="display: inline;">Current student: </p>
+					<p style="display: inline;" id="currStudentText"></p>
+
+					<div id="main-space" style="padding-top: 50px;">
+						<!--Dropdown button containing Student ID # -->
+						<div class="dropdown-container">
+							<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-xs" type="button" id="log-in">Select Student<span class="caret"></span>
+							</button>
+							<ul role="menu" class="dropdown-menu" id="log-in-menu">
+								<!--when clicked will remove button and display class options and buttons -->
+
+								<!-- Currently selecting all innerText, not just the chosen li
+								element (if there are multiple entries) when updating the current
+								 student p at the top of the page TODO- fix that to only grab the right one-->
+								<li class="dropdown-content"><a onclick="toggleLogin()">951234567</a> </li>
+	  					</ul>
+						</div>
+
+						<br><br>
+						<p><strong>-------- OR --------</strong></p>
+						<br>
+
+						<!-- New student creation form -->
+						<!-- Will need logic for passing input to flask to properly create a new object -->
+						<form>
+						  <div class="form-group" id="studentCreate">
+						    <label for="exampleInputEmail1">Create New Student</label>
+						    <input type="text" class="form-control" id="studentCreateInput" placeholder="Enter 95 Number">
+						  </div>
+						  <button type="submit" class="btn btn-primary">Create</button>
+						</form>
 					</div>
-					<!-- TODO Will need a create new student button -->
 
 				</div>
 			</div>
@@ -39,31 +63,16 @@
 		<div class="container-fluid padding">
 			<div class="row">
 
-					<div class="col-md-6 my-4">
-						<button class="btn btn-primary" id="save" style="display: none;" onclick="">Save</button>
-						<button class="btn btn-primary" id="display" style="display: none;" onclick="">Save and Display</button>
-						<!-- Perhaps a clear changes button? May be a future addition -->
-						<br><br>
-						<div class="table-responsive">
-							<table class="table table-bordered" id="added-list" style="display: none;">
-								<thead>
-								<tr class="table-success">
-									<th scope="col" style="width: 50%">Course Name</th>
-									<th scope="col" style="width: 25%">Year</th>
-									<th scope="col" style="width: 25%">Term</th>
-								</tr>
-								</thead>
-								<tbody id="course-rows">
-									<!-- Filled by JS when user inputs courses -->
-								</tbody>
-							</table>
+				<div class="col-md-6 my-4 text-center">
+
+						<div id="helperDropdownInfo" style="display: none">
+							<p>
+								Please enter information about completed courses here.
+								Each course will require the course name, term,
+								and year in which it was completed. These will show up in the table to the right.
+							</p>
 						</div>
-					</div>
-
-
-
-					<div class="col-md-6 my-4">
-
+						<br>
 
 						<div class="btn-group" id="button-row" role="group" aria-label="Basic example" style="display: none;">
 							<select class="custom-select" id='courses' style="width: 50%">
@@ -85,11 +94,58 @@
 							  <option value="3">Three</option>
 							</select>
 						</div>
+
 						<div class="btn-group" role="group" aria-label="Basic example">
-							<button class="btn btn-success" id="add" style="display: none;" onclick="addClass()">Add Course</button>
+							<button class="btn btn-primary" id="add" style="display: none;" onclick="addClass()">Add Course</button>
 							<button class="btn btn-danger" id="remove" style="display: none;" onclick="removeClass()">Remove Course</button>
 						</div>
+
 					</div>
+
+
+					<div class="col-md-6 my-4">
+
+						<div class="text-center">
+						<div id="helperTableInfo" style="display: none">
+							<p>
+								Once courses have been added and you have confirmed the information
+								is accurate (use the 'Remove Course' button if not), you may
+								save the courses to your course history and display your current forecasted
+								four-year plan.
+							</p>
+						</div>
+						<br>
+
+						<button class="btn btn-success" id="save" style="display: none;" onclick="">Save</button>
+						<button class="btn btn-success" id="display" style="display: none;" onclick="">Save and Display</button>
+						<!-- Perhaps a clear changes button? May be a future addition -->
+						<br><br>
+						</div>
+
+						<div class="row justify-content-center">
+					    <div class="col-auto">
+
+								<div class="table-responsive">
+									<table class="table table-hover" id="added-list" style="display: none;">
+										<thead>
+										<tr class="table-primary">
+											<th scope="col">Course Name</th>
+											<th scope="col">Year</th>
+											<th scope="col">Term</th>
+										</tr>
+										</thead>
+										<tbody id="course-rows">
+											<!-- Filled by JS when user inputs courses -->
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+
+
 			</div>
 		</div>
 
