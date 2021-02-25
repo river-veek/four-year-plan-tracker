@@ -50,7 +50,7 @@ def create_CIS_major():
     CIS_major.add_course("CIS 407 Seminar on Principles of Programming Languages", 407, 2, [], [Term("Spring")])
     CIS_major.add_course("CIS 415 Operating Systems", 415, 4, ["CIS 313 Intermediate Data Structures", "CIS 330 C/C++ & Unix"], [Term("Fall"), Term("Spring")], is_core = True)
     CIS_major.add_course("CIS 425 Principles of Programming Languages", 425, 4, ["CIS 315 Intermediate Algorithms"], [Term("Fall"), Term("Spring")], is_core = True)
-
+    CIS_major.add_course("CIS 422 Software Methodology", 422, 4, ["CIS 313 Intermediate Data Structures"], [Term("Fall"), Term("Winter"), Term("Spring")], is_core = True)
 
     CIS_major.add_course("CIS 407 Programming Competition", 407, 2, ["CIS 313 Intermediate Data Structures"], [Term("Fall"), Term("Spring")])
     CIS_major.add_course("CIS 407 Research Colloquia", 407, 2, [], [Term("Fall"), Term("Winter"), Term("Spring")])
@@ -70,7 +70,6 @@ def create_CIS_major():
     CIS_major.add_course("CIS 410 Selected Topics on Optimization", 410, 4, [], [Term("Fall")])
     CIS_major.add_course("CIS 413 Advanced Data Structures", 413, 4, ["CIS 315 Intermediate Algorithms"], [Term("Winter")])
     CIS_major.add_course("CIS 420 Automata Theory", 420, 4, ["CIS 315 Intermediate Algorithms"], [Term("Fall")])
-    CIS_major.add_course("CIS 422 Software Methodology", 422, 4, ["CIS 313 Intermediate Data Structures"], [Term("Fall"), Term("Winter"), Term("Spring")], is_core = True)
     CIS_major.add_course("CIS 429 Computer Architecture", 431, 4, ["CIS 330 C/C++ & Unix"], [Term("Spring")])
     CIS_major.add_course("CIS 431 Introduction to Parallel Computing", 431, 4, ["CIS 330 C/C++ & Unix"], [Term("Winter")])
     CIS_major.add_course("CIS 432 Intro to Computer Networks", 432, 4, ["CIS 330 C/C++ & Unix"], [Term("Fall")])

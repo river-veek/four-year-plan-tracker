@@ -9,6 +9,16 @@ Last Modified - 2/24/21
 """
 
 def generate_plan(student: "Student"):
+    """
+    Function for generating a forecast degree plan for a student to meet all
+    requirments of their degrees
+
+    Inputs:
+        student - Student object of the student to generate the plan for
+
+    Returns:
+        forecast_plan
+    """
 
     #create copy of self.plan
     forecast_plan = student.plan.copy()
@@ -32,17 +42,9 @@ def generate_plan(student: "Student"):
                 #update current term
                 current_term = (year, student.plan[year].index(term) + 1)
 
-    # print(f"UNSORTED - {unmet_courses}")
-    # for course in unmet_courses:
-    #     print(course.name, course.pre_reqs_num)
-
     #sort this unmet_courses by pre_rec_nums
     unmet_courses.sort(key=sort_pre_req)
     unmet_courses.reverse()
-
-    # print(f"SORTED - {unmet_courses}")
-    # for course in unmet_courses:
-    #     print(course.name, course.pre_reqs_num)
 
     #add courses to forecast_plan
     add_courses_to_forecast(forecast_plan, unmet_courses, current_term, student.summer, student.max_credits_per_term)
@@ -55,9 +57,29 @@ def generate_plan(student: "Student"):
 #-------------------------------------------------------------------------------
 
 def sort_pre_req(course):
+    """
+    Function for specifing the paremeter to sort a course list by. This function
+    give a sort key of course.pre_reqs_num
+
+    Inputs:
+        course - Course object
+
+    Returns:
+        course.pre_reqs_num
+    """
     return course.pre_reqs_num
 
 def print_plan(plan):
+    """
+    Function for printing a degree plan to the terminal (Used for progress
+    testing)
+
+    Inputs:
+        plan - degree plan dictonary to print
+
+    Returns:
+        None
+    """
 
     print("----------------------------")
     for year in plan:
@@ -70,16 +92,22 @@ def print_plan(plan):
         print(string)
         print("----------------------------")
 
-def increment_year(plan, year: str):
-    year += 1
-
-    #if year is now not a key in the plan add a new year to the plan
-    if year not in plan.keys():
-        plan[year] = [[], [], [], []]
-
-    return year
-
 def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, summer: bool, max_credits_per_term: int):
+    """
+    Function adding the courses from unmet_courses into the forecast_plan
+
+    Inputs:
+        plan - degree plan to be adding courses to
+        unmet_courses - list of course objects that need to be added to the plan
+        current_term - tuple of the term the student is entering (year, term)
+        summer - boolian indicator of whether or not the student is willing to
+                 take summer courses
+        max_credits_per_term - integer value of how many credits can be taken in
+                               a single term
+
+    Returns:
+        None
+    """
 
     #find initial term
     current_year = current_term[0]
@@ -97,7 +125,6 @@ def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, summ
         next_course = unmet_courses[0]
         unmet_courses.remove(next_course)
 
-
         #find num credits taken in current term
         num_credits = 0
         for course in plan[current_year][current_term]:
@@ -114,3 +141,25 @@ def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, summ
 
         #add courses to term
         plan[current_year][current_term].append(next_course)
+
+def increment_year(plan, year: int):
+    """
+    Function incrementing the year key being used to index through a degree plan.
+    If incremented key is out of range of the keys within the degree plan then
+    a new year gets added to the degree plan
+
+    Inputs:
+        plan - degree plan dictonary to print
+        year - year key for the dictonary
+
+    Returns:
+        None
+    """
+    #increment year
+    year += 1
+
+    #if year is now not a key in the plan add a new year to the plan
+    if year not in plan.keys():
+        plan[year] = [[], [], [], []]
+
+    return year
