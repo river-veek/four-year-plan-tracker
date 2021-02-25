@@ -87,7 +87,7 @@ class Degree():
             return None
 
         #generate Course object
-        new_course = Course(name, course_num, pre_req_objects, terms)
+        new_course = Course(name, course_num, num_credits, pre_req_objects, terms)
 
         #add Course into list of possible courses
         self.courses.append(new_course)
