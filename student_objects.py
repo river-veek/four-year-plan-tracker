@@ -8,6 +8,7 @@ Last Modified - 2/22/21
 ----------------------------------------------------------------------------------------
 """
 from degree_objects import *
+from degree_planning import *
 
 class Student():
     """
@@ -19,7 +20,8 @@ class Student():
     def __init__(self,
                  identifier: str,
                  summer = False,
-                 desired_grad_date = ("Senior", 2),
+                 desired_grad_date = ("Fourth", 2),
+                 max_credits_per_term = 12
                  ):
         """
         Function to initialize Student class object
@@ -44,6 +46,8 @@ class Student():
                      } # first, second, etc refer to the year in the students college experience
         self.summer = summer
         self.desired_grad_date = desired_grad_date
+        self.note = ""
+        self.max_credits_per_term = 12
 
     def add_degree(self, degree_obj: Degree):
         """
@@ -87,11 +91,11 @@ class Student():
         added_course = None
 
         #get course object that coresponds to the inputted course_name
-        for degree in  self.degree_list:
-        for course in degree:
-            if course.name == course_name:
-                added_course = course
-                break
+        for degree in self.degree_list:
+            for course in degree.courses:
+                if course.name == course_name:
+                    added_course = course
+                    break
 
         #add course object into self.plan
         self.plan[year][term].append(course)
@@ -118,34 +122,13 @@ class Student():
         if course_found == False:
             print("Error")
 
-    def generate_plan(self, year: str, term: int):
-        #TODO
+    def get_plan(self):
 
-        #create copy of self.plan
-        forecast_plan = self.plan.copy()
-
-        ###figure out which requirements have not been met and put them all in a list
-
-        #initialize unmet_courses
-        unmet_courses = []
+        #calculate the pre_req_num for the degrees
         for degree in self.degree_list:
+            degree.calc_pre_req_nums()
 
-        #remove courses from unmet_courses if in student plan
-        for key in self.plan:
-            for term in self.plan[key]:
-                for course in term:
-                    if course in unmet_courses:
-                        unmet_courses.remove(course)
-
-        ###sort this list by pre_rec_nums
-
-        ###figure out the number of terms remaining before the desired grad date
-
-        ###based off this number determine number of courses that need to be taken per term
-
-        ###loop through unmet list popping off the from of the list and adding to the plan
-
-        return forecast_plan
+        return generate_plan(self)
 
     def checkcompetion(self):
         """

@@ -7,6 +7,7 @@ Group - TBD
 Last Modified - 2/22/21
 ----------------------------------------------------------------------------------------
 """
+from enum import Enum
 
 class Degree():
 
@@ -19,7 +20,14 @@ class Degree():
         self.courses = []
         self.core_courses = []
 
-    def calc_pre_rec_nums(self):
+    def __repr__(self):
+        """
+        Function to state what should be printed when a degree object in printed
+        """
+
+        return self.name
+
+    def calc_pre_req_nums(self):
         """
         Function to calculate and set the number of courses each courses within
         the Degree are required for (Course.pre_reqs_num)
@@ -42,6 +50,7 @@ class Degree():
     def add_course(self,
                    name: str,
                    course_num: int,
+                   num_credits: int,
                    pre_reqs: list,
                    terms: list,
                    is_core = False):
@@ -53,9 +62,10 @@ class Degree():
         Inputs:
             name - (str) is the unique name for the course
             course_num - (int) is the identifier number for the course
+            num_credits - (int) is the number of credits the Univerity give the course
             pre_reqs - (list) is a list of course names that are required to
                         be taken by a Student before this one
-            terms - (list) is a list of Term enums
+            terms - (list) is a list of Term objects
             is_core - (bool) a string denoting what type of requirment the
                             core course to complete the major. Defaults to False
 
@@ -66,12 +76,14 @@ class Degree():
         #get pre_req objects
         pre_req_objects = []
         for course in self.courses:
-            if course.name is in pre_reqs:
+            if course.name in pre_reqs:
                 pre_req_objects.append(course)
 
         #error check to confirm all pre_req were found in the degree object
         if len(pre_req_objects) != len(pre_reqs):
-            print("Error loading pre-reqs could not find all of them in the degree")
+            # print(pre_req_objects, len(pre_req_objects))
+            # print(pre_reqs, len(pre_reqs))
+            print(f"Error adding {name}: could not find all of the pre-reqs in the degree")
             return None
 
         #generate Course object
@@ -113,20 +125,21 @@ class Degree():
 
 class Course():
 
-    def __init__(self, name: str, course_num: int, pre_reqs: list, terms: list):
+    def __init__(self, name: str, course_num: int, num_credits: int, pre_reqs: list, terms: list):
         """
         Function to initialize a Course object
 
         Inputs:
             name - (str) is the unique name for the course
             course_num - (int) is the identifier number for the course
+            num_credits - (int) is the number of credits the Univerity give the course
             pre_reqs - (list) is a list of Course objects that are required to
                         be taken by a Student before this one
-            terms - (list) is a list of Term enums
+            terms - (list) is a list of Term objects
         """
-
         #Base infomation
         self.name = name
+        self.num_credits = num_credits
         self.pre_reqs = pre_reqs
         self.terms = terms
 
@@ -137,13 +150,36 @@ class Course():
         self.course_num = course_num
         self.level = (course_num % 100) * 100
 
+    def __repr__(self):
+        """
+        Function to state what should be printed when a course in printed
+        """
 
-class Term(Enum):
+        return self.name
+
+    def calc_pre_reqs(self):
+        #base condition
+        # if self.pre_reqs = []:
+        #     return 0
+        # else:
+        pass
+
+
+class Term():
     """
     object for Term
     """
 
-    "Fall" = 0
-    "Winter" = 1
-    "Spring" = 2
-    "Summer" = 3
+    def __init__(self, term_name: str):
+
+        self.value = 0
+        self.name = term_name;
+
+        if term_name == "Fall":
+            self.value = 0
+        elif term_name == "Winter":
+            self.value = 1
+        elif term_name == "Spring":
+            self.value = 2
+        elif term_name == "Summer":
+            self.value = 3
