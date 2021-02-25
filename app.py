@@ -13,13 +13,16 @@ import random
 
 app = Flask(__name__)
 
+# Dummy info for passing to html
+names = ["951234567", "951234568", "951234569"]
+
 @app.route("/")
 @app.route("/index")
 def index():
     """
     Landing page
     """
-    return render_template('ui.html')
+    return render_template('ui.html', names=names)
 
 
 if __name__ == "__main__":

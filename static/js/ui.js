@@ -1,7 +1,7 @@
 // Always have 3 cells per row
 const NUM_OF_CELLS = 3
 
-function toggleLogin () {
+function toggleLogin (name) {
   // get elements of DOM
   const main = document.getElementById('main-space')
   const add = document.getElementById('add')
@@ -11,10 +11,14 @@ function toggleLogin () {
   const dInfo = document.getElementById('helperDropdownInfo')
   const tInfo = document.getElementById('helperTableInfo')
 
+  // Update the display for what student has been selected -- will need
+  // conditional logic for if the student info comes from the input field and not dropdown
   const currStudentText = document.getElementById('currStudentText')
+  const currStudent = document.getElementById('currStudent')
   const studentIDMenu = document.getElementById('log-in-menu')
 
-  currStudentText.innerText = studentIDMenu.innerText
+  currStudent.innerText = name
+  currStudentText.innerText = "Current Student: "
 
   // Hide log-in
   main.style.display = 'none'

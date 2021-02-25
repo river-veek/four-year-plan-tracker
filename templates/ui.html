@@ -23,21 +23,27 @@
 					<hr>
 
 					<!-- Show current student ID- can be used later to retrieve the ID perhaps -->
-					<p style="display: inline;">Current student: </p>
-					<p style="display: inline;" id="currStudentText"></p>
+					<p style="display: inline;" id="currStudentText">Current Student: None</p>
+					<p style="display: inline;" id="currStudent"></p>
 
 					<div id="main-space" style="padding-top: 50px;">
 						<!--Dropdown button containing Student ID # -->
 						<div class="dropdown-container">
 							<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-xs" type="button" id="log-in">Select Student<span class="caret"></span>
 							</button>
+
 							<ul role="menu" class="dropdown-menu" id="log-in-menu">
 								<!--when clicked will remove button and display class options and buttons -->
 
-								<!-- Currently selecting all innerText, not just the chosen li
-								element (if there are multiple entries) when updating the current
-								 student p at the top of the page TODO- fix that to only grab the right one-->
-								<li class="dropdown-content"><a onclick="toggleLogin()">951234567</a> </li>
+								<!-- Works for when running in docker container -->
+								{% for name in names %}
+								<li class="dropdown-content"><a onclick="toggleLogin({{name}})">{{name}}</a> </li>
+								{% endfor %}
+
+								<!-- Works for when running w/o containerization
+								<li class="dropdown-content"><a onclick="toggleLogin(951234567)">951234567</a> </li>
+								-->
+
 	  					</ul>
 						</div>
 
@@ -65,6 +71,7 @@
 
 				<div class="col-md-6 my-4 text-center">
 
+						<!-- Explainer text -->
 						<div id="helperDropdownInfo" style="display: none">
 							<p>
 								Please enter information about completed courses here.
@@ -74,6 +81,7 @@
 						</div>
 						<br>
 
+						<!-- Our three primary dropdowns -->
 						<div class="btn-group" id="button-row" role="group" aria-label="Basic example" style="display: none;">
 							<select class="custom-select" id='courses' style="width: 50%">
 							  <option selected>Course Name</option>
@@ -105,15 +113,16 @@
 
 					<div class="col-md-6 my-4">
 
+						<!-- Explainer text -->
 						<div class="text-center">
-						<div id="helperTableInfo" style="display: none">
-							<p>
-								Once courses have been added and you have confirmed the information
-								is accurate (use the 'Remove Course' button if not), you may
-								save the courses to your course history and display your current forecasted
-								four-year plan.
-							</p>
-						</div>
+							<div id="helperTableInfo" style="display: none">
+								<p>
+									Once courses have been added and you have confirmed the information
+									is accurate (use the 'Remove Course' button if not), you may
+									save the courses to your course history and display your current forecasted
+									four-year plan.
+								</p>
+							</div>
 						<br>
 
 						<button class="btn btn-success" id="save" style="display: none;" onclick="">Save</button>
