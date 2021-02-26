@@ -11,12 +11,11 @@ function toggleLogin (name) {
   const dInfo = document.getElementById('helperDropdownInfo')
   const tInfo = document.getElementById('helperTableInfo')
 
-  // Update the display for what student has been selected -- will need
-  // conditional logic for if the student info comes from the input field and not dropdown
+  // Update the display for what student has been selected
   const currStudentText = document.getElementById('currStudentText')
   const currStudent = document.getElementById('currStudent')
-  const studentIDMenu = document.getElementById('log-in-menu')
 
+  // Set display fields
   currStudent.innerText = name
   currStudentText.innerText = "Current Student: "
 
@@ -34,6 +33,12 @@ function toggleLogin (name) {
   document.getElementById('button-row').style.display = 'inline-flex'
   dInfo.style.display = 'inline'
   tInfo.style.display = 'inline'
+}
+
+// Wrapper for main toggleLogin for when user inputs new student ID
+function toggleLoginNew () {
+  const input = document.getElementById('studentCreateInput').value
+  return toggleLogin(input)
 }
 
 // Takes current option value - adds it to table

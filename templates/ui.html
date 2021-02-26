@@ -52,14 +52,12 @@
 						<br>
 
 						<!-- New student creation form -->
-						<!-- Will need logic for passing input to flask to properly create a new object -->
-						<form>
-						  <div class="form-group" id="studentCreate">
-						    <label for="exampleInputEmail1">Create New Student</label>
-						    <input type="text" class="form-control" id="studentCreateInput" placeholder="Enter 95 Number">
-						  </div>
-						  <button type="submit" class="btn btn-primary">Create</button>
-						</form>
+						<div class="form-group" id="studentCreate">
+						  <label for="studentCreateInput">Create New Student</label>
+						  <input type="text" class="form-control" id="studentCreateInput" placeholder="Enter 95 Number">
+						</div>
+						<button onclick="toggleLoginNew()" class="btn btn-primary">Create</button>
+
 					</div>
 
 				</div>
@@ -85,21 +83,36 @@
 						<div class="btn-group" id="button-row" role="group" aria-label="Basic example" style="display: none;">
 							<select class="custom-select" id='courses' style="width: 50%">
 							  <option selected>Course Name</option>
-							  <option value="1">One</option>
+								{% for course in courses %}
+								<option>{{course}}</option>
+								{% endfor %}
+							  <!-- Works for non-docker dummy testing
+								<option value="1">One</option>
 							  <option value="2">Two</option>
 							  <option value="3">Three</option>
+								-->
 							</select>
 							<select class="custom-select" id='terms' style="width: 25%">
 							  <option selected>Term</option>
-							  <option value="1">One</option>
+								{% for term in terms %}
+								<option>{{term}}</option>
+								{% endfor %}
+							  <!-- Works for non-docker dummy testing
+								<option value="1">One</option>
 							  <option value="2">Two</option>
 							  <option value="3">Three</option>
+								-->
 							</select>
 							<select class="custom-select" id='year' style="width: 25%">
 							  <option selected>Year</option>
-							  <option value="1">One</option>
+								{% for year in years %}
+								<option>{{year}}</option>
+								{% endfor %}
+							  <!-- Works for non-docker dummy testing
+								<option value="1">One</option>
 							  <option value="2">Two</option>
 							  <option value="3">Three</option>
+								-->
 							</select>
 						</div>
 
@@ -139,8 +152,8 @@
 										<thead>
 										<tr class="table-primary">
 											<th scope="col">Course Name</th>
-											<th scope="col">Year</th>
 											<th scope="col">Term</th>
+											<th scope="col">Year</th>
 										</tr>
 										</thead>
 										<tbody id="course-rows">
