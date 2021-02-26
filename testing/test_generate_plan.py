@@ -10,7 +10,7 @@ Last Modified - 2/24/21
 
 import numpy as np
 import sys
-sys.path.append("../")
+sys.path.append("../degree_logic")
 
 from student_objects import *
 from CIS_degree import *

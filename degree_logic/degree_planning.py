@@ -46,6 +46,9 @@ def generate_plan(student: "Student"):
     unmet_courses.sort(key=sort_pre_req)
     unmet_courses.reverse()
 
+    for course in unmet_courses:
+        print(course, course.pre_reqs_num)
+
     #add courses to forecast_plan
     add_courses_to_forecast(forecast_plan, unmet_courses, current_term, student.summer, student.max_credits_per_term)
 

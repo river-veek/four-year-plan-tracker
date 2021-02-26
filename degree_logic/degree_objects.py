@@ -41,9 +41,18 @@ class Degree():
 
         #loop through courses in the major
         for course in self.courses:
-            #loop through pre_reqs for the current course
-            for pre_req in course.pre_reqs:
-                pre_req.pre_reqs_num += 1
+            temp = course.pre_reqs
+            while len(temp) != 0:
+                print(course, "---", temp)
+                for pre_req_course in temp:
+                    pre_req_course.pre_reqs_num += 1
+                    print(type(pre_req_course), pre_req_course, pre_req_course.pre_reqs)
+                    temp += pre_req_course.pre_reqs
+                    temp.remove(pre_req_course)
+            print("------")
+            # #loop through pre_reqs for the current course
+            # for pre_req in course.pre_reqs:
+            #     pre_req.pre_reqs_num += 1
 
         return None
 
@@ -117,6 +126,11 @@ class Degree():
                 if course.name == name:
                     self.courses.remove(course)
 
+    def get_course(self, target_course_name: str):
+        for course in self.courses:
+            if course.name == target_course_name:
+                print(course.name)
+                return course
 
     def save_degree(self):
         self.calc_pre_rec_nums()

@@ -15,8 +15,8 @@ def create_CIS_major():
 
     ################# Writing and Math Pre-Requisites ##########################
     # --------------------------------------------------------------------------
-    Gen_Ed.add_course("WR 121 College Composition I", 121, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")])
-    Gen_Ed.add_course("WR 122 College Composition II", 121, 4, ["WR 121 College Composition I"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")])
+    CIS_major.add_course("WR 121 College Composition I", 121, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")])
+    CIS_major.add_course("WR 122 College Composition II", 121, 4, ["WR 121 College Composition I"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")])
 
     # TODO: MATH 101 + 112 are not explicitly required if the student has an adequate placement test score - this needs handling
     CIS_major.add_course("MATH 101 Foundations of Algebra and Mathematical Modeling", 101, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
