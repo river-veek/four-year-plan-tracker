@@ -41,15 +41,23 @@ class Degree():
 
         #loop through courses in the major
         for course in self.courses:
-            temp = course.pre_reqs
+            temp = course.pre_reqs.copy()
             while len(temp) != 0:
-                print(course, "---", temp)
+                #loop through pre-req courses
                 for pre_req_course in temp:
+                    #increment pre req counter for pre_req_course by 1
                     pre_req_course.pre_reqs_num += 1
-                    print(type(pre_req_course), pre_req_course, pre_req_course.pre_reqs)
-                    temp += pre_req_course.pre_reqs
+                    #add pre_req_course's pre-reqs to the temp list
+                    temp += pre_req_course.pre_reqs.copy()
+                    #remove pre_req_course from temp list
                     temp.remove(pre_req_course)
-            print("------")
+
+            # print(course," ---\n")
+            # for course in self.courses:
+            #     print(course, course.pre_reqs_num)
+            # print("------\n")
+
+
             # #loop through pre_reqs for the current course
             # for pre_req in course.pre_reqs:
             #     pre_req.pre_reqs_num += 1

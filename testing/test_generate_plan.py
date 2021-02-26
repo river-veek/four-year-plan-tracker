@@ -45,7 +45,7 @@ def test_create_plan():
 def main():
     student_A = Student("student_A",)
     student_A.add_degree(CIS_major)
-    student_A.add_course("MATH 112 Elementary Functions", 1, 0)
+    #student_A.add_course("MATH 112 Elementary Functions", 1, 0)
     forecast_plan = student_A.get_plan()
 
 main()
