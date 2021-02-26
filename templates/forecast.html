@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FYPT</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/css/ui.css">
+  </head>
+
+  <body>
+	  <script type="text/javascript" src="../static/js/ui.js"></script>
+
+		<div class="container-fluid padding">
+			<div class="row text-center padding">
+				<div class="col-12">
+					<h2>Four-Year Forecast</h2>
+					<hr>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid padding">
+			<div class="row">
+					<div class="col-12">
+
+						<div class="row justify-content-center">
+					    <div class="col-auto">
+
+								{% for year in forecast_rows %} <!-- Outer loop -->
+								<div class="table-responsive">
+
+									<table class="table table-hover table-bordered">
+										<thead>
+										<tr class="table-primary">
+											<th scope="col">Fall</th>
+											<th scope="col">Winter</th>
+											<th scope="col">Spring</th>
+											<th scope="col">Summer</th>
+										</tr>
+										</thead>
+
+					<!-- Trying to figure out how to use this nexted django syntax-
+					swap in and out with this tbody that works with just the outer loop -->
+										<tbody>
+											<tr>
+												<td>Course 1</td>
+												<td>Course 2</td>
+												<td>Course 3</td>
+												<td>Course 4</td>
+											</tr>
+										</tbody>
+
+										<!-- <tbody>
+											{% for row in year.objects %}
+											<tr class="table-warning">
+												{% for course in row.objects %}
+												<td>{{course}}</td>
+												{% endfor %}
+											</tr>
+											{% endfor %}
+										</tbody> -->
+
+									</table>
+
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+
+					</div>
+
+
+			</div>
+		</div>
+
+  </body>
+</html>
