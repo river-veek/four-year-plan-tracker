@@ -50,21 +50,16 @@ def delete_record(student_id):
         print("File doesn't exist\n")
     return
 
-"""
-def testing():
-    id = "951234567"
-    test_obj = {"test1": 4, "test2": 16}
-    save_record(id, test_obj)
-    loaded_obj = load_record(id)
-    assert loaded_obj["test1"] == 4
-    delete_record(id)
-    return
-
-def main():
-    print("----------- Begin testing ------------\n")
-    testing()
-    print("---------- All tests passed ----------\n")
-"""
+def create_studentID_list():
+    """Returns a list of all pickle file names (as strings) in pickles/ directory."""
+    dir = './pickles/'
+    studentID_list = []
+    for file in os.listdir(dir):
+        path = dir + file
+        if os.path.exists(path):
+            if not path == "./pickles/tmp.txt":  # temp file to make pickles/ a nonempty directory
+                studentID_list.append(file)
+    return studentID_list
 
 if __name__ == '__main__':
     main()
