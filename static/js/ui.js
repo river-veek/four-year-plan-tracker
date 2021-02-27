@@ -114,6 +114,12 @@ function removeClass () {
   }
 }
 
+function displayTable() {
+	saveTable()
+	location.href = 'forecast.html'
+}
+
+
 function saveTable() {
 	const table = document.getElementById('course-rows')
 	const len = table.rows.length
