@@ -33,6 +33,7 @@ def index():
     Landing page
     """
     # Comment out the ui.html return statement and uncomment this to test the forecast page
+    # Works with lists in the format of forecast_rows
     # return render_template('forecast.html', forecast_rows=forecast_rows)
     return render_template('ui.html', names=names, terms=terms, years=years, courses=courses)
 
