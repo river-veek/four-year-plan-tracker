@@ -113,3 +113,19 @@ function removeClass () {
     }
   }
 }
+
+function saveTable() {
+	const table = document.getElementById('course-rows')
+	const len = table.rows.length
+	// Array containing all the Rows
+	var savedData = Array()
+	for(let x = 0; x < len; x++)
+	savedData.push([])
+	console.log(savedData)
+	// Clear table
+	for(let x = 0; x < len; x++)
+	{ table.deleteRow(0) }
+}
+
+
+
