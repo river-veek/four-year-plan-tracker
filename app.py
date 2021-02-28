@@ -38,16 +38,16 @@ def index():
     return render_template('ui.html', names=names, terms=terms, years=years, courses=courses)
 
 # Going off JT's project creating route, including GET/POST methods 
-@app.route("/_forecast", methods=['GET', 'POST'])
+@app.route("/forecast", methods=['GET', 'POST'])
 def forecast():
 	"""
 	Forecast page
 	
 	"""
 	# using JSON to get data from form - gets Array - needs to be passed to render_temp
-	if request.method == "POST":
-		data = request.json
-		return jsonify(data)
+	#if request.method == "POST":
+	#	data = request.json
+	#	return jsonify(data)
 	
 	return render_template('forecast.html', forecast_rows=forecast_rows)
 
