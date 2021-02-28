@@ -137,7 +137,26 @@ function saveTable() {
 	const len = table.rows.length
 	for(let z = 0; z < len; z++)
 	{ table.deleteRow(0) }
+	
+	return tableData;
 }
 
-
+$(document).ready(function () {
+	$("#display").on("click", function() {
+		// get Array and using JSON turn it into string for sending
+		var arrData = JSON.stringify(saveTable());
+		$.ajax({
+			url: '/index.html',
+			type: 'post',
+			contentType: 'application/json',
+			dataType: 'json',
+			data: arrData
+		}).done(function(result) {
+			console.log(result);
+			$("data").html(result);
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+			console.log("fail: ", textStatus, errorThrown);
+		});
+	});
+});
 
