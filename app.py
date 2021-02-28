@@ -37,18 +37,19 @@ def index():
     # return render_template('forecast.html', forecast_rows=forecast_rows)
     return render_template('ui.html', names=names, terms=terms, years=years, courses=courses)
 
-# Need another app route for generating the forecast matrix, currently using index for testing
+# Going off JT's project creating route, including GET/POST methods 
 @app.route("/_forecast", methods=['GET', 'POST'])
 def forecast():
 	"""
 	Forecast page
 	
 	"""
+	# using JSON to get data from form - gets Array - needs to be passed to render_temp
 	if request.method == "POST":
 		data = request.json
 		return jsonify(data)
-	#forecast is nothing as of now - using it as data from forecast to pass into table
-	return render_template('forecast.html', forecast=forecast)
+	
+	return render_template('forecast.html', forecast_rows=forecast_rows)
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0')
