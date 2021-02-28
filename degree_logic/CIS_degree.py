@@ -145,9 +145,9 @@ def create_CIS_major():
 
     ################ 3-course Science sequence electives #######################
     # --------------------------------------------------------------------------
-    CIS_major.add_course("SCIENCE Elective 200+", 200, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
-    CIS_major.add_course("SCIENCE Elective 200+", 200, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
-    CIS_major.add_course("SCIENCE Elective 200+", 200, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+    CIS_major.add_course("SCIENCE Elective Term 1 200+", 200, 4, [], [Term("Fall")], is_core = True)
+    CIS_major.add_course("SCIENCE Elective Term 2 200+", 200, 4, ["SCIENCE Elective Term 1 200+"], [Term("Winter")], is_core = True)
+    CIS_major.add_course("SCIENCE Elective Term 3 200+", 200, 4, ["SCIENCE Elective Term 2 200+"], [Term("Spring")], is_core = True)
     # --------------------------------------------------------------------------
 
 
