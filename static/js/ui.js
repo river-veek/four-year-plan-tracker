@@ -119,17 +119,23 @@ function displayTable() {
 	location.href = 'forecast.html'
 }
 
-
 function saveTable() {
+	//Rough draft 
+	theData = document.getElementById('course-rows').rows
+	var tableData = []
+	for(var x = 0; x < theData.length; x++)
+	{
+		let tmp = theData[x].children
+		let current = []
+		for(var v = 0; v < tmp.length; v++)
+		{ current.push(tmp[v].innerText);}
+		tableData.push(current);
+	}
+	console.log(tableData)
+	
 	const table = document.getElementById('course-rows')
 	const len = table.rows.length
-	// Array containing all the Rows
-	var savedData = Array()
-	for(let x = 0; x < len; x++)
-	savedData.push([])
-	console.log(savedData)
-	// Clear table
-	for(let x = 0; x < len; x++)
+	for(let z = 0; z < len; z++)
 	{ table.deleteRow(0) }
 }
 
