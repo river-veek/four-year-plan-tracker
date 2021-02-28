@@ -38,7 +38,7 @@ def index():
     return render_template('ui.html', names=names, terms=terms, years=years, courses=courses)
 
 # Need another app route for generating the forecast matrix, currently using index for testing
-@app.route("/forecast", methods=['GET', 'POST'])
+@app.route("/_forecast", methods=['GET', 'POST'])
 def forecast():
 	"""
 	Forecast page
