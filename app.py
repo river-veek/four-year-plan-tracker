@@ -8,7 +8,7 @@ Last Modified: 2/25/21
 --------------------------------------------------------------------------------
 """
 
-from flask import Flask, render_template, abort, request
+from flask import Flask, render_template, abort, request, jsonify
 import random
 
 app = Flask(__name__)
@@ -38,6 +38,17 @@ def index():
     return render_template('ui.html', names=names, terms=terms, years=years, courses=courses)
 
 # Need another app route for generating the forecast matrix, currently using index for testing
+@app.route("/forecast", methods=['GET', 'POST'])
+def forecast():
+	"""
+	Forecast page
+	
+	"""
+	if request.method == "POST":
+		data = request.json
+		return jsonify(data)
+	#forecast is nothing as of now - using it as data from forecast to pass into table
+	return render_template('forecast.html', forecast=forecast)
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0')
