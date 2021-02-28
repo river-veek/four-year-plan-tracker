@@ -114,10 +114,9 @@ function removeClass () {
   }
 }
 
-function displayTable() {
-	saveTable()
-	location.href = 'forecast.html'
-}
+//function displayTable() {
+//	saveTable()
+//}
 
 function saveTable() {
 	//Rough draft 
@@ -141,7 +140,7 @@ function saveTable() {
 	return tableData;
 }
 
-/*$(document).ready(function () {
+$(document).ready(function () {
 	$("#display").on("click", function() {
 		// get Array and using JSON turn it into string for sending
 		var arrData = JSON.stringify(saveTable());
@@ -153,11 +152,10 @@ function saveTable() {
 			data: arrData
 		}).done(function(result) {
 			console.log(result);
-			$("data").html(result);
+			$("tbl").html(result);
 		}).fail(function(jqXHR, textStatus, errorThrown) {
 			console.log("fail: ", textStatus, errorThrown);
 		});
 	});
 });
 
-*/
