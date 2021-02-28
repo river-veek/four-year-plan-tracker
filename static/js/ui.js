@@ -140,7 +140,7 @@ function saveTable() {
 	return tableData;
 }
 
-$(document).ready(function () {
+/*$(document).ready(function () {
 	$("#display").on("click", function() {
 		// get Array and using JSON turn it into string for sending
 		var arrData = JSON.stringify(saveTable());
@@ -158,4 +158,4 @@ $(document).ready(function () {
 		});
 	});
 });
-
+*/
