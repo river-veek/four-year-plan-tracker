@@ -57,11 +57,6 @@ class Degree():
             #     print(course, course.pre_reqs_num)
             # print("------\n")
 
-
-            # #loop through pre_reqs for the current course
-            # for pre_req in course.pre_reqs:
-            #     pre_req.pre_reqs_num += 1
-
         return None
 
     def add_course(self,
@@ -170,7 +165,6 @@ class Course():
 
         #Course difficulty properties
         self.course_num = course_num
-        self.level = (course_num % 100) * 100
 
     def __repr__(self):
         """

@@ -43,6 +43,8 @@ class Student():
                      3: [[], [], [], []],
                      4: [[], [], [], []]
                      } # 1, 2, etc refer to the year in the students college experience
+        self.courses_taken = []
+
         self.summer = summer
         self.desired_grad_date = desired_grad_date
         self.note = ""
@@ -95,9 +97,10 @@ class Student():
                 if course.name == course_name:
                     added_course = course
                     break
+        #add course object into self.plan and courses_taken
+        self.plan[year][term].append(added_course)
+        self.courses_taken.append(added_course)
 
-        #add course object into self.plan
-        self.plan[year][term].append(course)
 
     def remove_course(self, course_name: str, year: int, term: int):
         """
@@ -117,6 +120,7 @@ class Student():
             if course.name == course_name:
                 course_found = True
                 self.plan[year][term].remove(course)
+                self.courses_taken.remove(course)
 
         if course_found == False:
             print("Error")

@@ -26,7 +26,14 @@ def generate_plan(student: "Student"):
     #initialize unmet_courses
     unmet_courses = []
     for degree in student.degree_list:
-        unmet_courses += degree.core_courses.copy()
+        degree_core_list_copy = degree.core_courses.copy()
+
+        #check for repeat courses between degrees
+        for course in degree_core_list_copy:
+            if course in unmet_courses:
+                degree_core_list_copy.remove(course)
+
+        unmet_courses += degree_core_list_copy
 
     #set current term
     current_term = (1, 0)
@@ -39,6 +46,23 @@ def generate_plan(student: "Student"):
                 #if course is in unmet_courses remove it
                 if course in unmet_courses:
                     unmet_courses.remove(course)
+                #elective condition
+                else:
+                    #loop through the core_courses in degree
+                    for core_course in unmet_courses:
+                        core_course_degree_name = core_course.name.split()[0]
+                        elective_str = core_course.name.split()[1]
+                        course_degree_name = course.name.split()[0]
+
+                        #if core_course is an elective
+                        if elective_str == "Elective":
+                            #if cources are the same major and level requirment it hit
+                            if (course_degree_name == core_course_degree_name) and \
+                               (course.course_num >= core_course.course_num):
+
+                               unmet_courses.remove(core_course)
+                               break
+
                 #update current term
                 current_term = (year, student.plan[year].index(term) + 1)
 
@@ -46,11 +70,11 @@ def generate_plan(student: "Student"):
     unmet_courses.sort(key=sort_pre_req)
     unmet_courses.reverse()
 
-    for course in unmet_courses:
-        print(course, course.pre_reqs_num)
+    # for course in unmet_courses:
+    #     print(course, course.pre_reqs_num)
 
     #add courses to forecast_plan
-    add_courses_to_forecast(forecast_plan, unmet_courses, current_term, student.summer, student.max_credits_per_term)
+    add_courses_to_forecast(forecast_plan, unmet_courses, current_term, student)
 
     print_plan(forecast_plan)
     return forecast_plan
@@ -83,19 +107,20 @@ def print_plan(plan):
     Returns:
         None
     """
-
+    print("Student Degree Plan")
     print("----------------------------")
     for year in plan:
         string = ""
         for term in plan[year]:
-            string += "| ### "
+            string += f"- "
             for course in term:
                 string += course.name
                 string += " ### "
-        print(string)
+            string += "\n"
+        print(string, end=" ")
         print("----------------------------")
 
-def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, summer: bool, max_credits_per_term: int):
+def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, student: "Student"):
     """
     Function adding the courses from unmet_courses into the forecast_plan
 
@@ -103,10 +128,7 @@ def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, summ
         plan - degree plan to be adding courses to
         unmet_courses - list of course objects that need to be added to the plan
         current_term - tuple of the term the student is entering (year, term)
-        summer - boolian indicator of whether or not the student is willing to
-                 take summer courses
-        max_credits_per_term - integer value of how many credits can be taken in
-                               a single term
+        student - Student object forecast is being preformed for
 
     Returns:
         None
@@ -117,33 +139,97 @@ def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, summ
     current_term = current_term[1]
 
     #set cap for term
-    if summer:
+    if student.summer:
         term_cap = 3
     else:
         term_cap = 2
 
+    forecasted_courses_taken = student.courses_taken.copy()
+    current_term_buffer = []
+
     #loop until unmet_courses is empty
     while(unmet_courses):
+
         # get next course and remove it from unmet_courses
-        next_course = unmet_courses[0]
-        unmet_courses.remove(next_course)
+        next_course = get_next_course(forecasted_courses_taken, unmet_courses, current_term)
+        # print()
+        # print(plan)
+        # print(next_course)
+        # print(current_term)
 
-        #find num credits taken in current term
-        num_credits = 0
-        for course in plan[current_year][current_term]:
-            num_credits += course.num_credits
-
-        #check if adding new courses to term will pass max_credits_per_term
-        if (num_credits + next_course.num_credits) > max_credits_per_term:
+        if next_course == None:
+            #increment term
             current_term += 1
+
+            #add buffered courses into forecasted_courses_taken
+            forecasted_courses_taken += current_term_buffer.copy()
+            #reset current_term_buffer
+            current_term_buffer = []
 
             #check if number is past term_cap
             if current_term > term_cap:
                 current_term = 0
                 current_year = increment_year(plan, current_year)
+        else:
+            #find num credits taken in current term
+            num_credits = 0
+            for course in plan[current_year][current_term]:
+                num_credits += course.num_credits
 
-        #add courses to term
-        plan[current_year][current_term].append(next_course)
+            #check if adding new courses to term will pass max_credits_per_term
+            if (num_credits + next_course.num_credits) > student.max_credits_per_term:
+                #increment term
+                current_term += 1
+
+                #add buffered courses into forecasted_courses_taken
+                forecasted_courses_taken += current_term_buffer.copy()
+                #reset current_term_buffer
+                current_term_buffer = []
+
+                #check if number is past term_cap
+                if current_term > term_cap:
+                    current_term = 0
+                    current_year = increment_year(plan, current_year)
+
+            else:
+                unmet_courses.remove(next_course)
+                unmet_courses.sort(key=sort_pre_req)
+                unmet_courses.reverse()
+                #add courses to term
+                plan[current_year][current_term].append(next_course)
+
+                #add course to current_term_buffer
+                current_term_buffer.append(next_course)
+
+def get_next_course(forecasted_courses_taken, unmet_course_list, current_term):
+
+    incr = 0
+    done = False
+    while(done == False):
+        done = True
+
+        #condition where no course can be found for current term
+        if incr >= len(unmet_course_list):
+            return None
+
+        next_course = unmet_course_list[incr]
+        #check that all pre-reqs have been taken
+        for course in next_course.pre_reqs:
+            if course not in forecasted_courses_taken:
+                done = False
+
+        #check that next_course is offered in current term
+        term_valid = False
+        for term in next_course.terms:
+            if term.value == current_term:
+                term_valid = True
+        if (term_valid == False):
+            done = False
+
+        incr += 1
+
+    return next_course
+
 
 def increment_year(plan, year: int):
     """

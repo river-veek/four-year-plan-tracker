@@ -153,10 +153,10 @@ def create_CIS_major():
 
     ################## Upper Division CIS electives ############################
     # --------------------------------------------------------------------------
-    CIS_major.add_course("CIS Elective 400+", 400, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
-    CIS_major.add_course("CIS Elective 400+", 400, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
-    CIS_major.add_course("CIS Elective 300+", 300, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
-    CIS_major.add_course("CIS Elective 300+", 300, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+    CIS_major.add_course("CIS Elective 400+", 400, 4, ["CIS 212 Computer Science III"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+    CIS_major.add_course("CIS Elective 400+", 400, 4, ["CIS 212 Computer Science III"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+    CIS_major.add_course("CIS Elective 300+", 300, 4, ["CIS 212 Computer Science III"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+    CIS_major.add_course("CIS Elective 300+", 300, 4, ["CIS 212 Computer Science III"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
     # --------------------------------------------------------------------------
 
     return CIS_major
