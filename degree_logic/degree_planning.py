@@ -19,6 +19,7 @@ def generate_plan(student: "Student"):
     Returns:
         forecast_plan
     """
+    print_plan(student.plan)
 
     #create copy of self.plan
     forecast_plan = student.plan.copy()
