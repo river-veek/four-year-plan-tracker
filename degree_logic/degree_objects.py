@@ -29,8 +29,8 @@ class Degree():
 
     def calc_pre_req_nums(self):
         """
-        Function to calculate and set the number of courses each courses within
-        the Degree are required for (Course.pre_reqs_num)
+        Function that calculates (and sets the integer value for) the number of courses
+        that each course in the Degree object relies upon (is a prereq for).
 
         Returns:
             None

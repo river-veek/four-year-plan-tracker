@@ -9,6 +9,8 @@ Last Modified: 2/25/21
 """
 
 import nose
+import sys
+# sys.path.append("../")
 from pickling import *
 
 class TestPickling:
