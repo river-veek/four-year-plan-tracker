@@ -7,9 +7,11 @@ Group: TBD
 Last Modified: 2/25/21
 --------------------------------------------------------------------------------
 """
-
-from flask import Flask, render_template, abort, request, jsonify
+from __future__ import print_function # In python 2.7
+from flask import Flask, render_template, abort, request, jsonify, json, redirect, url_for
 import random
+import sys
+
 
 app = Flask(__name__)
 
@@ -38,18 +40,43 @@ def index():
     return render_template('ui.html', names=names, terms=terms, years=years, courses=courses)
 
 # Going off JT's project creating route, including GET/POST methods 
-@app.route("/forecast", methods=['GET', 'POST'])
+@app.route("/forecast", methods=['POST'])
 def forecast():
 	"""
 	Forecast page
 	
 	"""
 	# using JSON to get data from form - gets Array - needs to be passed to render_temp
-	#if request.method == "POST":
-	#	data = request.json
-	#	return jsonify(data)
-	
-	return render_template('forecast.html', forecast_rows=forecast_rows)
+	if request.method == 'POST':
+		request_data = request.get_json()
+		
+		# print("GOT POST", file=sys.stderr)
+		# Print Functions are seen in Container logs
+		# print(type(request_data), file=sys.stderr)
+		
+		# output Dictionary of {'tData': list of lists
+		# Disregard u in front of each index - stands for Unibit - goes away
+		# print(request_data['tdata'], file=sys.stderr)
+		
+		# shows it is a list	
+		#print(type(request_data['tdata']),file=sys.stderr)
+				
+		# get List of lists - used to pass into forecast
+		result = get_data(request_data)
+		
+	# Not needed as of now but possibly later
+	elif request.method == 'GET':
+		print("Get", file=sys.stderr)
+
+	return render_template('forecast.html', forecast_rows=result)
+
+def get_data(data):
+	# print("IN GET DATA", data, file=sys.stderr)
+	# print(len(data), file=sys.stderr)
+	arr = (data['tdata'])
+	print(arr, file=sys.stderr)
+	return arr
 
 if __name__ == "__main__":
     app.run(debug=True,host='0.0.0.0')
+
