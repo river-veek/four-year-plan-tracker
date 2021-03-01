@@ -137,10 +137,33 @@
 								</p>
 							</div>
 						<br>
-						<button class="btn btn-success" id="save" style="display: none;" onclick="saveTable()">Save</button>
-						<form id="tbl" method="POST" action="/forecast">
-						<button class="btn btn-success" id="display" style="display: none;" type="submit" onclick="saveTable()">Save and Display</button>
-						</form>
+						<button class="btn btn-success" id="save" style="display: none;" onclick="">Save</button>
+						
+						<button class="btn btn-success" id="display" style="display: none;" type="button" name="save&display">Save and Display</button>
+						<!-- Script for sending POST on sava & display -->
+						<script>
+							$(document).ready(function() {
+								$('#display').on('click', function() {
+									const tableData = saveTable()
+									var tblData = {'tdata': tableData}
+									$.ajax({
+									type: "POST",
+									url: '/forecast',
+									data: JSON.stringify(tblData),
+									contentType: 'application/json; charset=utf-8',
+	  								success: function(result){
+	  								alert('OK')
+	  								document.write(result)
+	  								console.log("Success!")
+	  								},
+	  								error: function(request, error) {
+									console.log(arguments)
+									alert("Error: " + error)
+	  								}
+  									});
+  								});
+  							});
+						</script>
 						<!-- Perhaps a clear changes button? May be a future addition -->
 						<br><br>
 						</div>
