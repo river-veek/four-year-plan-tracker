@@ -17,7 +17,7 @@ function toggleLogin (name) {
 
   // Set display fields
   currStudent.innerText = name
-  currStudentText.innerText = "Current Student: "
+  currStudentText.innerText = 'Current Student: '
 
   // Hide log-in
   main.style.display = 'none'
@@ -50,7 +50,7 @@ function addClass () {
   // get Term Dropdown
   const termOption = document.getElementById('terms')
   // save Term selected
-  const tVal= termOption.options[termOption.selectedIndex].value
+  const tVal = termOption.options[termOption.selectedIndex].value
   // get Year Dropdown
   const yearOption = document.getElementById('year')
   // save Year selected
@@ -60,7 +60,7 @@ function addClass () {
 
   // if Trying to add dummy value - display not an option
   if (cVal === 'Course Name' || tVal === 'Term' || yVal === 'Year') {
-     alert("Not an Available Option :)");
+    alert('Not an Option :)')
   } else {
     // else insert new row
     const row = table.insertRow()
@@ -87,7 +87,7 @@ function removeClass () {
   // get Term Dropdown
   const termOption = document.getElementById('terms')
   // save Term selected
-  const tVal= termOption.options[termOption.selectedIndex].value
+  const tVal = termOption.options[termOption.selectedIndex].value
   // get Year Dropdown
   const yearOption = document.getElementById('year')
   // save Year selected
@@ -114,48 +114,20 @@ function removeClass () {
   }
 }
 
-//function displayTable() {
-//	saveTable()
-//}
+function saveTable () {
+  // Rough draft
+  const theData = document.getElementById('course-rows').rows
+  const tableData = []
+  for (let x = 0; x < theData.length; x++) {
+    const tmp = theData[x].children
+    const current = []
+    for (let v = 0; v < tmp.length; v++) { current.push(tmp[v].innerText) }
+    tableData.push(current)
+  }
 
-function saveTable() {
-	//Rough draft 
-	theData = document.getElementById('course-rows').rows
-	var tableData = []
-	for(var x = 0; x < theData.length; x++)
-	{
-		let tmp = theData[x].children
-		let current = []
-		for(var v = 0; v < tmp.length; v++)
-		{ current.push(tmp[v].innerText);}
-		tableData.push(current);
-	}
-	console.log(tableData)
-	
-	const table = document.getElementById('course-rows')
-	const len = table.rows.length
-	for(let z = 0; z < len; z++)
-	{ table.deleteRow(0) }
-	
-	return tableData;
+  const table = document.getElementById('course-rows')
+  const len = table.rows.length
+  for (let z = 0; z < len; z++) { table.deleteRow(0) }
+  
+   return tableData
 }
-
-/*$(document).ready(function () {
-	$("#display").on("click", function() {
-		// get Array and using JSON turn it into string for sending
-		var arrData = JSON.stringify(saveTable());
-		$.ajax({
-			url: '/index.html',
-			type: 'post',
-			contentType: 'application/json',
-			dataType: 'json',
-			data: arrData
-		}).done(function(result) {
-			console.log(result);
-			$("tbl").html(result);
-		}).fail(function(jqXHR, textStatus, errorThrown) {
-			console.log("fail: ", textStatus, errorThrown);
-		});
-	});
-});
-*/
