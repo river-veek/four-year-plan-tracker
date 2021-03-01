@@ -1,5 +1,5 @@
 // Always have 3 cells per row
-const NUM_OF_CELLS = 3
+var NUM_OF_CELLS = 3
 
 function toggleLogin (name) {
   // get elements of DOM
