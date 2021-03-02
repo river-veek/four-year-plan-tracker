@@ -29,7 +29,7 @@ forecast_rows = [
                 ]
 
 @app.route("/")
-@app.route("/index")
+@app.route("/index", methods=['POST'])
 def index():
     """
     Landing page
@@ -46,34 +46,36 @@ def forecast():
 	Forecast page
 	
 	"""
-	# using JSON to get data from form - gets Array - needs to be passed to render_temp
-	if request.method == 'POST':
-		request_data = request.get_json()
-		
-		# print("GOT POST", file=sys.stderr)
-		# Print Functions are seen in Container logs
-		# print(type(request_data), file=sys.stderr)
-		
-		# output Dictionary of {'tData': list of lists
-		# Disregard u in front of each index - stands for Unibit - goes away
-		# print(request_data['tdata'], file=sys.stderr)
-		
-		# shows it is a list	
-		#print(type(request_data['tdata']),file=sys.stderr)
-				
-		# get List of lists - used to pass into forecast
+	# using JSON to get data from form - gets string of list - needs to be passed to render_temp
+	
+	request_data = request.get_json()
+	print(request_data, file=sys.stderr)
+	print(request_data.keys(), file=sys.stderr)
+	
+	# only has one key
+	tmp = request_data.keys()
+	# will need to use to designate what button was called tableData - Save and display
+	# savedData - Save button - will need global variable to contain all saved data and add each time most likely?
+	if tmp[0] == 'login':
+		print("LOGIN", file=sys.stderr)
+		print("ID", request_data['login'], file=sys.stderr)
+	if tmp[0] == 'tableData':
+		# used for testing data transfer
+		print("Clicked Save/Display", file=sys.stderr),
+		print("Saved Classes: ", request_data['tableData'], file=sys.stderr)
 		result = get_data(request_data)
-		
-	# Not needed as of now but possibly later
-	elif request.method == 'GET':
-		print("Get", file=sys.stderr)
-
-	return render_template('forecast.html', forecast_rows=result)
+		return render_template('forecast.html', forecast_rows=result)
+	elif tmp[0] == 'savedData':
+		print('Clicked Save', file=sys.stderr)
+		print("Saved Classes: ", request_data['savedData'], file=sys.stderr)
+	#prints to browser console it has been saved
+	return "Saved Successfully"
 
 def get_data(data):
 	# print("IN GET DATA", data, file=sys.stderr)
 	# print(len(data), file=sys.stderr)
-	arr = (data['tdata'])
+	# needs to be formatted to correct list format for forecasting page
+	arr = (data['tableData'])
 	print(arr, file=sys.stderr)
 	return arr
 
