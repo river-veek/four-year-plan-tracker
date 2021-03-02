@@ -37,7 +37,7 @@
 
 								<!-- Works for when running in docker container -->
 								{% for name in names %}
-								<li class="dropdown-content"><a onclick="toggleLogin({{name}})">{{name}}</a> </li>
+								<li class="dropdown-content" id="prevstudent"><a onclick="toggleLogin({{name}})">{{name}}</a> </li>
 								{% endfor %}
 
 								<!-- Works for when running w/o containerization

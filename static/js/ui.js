@@ -2,7 +2,6 @@
 
 function toggleLogin (name) {
   // get elements of DOM
-  saveID()
   const main = document.getElementById('main-space')
   const add = document.getElementById('add')
   const save = document.getElementById('save')
@@ -33,6 +32,24 @@ function toggleLogin (name) {
   document.getElementById('button-row').style.display = 'inline-flex'
   dInfo.style.display = 'inline'
   tInfo.style.display = 'inline'
+  
+  // for previous student send data back 
+  var stringName = {'login': name}
+  $.ajax({
+		type: "POST",
+		url: '/forecast',
+		data: JSON.stringify(stringName),
+		contentType: 'application/json; charset=utf-8',
+	  	success: function(data){
+	  	alert("Log in sent")
+	  	console.log("login successfully")
+	  	console.log("Success!")
+	  	},
+	  	error: function(request, error) {
+		console.log(arguments)
+		alert("Error: " + error)
+	  	}
+  	});
 }
 
 // Wrapper for main toggleLogin for when user inputs new student ID
