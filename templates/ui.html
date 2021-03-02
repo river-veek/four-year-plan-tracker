@@ -56,8 +56,7 @@
 						  <label for="studentCreateInput">Create New Student</label>
 						  <input type="text" class="form-control" id="studentCreateInput" placeholder="Enter 95 Number">
 						</div>
-						<button onclick="toggleLoginNew()" class="btn btn-primary">Create</button>
-
+						<button onclick="toggleLoginNew()" id="newstudent" class="btn btn-primary">Create</button>
 					</div>
 
 				</div>
@@ -145,15 +144,15 @@
 							$(document).ready(function() {
 								$('#display').on('click', function() {
 									const tableData = saveTable()
-									var tblData = {'tdata': tableData}
+									var tblData = {'tableData': tableData}
 									$.ajax({
 									type: "POST",
 									url: '/forecast',
 									data: JSON.stringify(tblData),
 									contentType: 'application/json; charset=utf-8',
-	  								success: function(result){
-	  								alert('OK')
-	  								document.write(result)
+	  								success: function(data){
+	  								alert('Saving... Ready to Display!')
+	  								document.write(data)
 	  								console.log("Success!")
 	  								},
 	  								error: function(request, error) {
@@ -162,8 +161,49 @@
 	  								}
   									});
   								});
-  							});
-						</script>
+  								
+  								$('#save').on('click', function() {
+									const tableData = saveTable()
+									var tblData = {'savedData': tableData}
+									console.log(tblData)
+									$.ajax({
+									type: "POST",
+									url: '/forecast',
+									data: JSON.stringify(tblData),
+									contentType: 'application/json; charset=utf-8',
+	  								success: function(data){
+	  								alert('Saved Progress')
+	  								console.log("saved successfully")
+	  								console.log(data)
+	  								},
+	  								error: function(request, error) {
+									console.log(arguments)
+									alert("Error: " + error)
+	  								}
+  									});
+  								});
+  								
+  								$('#newstudent').on('click', function() {
+									var studentID = saveID()
+									var studentData = {'login': studentID}
+									$.ajax({
+									type: "POST",
+									url: '/forecast',
+									data: JSON.stringify(studentData),
+									contentType: 'application/json; charset=utf-8',
+	  								success: function(data){
+	  								alert("Log in sent")
+	  								console.log("login successfully")
+	  								console.log("Success!")
+	  								},
+	  								error: function(request, error) {
+									console.log(arguments)
+									alert("Error: " + error)
+	  								}
+  									});
+  								});
+  							});						
+  						</script>
 						<!-- Perhaps a clear changes button? May be a future addition -->
 						<br><br>
 						</div>
