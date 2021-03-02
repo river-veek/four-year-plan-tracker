@@ -32,6 +32,8 @@ def load_record(student_id):
     <student_id>.
     """
     path = './pickles/' + student_id
+    if not os.path.exists(path):
+        return None
     pickle_in = open(path, "rb")
     student = pickle.load(pickle_in)
     pickle_in.close()
