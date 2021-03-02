@@ -1,3 +1,12 @@
+<!--
+
+Primary webpage- handles "login" and add/remove course functionality
+
+Authors: Logan Levitre, Zeke Petersen
+Group: TBD
+
+-->
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -22,7 +31,7 @@
 					<h2>Welcome to the Four-Year Plan Tracker!</h2>
 					<hr>
 
-					<!-- Show current student ID- can be used later to retrieve the ID perhaps -->
+					<!-- Show current student ID -->
 					<p style="display: inline;" id="currStudentText">Current Student: None</p>
 					<p style="display: inline;" id="currStudent"></p>
 
@@ -33,16 +42,12 @@
 							</button>
 
 							<ul role="menu" class="dropdown-menu" id="log-in-menu">
-								<!--when clicked will remove button and display class options and buttons -->
 
-								<!-- Works for when running in docker container -->
+								<!-- Populates existing student dropdown -->
+								<!--when clicked will remove button and display class options and buttons -->
 								{% for name in names %}
 								<li class="dropdown-content" id="prevstudent"><a onclick="toggleLogin({{name}})">{{name}}</a> </li>
 								{% endfor %}
-
-								<!-- Works for when running w/o containerization
-								<li class="dropdown-content"><a onclick="toggleLogin(951234567)">951234567</a> </li>
-								-->
 
 	  					</ul>
 						</div>
@@ -56,6 +61,7 @@
 						  <label for="studentCreateInput">Create New Student</label>
 						  <input type="text" class="form-control" id="studentCreateInput" placeholder="Enter 95 Number">
 						</div>
+						<!--when clicked will remove button and display class options and buttons -->
 						<button onclick="toggleLoginNew()" id="newstudent" class="btn btn-primary">Create</button>
 					</div>
 
@@ -80,39 +86,28 @@
 
 						<!-- Our three primary dropdowns -->
 						<div class="btn-group" id="button-row" role="group" aria-label="Basic example" style="display: none;">
+							<!-- These dropdowns populated by the backend -->
 							<select class="custom-select" id='courses' style="width: 50%">
 							  <option selected>Course Name</option>
 								{% for course in courses %}
 								<option>{{course}}</option>
 								{% endfor %}
-							  <!-- Works for non-docker dummy testing
-								<option value="1">One</option>
-							  <option value="2">Two</option>
-							  <option value="3">Three</option>
-								-->
 							</select>
+
 							<select class="custom-select" id='terms' style="width: 25%">
 							  <option selected>Term</option>
 								{% for term in terms %}
 								<option>{{term}}</option>
 								{% endfor %}
-							  <!-- Works for non-docker dummy testing
-								<option value="1">One</option>
-							  <option value="2">Two</option>
-							  <option value="3">Three</option>
-								-->
 							</select>
+
 							<select class="custom-select" id='year' style="width: 25%">
 							  <option selected>Year</option>
 								{% for year in years %}
 								<option>{{year}}</option>
 								{% endfor %}
-							  <!-- Works for non-docker dummy testing
-								<option value="1">One</option>
-							  <option value="2">Two</option>
-							  <option value="3">Three</option>
-								-->
 							</select>
+
 						</div>
 
 						<div class="btn-group" role="group" aria-label="Basic example">
@@ -136,8 +131,10 @@
 								</p>
 							</div>
 						<br>
+
+						<!-- Save buttons will grab table data and send to backend- optional redirect -->
+
 						<button class="btn btn-success" id="save" style="display: none;" onclick="">Save</button>
-						
 						<button class="btn btn-success" id="display" style="display: none;" type="button" name="save&display">Save and Display</button>
 						<!-- Script for sending POST on sava & display -->
 						<script>
@@ -151,7 +148,7 @@
 									data: JSON.stringify(tblData),
 									contentType: 'application/json; charset=utf-8',
 	  								success: function(data){
-	  								alert('Saving... Ready to Display!')
+	  								// alert('Saving... Ready to Display!')
 	  								document.write(data)
 	  								console.log("Success!")
 	  								},
@@ -161,7 +158,7 @@
 	  								}
   									});
   								});
-  								
+
   								$('#save').on('click', function() {
 									const tableData = saveTable()
 									var tblData = {'savedData': tableData}
@@ -172,7 +169,7 @@
 									data: JSON.stringify(tblData),
 									contentType: 'application/json; charset=utf-8',
 	  								success: function(data){
-	  								alert('Saved Progress')
+	  								// alert('Saved Progress')
 	  								console.log("saved successfully")
 	  								console.log(data)
 	  								},
@@ -182,7 +179,7 @@
 	  								}
   									});
   								});
-  								
+
   								$('#newstudent').on('click', function() {
 									var studentID = saveID()
 									var studentData = {'login': studentID}
@@ -192,7 +189,7 @@
 									data: JSON.stringify(studentData),
 									contentType: 'application/json; charset=utf-8',
 	  								success: function(data){
-	  								alert("Log in sent")
+	  								// alert("Log in sent")
 	  								console.log("login successfully")
 	  								console.log("Success!")
 	  								},
@@ -202,12 +199,13 @@
 	  								}
   									});
   								});
-  							});						
+  							});
   						</script>
+
 						<!-- Perhaps a clear changes button? May be a future addition -->
 						<br><br>
 						</div>
-
+						<!-- Table object of courses that have not yet been saved -->
 						<div class="row justify-content-center">
 					    <div class="col-auto">
 
