@@ -1,8 +1,8 @@
-// Always have 3 cells per row
-var NUM_OF_CELLS = 3
+ 
 
 function toggleLogin (name) {
   // get elements of DOM
+  saveID()
   const main = document.getElementById('main-space')
   const add = document.getElementById('add')
   const save = document.getElementById('save')
@@ -67,7 +67,7 @@ function addClass () {
     // assign class
     row.className = 'table-warning' // Example of how to set Bootstrap class dynamically
     // always add 3 cells as only inserting choice, term and year
-    for (let x = 0; x < NUM_OF_CELLS; x++) {
+    for (let x = 0; x < 3; x++) {
     // insert new cell into row - 0 indexed
       table.rows[table.rows.length - 1].insertCell()
     }
@@ -130,4 +130,8 @@ function saveTable () {
   for (let z = 0; z < len; z++) { table.deleteRow(0) }
   
    return tableData
+}
+
+function saveID () {
+	return document.getElementById('studentCreateInput').value
 }
