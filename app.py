@@ -2,7 +2,7 @@
 --------------------------------------------------------------------------------
 File containing the routing for application logic
 
-Author: JT Kashuba
+Author: JT Kashuba, Logan Levitre, Zeke Petersen
 Group: TBD
 Last Modified: 2/25/21
 --------------------------------------------------------------------------------
@@ -13,8 +13,10 @@ import random
 import sys
 
 import degree_planning as dp
-import student_objects as st
 import pickling as pkl
+import CIS_degree as cd
+import Gen_Ed as ge
+from student_objects import *
 
 
 app = Flask(__name__)
@@ -45,7 +47,9 @@ def index():
 
 	# terms and years can be static globals since those should be the same no matter what
 	names = pkl.create_studentID_list()
-	courses = generate_course_list()  # All possible courses from the CIS major object (not sure if this exists yet)
+
+	# TODO -- create this function, for our program this will need to be static since we have not yet loaded the student_obj
+	courses = generate_course_list()  # All possible courses from the CIS/GenEd major objects (not sure if this exists yet)
 
 	"""
     return render_template('ui.html', names=names, terms=terms, years=years, courses=courses)
@@ -77,10 +81,16 @@ def forecast():
 		student_obj = pkl.load_record(id)
 
 		if student_obj == None:
-			student_obj = st.Student(id)
-			# add degree to student_obj?
+			student_obj = Student(id)
+			gen_ed = ge.create_Gen_Ed()
+			student_obj.add_degree(gen_ed)
+			deg = cd.create_CIS_major()
+			student_obj.add_degree(deg)
+
+			# TODO -- any other prep for this new object?
 
 		"""
+
 	if tmp[0] == 'tableData':
 		# used for testing data transfer
 		print("Clicked Save/Display", file=sys.stderr),
@@ -88,7 +98,10 @@ def forecast():
 
 		""" Pseudocode
 
+		# TODO -- is this the proper way to call add_course?
 		for i in range(len(request_data['tableData'])):
+			year = 1
+			term = 1
 			if request_data['tableData'][i][2] == u'1st':
 				year = 1
 			elif request_data['tableData'][i][2] == u'2nd':
@@ -101,17 +114,19 @@ def forecast():
 				year = 5
 
 			if request_data['tableData'][i][1] == u'Fall':
-				term = 0
-			elif request_data['tableData'][i][1] == u'Winter':
 				term = 1
-			elif request_data['tableData'][i][1] == u'Spring':
+			elif request_data['tableData'][i][1] == u'Winter':
 				term = 2
-			elif request_data['tableData'][i][1] == u'Summer':
+			elif request_data['tableData'][i][1] == u'Spring':
 				term = 3
+			elif request_data['tableData'][i][1] == u'Summer':
+				term = 4
 
 			student_obj.add_course(request_data['tableData'][i][0], year, term)
 
-		forecast = dp.generate_plan(student_obj)
+		# TODO -- is this the proper way to get the plan?
+		# forecast = dp.generate_plan(student_obj)
+		forecast = student_obj.get_plan()
 		forecast_adjusted = my_func(forecast)
 
 		pkl.save_record(student_obj.identifier, student_obj)
@@ -127,7 +142,11 @@ def forecast():
 
 		""" Pseudocode
 
+		# TODO -- is this the proper way to call add_course?
 		for i in range(len(request_data['tableData'])):
+			year = 1
+			term = 1
+
 			if request_data['tableData'][i][2] == u'1st':
 				year = 1
 			elif request_data['tableData'][i][2] == u'2nd':
@@ -140,13 +159,13 @@ def forecast():
 				year = 5
 
 			if request_data['tableData'][i][1] == u'Fall':
-				term = 0
-			elif request_data['tableData'][i][1] == u'Winter':
 				term = 1
-			elif request_data['tableData'][i][1] == u'Spring':
+			elif request_data['tableData'][i][1] == u'Winter':
 				term = 2
-			elif request_data['tableData'][i][1] == u'Summer':
+			elif request_data['tableData'][i][1] == u'Spring':
 				term = 3
+			elif request_data['tableData'][i][1] == u'Summer':
+				term = 4
 
 			student_obj.add_course(request_data['tableData'][i][0], year, term)
 
