@@ -12,6 +12,10 @@ from flask import Flask, render_template, abort, request, jsonify, json, redirec
 import random
 import sys
 
+import degree_planning as dp
+import student_objects as st
+import pickling as pkl
+
 
 app = Flask(__name__)
 
@@ -40,7 +44,7 @@ def index():
     """ Psuedocode
 
 	# terms and years can be static globals since those should be the same no matter what
-	names = create_studentID_list()
+	names = pkl.create_studentID_list()
 	courses = generate_course_list()  # All possible courses from the CIS major object (not sure if this exists yet)
 
 	"""
@@ -70,10 +74,11 @@ def forecast():
 		""" Pseudocode
 
 		id = request_data['login']
-		student_obj = load_record(id)
+		student_obj = pkl.load_record(id)
 
 		if student_obj == None:
-			student_obj = create_new_student(id) # Pretty sure this needs to just be the constructor of Student, this isn't it
+			student_obj = st.Student(id)
+			# add degree to student_obj?
 
 		"""
 	if tmp[0] == 'tableData':
@@ -84,13 +89,32 @@ def forecast():
 		""" Pseudocode
 
 		for i in range(len(request_data['tableData'])):
-			# Not sure about the syntax below this line yet
-			student_obj.add_course(request_data['tableData'][i][0], request_data['tableData'][i][1], request_data['tableData'][i][2])
+			if request_data['tableData'][i][2] == u'1st':
+				year = 1
+			elif request_data['tableData'][i][2] == u'2nd':
+				year = 2
+			elif request_data['tableData'][i][2] == u'3rd':
+				year = 3
+			elif request_data['tableData'][i][2] == u'4th':
+				year = 4
+			elif request_data['tableData'][i][2] == u'5th':
+				year = 5
 
-		forecast = student_obj.forecast()
-		forecast_adjusted = forecast.my_func()
+			if request_data['tableData'][i][1] == u'Fall':
+				term = 0
+			elif request_data['tableData'][i][1] == u'Winter':
+				term = 1
+			elif request_data['tableData'][i][1] == u'Spring':
+				term = 2
+			elif request_data['tableData'][i][1] == u'Summer':
+				term = 3
 
-		save_record(student_obj.id, student_obj)
+			student_obj.add_course(request_data['tableData'][i][0], year, term)
+
+		forecast = dp.generate_plan(student_obj)
+		forecast_adjusted = my_func(forecast)
+
+		pkl.save_record(student_obj.identifier, student_obj)
 
 		return render_template('forecast.html', forecast_rows=forecast_adjusted)
 		"""
@@ -104,10 +128,29 @@ def forecast():
 		""" Pseudocode
 
 		for i in range(len(request_data['tableData'])):
-			# Not sure about the syntax below this line yet
-			student_obj.add_course(request_data['tableData'][i][0], request_data['tableData'][i][1], request_data['tableData'][i][2])
+			if request_data['tableData'][i][2] == u'1st':
+				year = 1
+			elif request_data['tableData'][i][2] == u'2nd':
+				year = 2
+			elif request_data['tableData'][i][2] == u'3rd':
+				year = 3
+			elif request_data['tableData'][i][2] == u'4th':
+				year = 4
+			elif request_data['tableData'][i][2] == u'5th':
+				year = 5
 
-		save_record(student_obj.id, student_obj)
+			if request_data['tableData'][i][1] == u'Fall':
+				term = 0
+			elif request_data['tableData'][i][1] == u'Winter':
+				term = 1
+			elif request_data['tableData'][i][1] == u'Spring':
+				term = 2
+			elif request_data['tableData'][i][1] == u'Summer':
+				term = 3
+
+			student_obj.add_course(request_data['tableData'][i][0], year, term)
+
+		pkl.save_record(student_obj.identifier, student_obj)
 
 		return "Saved Successfully"
 		"""
