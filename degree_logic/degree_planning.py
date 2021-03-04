@@ -2,9 +2,9 @@
 ----------------------------------------------------------------------------------------
 File for defining functions for generating a degree plan
 
-Authors - Noah Kruss
+Authors - JT Kashuba, Noah Kruss
 Group - TBD
-Last Modified - 2/24/21
+Last Modified - 3/3/21
 ----------------------------------------------------------------------------------------
 """
 
@@ -17,7 +17,7 @@ def generate_plan(student: "Student"):
         student - Student object of the student to generate the plan for
 
     Returns:
-        forecast_plan - dictonary of plan infomation in the following form
+        forecast_plan - dictionary of plan infomation in the following form
 
             {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
              2: [[], [], [], []],
@@ -26,7 +26,11 @@ def generate_plan(student: "Student"):
              ...
             }
 
-                Note - course objects are stored within the lists
+                Notes: course objects are stored within the lists
+
+                        key:value pairs represent year:courses_taken_that_year,
+                        where the inner lists represent each term within that year.
+                        The ordering is Fall, Winter, Spring, Summer.
     """
 
     #create copy of self.plan
@@ -112,7 +116,7 @@ def print_plan(plan):
     testing)
 
     Inputs:
-        plan - degree plan dictonary to be printed. plan has the following form
+        plan - degree plan dictionary to be printed. plan has the following form
 
             {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
              2: [[], [], [], []],
@@ -120,7 +124,11 @@ def print_plan(plan):
              4: [[], [], [], []],
              ...
             }
-                Note - course objects are stored within the lists
+                Notes: course objects are stored within the lists
+
+                        key:value pairs represent year:courses_taken_that_year,
+                        where the inner lists represent each term within that year.
+                        The ordering is Fall, Winter, Spring, Summer.
 
     Returns:
         None
@@ -150,7 +158,12 @@ def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, stud
              4: [[], [], [], []],
              ...
             }
-                Note - course objects are stored within the lists
+                Notes: course objects are stored within the lists
+
+                        key:value pairs represent year:courses_taken_that_year,
+                        where the inner lists represent each term within that year.
+                        The ordering is Fall, Winter, Spring, Summer.
+
         unmet_courses - list of course objects that need to be added to the plan
         current_term - tuple of the term the student is entering (year, term)
         student - Student object forecast is being preformed for
@@ -279,7 +292,7 @@ def increment_year(plan, year: int):
     a new year gets added to the degree plan
 
     Inputs:
-        plan - degree plan dictonary. plan has the following form
+        plan - degree plan dictionary. plan has the following form
 
             {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
              2: [[], [], [], []],
@@ -287,9 +300,13 @@ def increment_year(plan, year: int):
              4: [[], [], [], []],
              ...
             }
-                Note - course objects are stored within the lists
+                Notes: course objects are stored within the lists
 
-        year - year key (int) for the dictonary
+                        key:value pairs represent year:courses_taken_that_year,
+                        where the inner lists represent each term within that year.
+                        The ordering is Fall, Winter, Spring, Summer.
+
+        year - year key (int) for the dictionary
 
     Returns:
         None
