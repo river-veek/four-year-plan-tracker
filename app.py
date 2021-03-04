@@ -13,6 +13,7 @@ import random
 import sys
 sys.path.append('./degree_logic')
 
+import pickle
 import degree_planning as dp
 import pickling as pkl
 import CIS_degree as cd
@@ -75,80 +76,84 @@ def forecast():
 		print("Clicked Save/Display", file=sys.stderr),
 		print("Saved Classes: ", request_data['tableData'], file=sys.stderr)
 
-
-		for i in range(len(request_data['tableData'])):
-			year = 1
-			term = 1
-			if request_data['tableData'][i][2] == u'1st':
+		if 'tableData' in request_data.keys():
+			for i in range(len(request_data['tableData'])):
 				year = 1
-			elif request_data['tableData'][i][2] == u'2nd':
-				year = 2
-			elif request_data['tableData'][i][2] == u'3rd':
-				year = 3
-			elif request_data['tableData'][i][2] == u'4th':
-				year = 4
-			elif request_data['tableData'][i][2] == u'5th':
-				year = 5
-
-			if request_data['tableData'][i][1] == u'Fall':
-				term = 0
-			elif request_data['tableData'][i][1] == u'Winter':
 				term = 1
-			elif request_data['tableData'][i][1] == u'Spring':
-				term = 2
-			elif request_data['tableData'][i][1] == u'Summer':
-				term = 3
+				if request_data['tableData'][i][2] == u'1st':
+					year = 1
+				elif request_data['tableData'][i][2] == u'2nd':
+					year = 2
+				elif request_data['tableData'][i][2] == u'3rd':
+					year = 3
+				elif request_data['tableData'][i][2] == u'4th':
+					year = 4
+				elif request_data['tableData'][i][2] == u'5th':
+					year = 5
 
-			student_obj.add_course(request_data['tableData'][i][0], year, term)
+				if request_data['tableData'][i][1] == u'Fall':
+					term = 0
+				elif request_data['tableData'][i][1] == u'Winter':
+					term = 1
+				elif request_data['tableData'][i][1] == u'Spring':
+					term = 2
+				elif request_data['tableData'][i][1] == u'Summer':
+					term = 3
 
-		forecast_dict = student_obj.get_plan()
-		forecast_adjusted = format_rows_to_columns(forecast_dict)
+				student_obj.add_course(request_data['tableData'][i][0], year, term)
 
-		pkl.save_record(student_obj.identifier, student_obj)
+			forecast_dict = student_obj.get_plan()
+			forecast_adjusted = format_rows_to_columns(forecast_dict)
 
-		return render_template('forecast.html', forecast_rows=forecast_adjusted)
+			# path = './pickles/' + student_obj.identifier
+			# print("pickle file path: ", path, file=sys.stderr)
+			# path = str(path)
+			# with open(path, "wb") as pickle_out:
+			# 	pickle.dump("teststring", pickle_out)
+			# pickle_out = open(path, "wb")
+			# print(pickle_out, file=sys.stderr)
+			# pickle.dump(student_obj, pickle_out)
+			# pickle_out.close()
 
+			# pkl.save_record(student_obj.identifier, student_obj)
 
-		# result = get_data(request_data)
-		# return render_template('forecast.html', forecast_rows=result)
+			return render_template('forecast.html', forecast_rows=forecast_adjusted)
 
 	elif tmp[0] == 'savedData':
 		print('Clicked Save', file=sys.stderr)
 		print("Saved Classes: ", request_data['savedData'], file=sys.stderr)
 
-		""" Pseudocode
-
-		# TODO -- is this the proper way to call add_course?
-		for i in range(len(request_data['tableData'])):
-			year = 1
-			term = 1
-
-			if request_data['tableData'][i][2] == u'1st':
+		if 'tableData' in request_data.keys():
+			for i in range(len(request_data['tableData'])):
 				year = 1
-			elif request_data['tableData'][i][2] == u'2nd':
-				year = 2
-			elif request_data['tableData'][i][2] == u'3rd':
-				year = 3
-			elif request_data['tableData'][i][2] == u'4th':
-				year = 4
-			elif request_data['tableData'][i][2] == u'5th':
-				year = 5
-
-			if request_data['tableData'][i][1] == u'Fall':
-				term = 0
-			elif request_data['tableData'][i][1] == u'Winter':
 				term = 1
-			elif request_data['tableData'][i][1] == u'Spring':
-				term = 2
-			elif request_data['tableData'][i][1] == u'Summer':
-				term = 3
 
-			student_obj.add_course(request_data['tableData'][i][0], year, term)
+				if request_data['tableData'][i][2] == u'1st':
+					year = 1
+				elif request_data['tableData'][i][2] == u'2nd':
+					year = 2
+				elif request_data['tableData'][i][2] == u'3rd':
+					year = 3
+				elif request_data['tableData'][i][2] == u'4th':
+					year = 4
+				elif request_data['tableData'][i][2] == u'5th':
+					year = 5
 
-		pkl.save_record(student_obj.identifier, student_obj)
+				if request_data['tableData'][i][1] == u'Fall':
+					term = 0
+				elif request_data['tableData'][i][1] == u'Winter':
+					term = 1
+				elif request_data['tableData'][i][1] == u'Spring':
+					term = 2
+				elif request_data['tableData'][i][1] == u'Summer':
+					term = 3
 
-		return "Saved Successfully"
-		"""
+				student_obj.add_course(request_data['tableData'][i][0], year, term)
+
+			pkl.save_record(student_obj.identifier, student_obj)
+
+			return "Saved Successfully"
+
 	#prints to browser console it has been saved
 	return "Saved Successfully"
 
@@ -216,6 +221,8 @@ def format_rows_to_columns(forecast_dict):
 	formatted_columns = [
 						  ]
 	for year in student_plan:
+		# This is hardcoding the max number of courses taken each term (4 lists
+		# of empty strings to be in line with the established 16 credit max set in student_objects)
 		formatted_columns.append([ ["", "", "", ""],["", "", "", ""],["", "", "", ""], ["", "", "", ""] ])
 
 	# formatted_columns[i][j][0]

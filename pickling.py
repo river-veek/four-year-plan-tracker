@@ -64,4 +64,5 @@ def create_studentID_list():
     return studentID_list
 
 if __name__ == '__main__':
-    main()
+    pass
+    # main()
