@@ -7,6 +7,7 @@ Group - TBD
 Last Modified - 3/3/21
 ----------------------------------------------------------------------------------------
 """
+import copy
 
 # def generate_plan(student: "Student"):
 def generate_plan(student):
@@ -35,7 +36,7 @@ def generate_plan(student):
     """
 
     #create copy of self.plan
-    forecast_plan = student.plan.copy()
+    forecast_plan = copy.deepcopy(student.plan)
 
     #initialize unmet_courses
     unmet_courses = []
@@ -90,8 +91,8 @@ def generate_plan(student):
     #add courses to forecast_plan
     add_courses_to_forecast(forecast_plan, unmet_courses, current_term, student)
 
-    #print_plan(student.plan)
-    #print_plan(forecast_plan)
+    print_plan(student.plan)
+    print_plan(forecast_plan)
     return forecast_plan
 
 #-------------------------------------------------------------------------------
