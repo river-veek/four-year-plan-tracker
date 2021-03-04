@@ -133,6 +133,17 @@ class Student():
 
         return generate_plan(self)
 
+    def get_course_list(self):
+
+        course_list =[]
+
+        for degree in self.degree_list:
+            for course in degree.courses:
+                if course.name not in course_list:
+                    course_list.append(course.name)
+
+        return course_list
+
     def checkcompetion(self):
         """
         check if all degrees for the student has had their requirements met

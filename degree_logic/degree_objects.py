@@ -63,6 +63,7 @@ class Degree():
                    name: str,
                    course_num: int,
                    num_credits: int,
+                   difficulty: int,
                    pre_reqs: list,
                    terms: list,
                    is_core = False):
@@ -75,6 +76,8 @@ class Degree():
             name - (str) is the unique name for the course
             course_num - (int) is the identifier number for the course
             num_credits - (int) is the number of credits the Univerity give the course
+            difficulty - (int) is a integer repersenting how difficult the course
+                         is on a scale of 1 to ____
             pre_reqs - (list) is a list of course names that are required to
                         be taken by a Student before this one
             terms - (list) is a list of Term objects
@@ -99,7 +102,7 @@ class Degree():
             return None
 
         #generate Course object
-        new_course = Course(name, course_num, num_credits, pre_req_objects, terms)
+        new_course = Course(name, course_num, num_credits, pre_req_objects, terms, difficulty)
 
         #add Course into list of possible courses
         self.courses.append(new_course)
@@ -142,7 +145,7 @@ class Degree():
 
 class Course():
 
-    def __init__(self, name: str, course_num: int, num_credits: int, pre_reqs: list, terms: list):
+    def __init__(self, name: str, course_num: int, num_credits: int, pre_reqs: list, terms: list, difficulty: int):
         """
         Function to initialize a Course object
 
@@ -153,12 +156,15 @@ class Course():
             pre_reqs - (list) is a list of Course objects that are required to
                         be taken by a Student before this one
             terms - (list) is a list of Term objects
+            difficulty - (int) is a integer repersenting how difficult the course
+                         is on a scale of 1 to ____
         """
         #Base infomation
         self.name = name
         self.num_credits = num_credits
         self.pre_reqs = pre_reqs
         self.terms = terms
+        self.difficulty = difficulty
 
         #Counter for how many courses require this one to be taken before hand
         self.pre_reqs_num = 0
