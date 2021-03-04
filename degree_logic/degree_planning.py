@@ -28,7 +28,6 @@ def generate_plan(student: "Student"):
 
                 Note - course objects are stored within the lists
     """
-    print_plan(student.plan)
 
     #create copy of self.plan
     forecast_plan = student.plan.copy()
@@ -86,7 +85,8 @@ def generate_plan(student: "Student"):
     #add courses to forecast_plan
     add_courses_to_forecast(forecast_plan, unmet_courses, current_term, student)
 
-    print_plan(forecast_plan)
+    #print_plan(student.plan)
+    #print_plan(forecast_plan)
     return forecast_plan
 
 #-------------------------------------------------------------------------------

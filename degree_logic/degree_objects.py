@@ -63,10 +63,10 @@ class Degree():
                    name: str,
                    course_num: int,
                    num_credits: int,
-                   difficulty: int,
                    pre_reqs: list,
                    terms: list,
-                   is_core = False):
+                   is_core = False,
+                   difficulty = 2):
         """
         Function for creating a new Course object and adding it to the degree
 
@@ -76,13 +76,13 @@ class Degree():
             name - (str) is the unique name for the course
             course_num - (int) is the identifier number for the course
             num_credits - (int) is the number of credits the Univerity give the course
-            difficulty - (int) is a integer repersenting how difficult the course
-                         is on a scale of 1 to ____
             pre_reqs - (list) is a list of course names that are required to
                         be taken by a Student before this one
             terms - (list) is a list of Term objects
             is_core - (bool) a string denoting what type of requirment the
                             core course to complete the major. Defaults to False
+            difficulty - (int) is a integer repersenting how difficult the course
+                         is on a scale of 1 to 5
 
         Outputs:
             None
@@ -157,7 +157,7 @@ class Course():
                         be taken by a Student before this one
             terms - (list) is a list of Term objects
             difficulty - (int) is a integer repersenting how difficult the course
-                         is on a scale of 1 to ____
+                         is on a scale of 1 to 5
         """
         #Base infomation
         self.name = name
@@ -178,13 +178,6 @@ class Course():
         """
 
         return self.name
-
-    def calc_pre_reqs(self):
-        #base condition
-        # if self.pre_reqs = []:
-        #     return 0
-        # else:
-        pass
 
 
 class Term():
