@@ -17,7 +17,16 @@ def generate_plan(student: "Student"):
         student - Student object of the student to generate the plan for
 
     Returns:
-        forecast_plan
+        forecast_plan - dictonary of plan infomation in the following form
+
+            {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
+             2: [[], [], [], []],
+             3: [[], [], [], []],
+             4: [[], [], [], []],
+             ...
+            }
+
+                Note - course objects are stored within the lists
     """
     print_plan(student.plan)
 
@@ -103,7 +112,15 @@ def print_plan(plan):
     testing)
 
     Inputs:
-        plan - degree plan dictonary to print
+        plan - degree plan dictonary to be printed. plan has the following form
+
+            {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
+             2: [[], [], [], []],
+             3: [[], [], [], []],
+             4: [[], [], [], []],
+             ...
+            }
+                Note - course objects are stored within the lists
 
     Returns:
         None
@@ -126,7 +143,14 @@ def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, stud
     Function adding the courses from unmet_courses into the forecast_plan
 
     Inputs:
-        plan - degree plan to be adding courses to
+        plan - degree plan to be adding courses to. plan has the following form
+            {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
+             2: [[], [], [], []],
+             3: [[], [], [], []],
+             4: [[], [], [], []],
+             ...
+            }
+                Note - course objects are stored within the lists
         unmet_courses - list of course objects that need to be added to the plan
         current_term - tuple of the term the student is entering (year, term)
         student - Student object forecast is being preformed for
@@ -203,6 +227,23 @@ def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, stud
                 current_term_buffer.append(next_course)
 
 def get_next_course(forecasted_courses_taken, unmet_course_list, current_term):
+    """
+    Function for determining what course should be added to a student plan next
+
+    Inputs:
+        forecasted_courses_taken - list of Course objects that are currently in
+                                   the students plan for previous terms
+        unmet_course_list - list of Course objects that still need to be taken
+                            by the student
+        current_term - (int) value repersenting the term next_couse is going to
+                       be taken in
+                            0 = Fall
+                            1 = Winter
+                            2 = Spring
+                            3 = Summer
+    Returns:
+        next_course - Course object of the next course that should be taken
+    """
 
     incr = 0
     done = False
@@ -231,7 +272,6 @@ def get_next_course(forecasted_courses_taken, unmet_course_list, current_term):
 
     return next_course
 
-
 def increment_year(plan, year: int):
     """
     Function incrementing the year key being used to index through a degree plan.
@@ -239,8 +279,17 @@ def increment_year(plan, year: int):
     a new year gets added to the degree plan
 
     Inputs:
-        plan - degree plan dictonary to print
-        year - year key for the dictonary
+        plan - degree plan dictonary. plan has the following form
+
+            {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
+             2: [[], [], [], []],
+             3: [[], [], [], []],
+             4: [[], [], [], []],
+             ...
+            }
+                Note - course objects are stored within the lists
+
+        year - year key (int) for the dictonary
 
     Returns:
         None

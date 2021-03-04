@@ -7,8 +7,8 @@ Group - TBD
 Last Modified - 2/22/21
 ----------------------------------------------------------------------------------------
 """
-from degree_objects import *
-from degree_planning import *
+import degree_objects as d_o
+import degree_planning as d_p
 
 class Student():
     """
@@ -86,8 +86,14 @@ class Student():
         Inputs:
             course_name - (str) identifier of the course to add
             year - (int) indicates the year in which to add the course in self.plan
-            term - (int) indicats the term in which to add the course in self.plan
-
+                        1 = 1st year
+                        2 = 2nd year
+                        ...
+            term - (int) indicats the term in which to find the course in self.plan
+                        0 = Fall
+                        1 = Winter
+                        2 = Spring
+                        3 = Summer
         """
         added_course = None
 
@@ -110,7 +116,14 @@ class Student():
         Inputs:
             course_name - (str) identifier of the course to add
             year - (int) indicates the year in which to add the course in self.plan
+                        1 = 1st year
+                        2 = 2nd year
+                        ...
             term - (int) indicats the term in which to find the course in self.plan
+                        0 = Fall
+                        1 = Winter
+                        2 = Spring
+                        3 = Summer
 
         """
 
@@ -126,26 +139,48 @@ class Student():
             print("Error")
 
     def get_plan(self):
+        """
+        Function to generate a possible plan for the student to complete all of
+        the requirments for the degrees they are taking
+
+        Returns:
+            plan - dictonary of plan infomation in the following form
+
+                {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
+                 2: [[], [], [], []],
+                 3: [[], [], [], []],
+                 4: [[], [], [], []],
+                 ...
+                }
+
+                    Note - course objects are stored within the lists
+        """
 
         #calculate the pre_req_num for the degrees
         for degree in self.degree_list:
             degree.calc_pre_req_nums()
 
-        return generate_plan(self)
+        return d_p.generate_plan(self)
 
     def get_course_list(self):
+        """
+        Function to return a list of the string names of all course objects that
+        are within the degrees within self.degree_list
 
+        Returns:
+            course_list - list of course names
+        """
+
+        #initilize list
         course_list =[]
 
+        #loop through degrees
         for degree in self.degree_list:
+            #loop through courses within the degree
             for course in degree.courses:
+                #check that the course isn't already in the list
                 if course.name not in course_list:
+                    #add course
                     course_list.append(course.name)
 
         return course_list
-
-    def checkcompetion(self):
-        """
-        check if all degrees for the student has had their requirements met
-        """
-        pass
