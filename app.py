@@ -181,14 +181,15 @@ def format_rows_to_columns(forecast_dict):
 	# stores all the lists of the Fall term courses from each year in "fall_col",
 	# each year's Winter terms in winter_col, and so on.
 	for year in student_plan:
-		for term in student_plan[year]:
-			if term == student_plan[year][0]:
+		for term_i in range(len(student_plan[year])):
+			term = student_plan[year][term_i]
+			if term_i == 0:
 				fall_col.append(term)
-			elif term == student_plan[year][1]:
+			elif term_i == 1:
 				winter_col.append(term)
-			elif term == student_plan[year][2]:
+			elif term_i == 2:
 				spring_col.append(term)
-			elif term == student_plan[year][3]:
+			elif term_i == 3:
 				summer_col.append(term)
 
 	# formatted_columns is a list containing 5 sub-lists
