@@ -76,41 +76,41 @@ def forecast():
 		print("Saved Classes: ", request_data['tableData'], file=sys.stderr)
 
 
-		# for i in range(len(request_data['tableData'])):
-		# 	year = 1
-		# 	term = 1
-		# 	if request_data['tableData'][i][2] == u'1st':
-		# 		year = 1
-		# 	elif request_data['tableData'][i][2] == u'2nd':
-		# 		year = 2
-		# 	elif request_data['tableData'][i][2] == u'3rd':
-		# 		year = 3
-		# 	elif request_data['tableData'][i][2] == u'4th':
-		# 		year = 4
-		# 	elif request_data['tableData'][i][2] == u'5th':
-		# 		year = 5
-		#
-		# 	if request_data['tableData'][i][1] == u'Fall':
-		# 		term = 0
-		# 	elif request_data['tableData'][i][1] == u'Winter':
-		# 		term = 1
-		# 	elif request_data['tableData'][i][1] == u'Spring':
-		# 		term = 2
-		# 	elif request_data['tableData'][i][1] == u'Summer':
-		# 		term = 3
-		#
-		# 	student_obj.add_course(request_data['tableData'][i][0], year, term)
-		#
-		# forecast_dict = student_obj.get_plan()
-		# forecast_adjusted = format_rows_to_columns(forecast_dict)
-		# 
-		# pkl.save_record(student_obj.identifier, student_obj)
-		#
-		# return render_template('forecast.html', forecast_rows=forecast_adjusted)
+		for i in range(len(request_data['tableData'])):
+			year = 1
+			term = 1
+			if request_data['tableData'][i][2] == u'1st':
+				year = 1
+			elif request_data['tableData'][i][2] == u'2nd':
+				year = 2
+			elif request_data['tableData'][i][2] == u'3rd':
+				year = 3
+			elif request_data['tableData'][i][2] == u'4th':
+				year = 4
+			elif request_data['tableData'][i][2] == u'5th':
+				year = 5
+
+			if request_data['tableData'][i][1] == u'Fall':
+				term = 0
+			elif request_data['tableData'][i][1] == u'Winter':
+				term = 1
+			elif request_data['tableData'][i][1] == u'Spring':
+				term = 2
+			elif request_data['tableData'][i][1] == u'Summer':
+				term = 3
+
+			student_obj.add_course(request_data['tableData'][i][0], year, term)
+
+		forecast_dict = student_obj.get_plan()
+		forecast_adjusted = format_rows_to_columns(forecast_dict)
+
+		pkl.save_record(student_obj.identifier, student_obj)
+
+		return render_template('forecast.html', forecast_rows=forecast_adjusted)
 
 
-		result = get_data(request_data)
-		return render_template('forecast.html', forecast_rows=result)
+		# result = get_data(request_data)
+		# return render_template('forecast.html', forecast_rows=result)
 
 	elif tmp[0] == 'savedData':
 		print('Clicked Save', file=sys.stderr)
@@ -212,12 +212,11 @@ def format_rows_to_columns(forecast_dict):
 	# Year 2 Summer Term the student is taking no courses
 
 	# Assumes a maximum of 4 courses allowed per term
-	formatted_columns = [ [ [],[],[],[] ],
-						  [ [],[],[],[] ],
-						  [ [],[],[],[] ],
-						  [ [],[],[],[] ],
-						  [ [],[],[],[] ],
+	formatted_columns = [
 						  ]
+	for year in student_plan:
+		formatted_columns.append([ ["", "", "", ""],["", "", "", ""],["", "", "", ""], ["", "", "", ""] ])
+
 	# formatted_columns[i][j][0]
 	# i represents which Year the courses were taken
 	# j represents how many courses taken that term
@@ -257,6 +256,8 @@ def format_rows_to_columns(forecast_dict):
 		summer_col_i_len = len(summer_col[i])
 		for j in range(summer_col_i_len):
 			formatted_columns[i][j][3] = summer_col[i][j].name
+
+	return formatted_columns
 
 def gen_courses():
 	dummy_student = Student("951234567")

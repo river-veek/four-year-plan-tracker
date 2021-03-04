@@ -27,7 +27,7 @@ class Student():
                  identifier,
                  summer = False,
                  desired_grad_date = (4, 2),
-                 max_credits_per_term = 12
+                 max_credits_per_term = 16
                  ):
         """
         Function to initialize Student class object
