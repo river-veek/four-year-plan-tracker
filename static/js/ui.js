@@ -1,4 +1,4 @@
- 
+
 
 function toggleLogin (name) {
   // get elements of DOM
@@ -32,8 +32,8 @@ function toggleLogin (name) {
   document.getElementById('button-row').style.display = 'inline-flex'
   dInfo.style.display = 'inline'
   tInfo.style.display = 'inline'
-  
-  // for previous student send data back 
+
+  // for previous student send data back
   var stringName = {'login': name}
   $.ajax({
 		type: "POST",
@@ -41,7 +41,7 @@ function toggleLogin (name) {
 		data: JSON.stringify(stringName),
 		contentType: 'application/json; charset=utf-8',
 	  	success: function(data){
-	  	alert("Log in sent")
+	  	//alert("Log in sent")
 	  	console.log("login successfully")
 	  	console.log("Success!")
 	  	},
@@ -145,7 +145,7 @@ function saveTable () {
   const table = document.getElementById('course-rows')
   const len = table.rows.length
   for (let z = 0; z < len; z++) { table.deleteRow(0) }
-  
+
    return tableData
 }
 
