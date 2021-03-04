@@ -11,12 +11,13 @@ from __future__ import print_function # In python 2.7
 from flask import Flask, render_template, abort, request, jsonify, json, redirect, url_for
 import random
 import sys
+sys.path.append('./degree_logic')
 
-# import degree_planning as dp
-# import pickling as pkl
-# import CIS_degree as cd
-# import Gen_Ed as ge
-# from student_objects import *
+import degree_planning as dp
+import pickling as pkl
+import CIS_degree as cd
+import Gen_Ed as ge
+from student_objects import *
 
 
 app = Flask(__name__)
@@ -255,7 +256,7 @@ def format_rows_to_columns(forecast_dict):
     # j represents how many courses taken that term
     # 0 is hard coding the location for Fall
     fall_col_len = len(fall_col)
-    for i in range(fall_col_len)):
+    for i in range(fall_col_len):
         fall_col_i_len = len(fall_col[i])
         for j in range(fall_col_i_len):
             formatted_columns[i][j][0] = fall_col[i][j].name

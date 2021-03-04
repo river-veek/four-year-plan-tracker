@@ -11,7 +11,8 @@ from enum import Enum
 
 class Degree():
 
-    def __init__(self, name: str):
+    # def __init__(self, name: str):
+    def __init__(self, name):
         """
         required_courses - (list) is a list of course_num / levels
         """
@@ -59,12 +60,20 @@ class Degree():
 
         return None
 
+    # def add_course(self,
+    #                name: str,
+    #                course_num: int,
+    #                num_credits: int,
+    #                pre_reqs: list,
+    #                terms: list,
+    #                is_core = False,
+    #                difficulty = 2):
     def add_course(self,
-                   name: str,
-                   course_num: int,
-                   num_credits: int,
-                   pre_reqs: list,
-                   terms: list,
+                   name,
+                   course_num,
+                   num_credits,
+                   pre_reqs,
+                   terms,
                    is_core = False,
                    difficulty = 2):
         """
@@ -98,7 +107,8 @@ class Degree():
         if len(pre_req_objects) != len(pre_reqs):
             # print(pre_req_objects, len(pre_req_objects))
             # print(pre_reqs, len(pre_reqs))
-            print(f"Error adding {name}: could not find all of the pre-reqs in the degree")
+            # print(f"Error adding {name}: could not find all of the pre-reqs in the degree")
+            print("Error adding {name}: could not find all of the pre-reqs in the degree")
             return None
 
         #generate Course object
@@ -110,7 +120,8 @@ class Degree():
         if is_core:
             self.core_courses.append(new_course)
 
-    def remove_course(self, name: str):
+    # def remove_course(self, name: str):
+    def remove_course(self, name):
         """
         Function to remove a course with course.name == name from degree object
 
@@ -132,7 +143,8 @@ class Degree():
                 if course.name == name:
                     self.courses.remove(course)
 
-    def get_course(self, target_course_name: str):
+    # def get_course(self, target_course_name: str):
+    def get_course(self, target_course_name):
         for course in self.courses:
             if course.name == target_course_name:
                 print(course.name)
@@ -145,7 +157,8 @@ class Degree():
 
 class Course():
 
-    def __init__(self, name: str, course_num: int, num_credits: int, pre_reqs: list, terms: list, difficulty: int):
+    # def __init__(self, name: str, course_num: int, num_credits: int, pre_reqs: list, terms: list, difficulty: int):
+    def __init__(self, name, course_num, num_credits, pre_reqs, terms, difficulty):
         """
         Function to initialize a Course object
 
@@ -185,7 +198,8 @@ class Term():
     object for Term
     """
 
-    def __init__(self, term_name: str):
+    # def __init__(self, term_name: str):
+    def __init__(self, term_name):
 
         self.value = 0
         self.name = term_name;

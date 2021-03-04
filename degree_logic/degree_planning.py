@@ -8,7 +8,8 @@ Last Modified - 3/3/21
 ----------------------------------------------------------------------------------------
 """
 
-def generate_plan(student: "Student"):
+# def generate_plan(student: "Student"):
+def generate_plan(student):
     """
     Function for generating a forecast degree plan for a student to meet all
     requirments of their degrees
@@ -138,15 +139,18 @@ def print_plan(plan):
     for year in plan:
         string = ""
         for term in plan[year]:
-            string += f"- "
+            # string += f"- "
+            string += "- "
             for course in term:
                 string += course.name
                 string += " ### "
             string += "\n"
-        print(string, end=" ")
+        # print(string, end=" ")
+        print(string)
         print("----------------------------")
 
-def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, student: "Student"):
+# def add_courses_to_forecast(plan, unmet_courses: list, current_term: tuple, student: "Student"):
+def add_courses_to_forecast(plan, unmet_courses, current_term, student):
     """
     Function adding the courses from unmet_courses into the forecast_plan
 
@@ -285,7 +289,8 @@ def get_next_course(forecasted_courses_taken, unmet_course_list, current_term):
 
     return next_course
 
-def increment_year(plan, year: int):
+# def increment_year(plan, year: int):
+def increment_year(plan, year):
     """
     Function incrementing the year key being used to index through a degree plan.
     If incremented key is out of range of the keys within the degree plan then

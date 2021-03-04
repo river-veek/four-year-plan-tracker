@@ -16,9 +16,15 @@ class Student():
     if they are willing to take classes over the summer, and what courses they
     completed
     """
+    # def __init__(self,
+    #              identifier: str,
+    #              summer = False,
+    #              desired_grad_date = (4, 2),
+    #              max_credits_per_term = 12
+    #              ):
 
     def __init__(self,
-                 identifier: str,
+                 identifier,
                  summer = False,
                  desired_grad_date = (4, 2),
                  max_credits_per_term = 12
@@ -50,7 +56,8 @@ class Student():
         self.note = ""
         self.max_credits_per_term = max_credits_per_term
 
-    def add_degree(self, degree_obj: Degree):
+    # def add_degree(self, degree_obj: Degree):
+    def add_degree(self, degree_obj):
         """
         Function for adding a degree from the student.degree_list
 
@@ -63,7 +70,8 @@ class Student():
 
         self.degree_list.append(degree_obj)
 
-    def remove_degree(self, degree_name: str):
+    # def remove_degree(self, degree_name: str):
+    def remove_degree(self, degree_name):
         """
         Function for removing a degree from the student.degree_list
 
@@ -78,7 +86,8 @@ class Student():
             if degree.name == degree_name:
                 self.degree_list.remove(degree)
 
-    def add_course(self, course_name: str, year: int, term: int):
+    # def add_course(self, course_name: str, year: int, term: int):
+    def add_course(self, course_name, year, term):
         """
         Function adds a course to the course object into self.student plan with
         position being determined by inputted "year" and "term"
@@ -107,8 +116,8 @@ class Student():
         self.plan[year][term].append(added_course)
         self.courses_taken.append(added_course)
 
-
-    def remove_course(self, course_name: str, year: int, term: int):
+    # def remove_course(self, course_name: str, year: int, term: int):
+    def remove_course(self, course_name, year, term):
         """
         Function removes a course from the course object from self.student plan
         with position being determined by inputted "year" and "term"
