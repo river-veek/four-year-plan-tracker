@@ -12,11 +12,11 @@ from flask import Flask, render_template, abort, request, jsonify, json, redirec
 import random
 import sys
 
-import degree_planning as dp
-import pickling as pkl
-import CIS_degree as cd
-import Gen_Ed as ge
-from student_objects import *
+# import degree_planning as dp
+# import pickling as pkl
+# import CIS_degree as cd
+# import Gen_Ed as ge
+# from student_objects import *
 
 
 app = Flask(__name__)
@@ -26,6 +26,13 @@ names = ["951234567", "951234568", "951234569"]
 terms = ["Fall", "Winter", "Spring", "Summer"]
 years = ["1st", "2nd", "3rd", "4th", "5th"]
 courses = ["CIS 210", "CIS 211", "CIS 212"]
+
+# dummy_student = Student("951234567")
+# dummy_gen_ed = ge.create_Gen_Ed()
+# dummy_student.add_degree(dummy_gen_ed)
+# dummy_deg = cd.create_CIS_major()
+# dummy_student.add_degree(dummy_deg)
+# courses = dummy_student.get_course_list()
 
 # Starting with this class arrangement (by row instead of year) just to make it easier
 # to make sure django code in the HTML is working (we can parse the python to match this if absolutely necessary)
@@ -114,20 +121,20 @@ def forecast():
 				year = 5
 
 			if request_data['tableData'][i][1] == u'Fall':
-				term = 1
+				term = 0
 			elif request_data['tableData'][i][1] == u'Winter':
-				term = 2
+				term = 1
 			elif request_data['tableData'][i][1] == u'Spring':
-				term = 3
+				term = 2
 			elif request_data['tableData'][i][1] == u'Summer':
-				term = 4
+				term = 3
 
 			student_obj.add_course(request_data['tableData'][i][0], year, term)
 
 		# TODO -- is this the proper way to get the plan?
 		# forecast = dp.generate_plan(student_obj)
-		forecast = student_obj.get_plan()
-		forecast_adjusted = my_func(forecast)
+		forecast_dict = student_obj.get_plan()
+		forecast_adjusted = my_func(forecast_dict)
 
 		pkl.save_record(student_obj.identifier, student_obj)
 
@@ -136,6 +143,7 @@ def forecast():
 
 		result = get_data(request_data)
 		return render_template('forecast.html', forecast_rows=result)
+
 	elif tmp[0] == 'savedData':
 		print('Clicked Save', file=sys.stderr)
 		print("Saved Classes: ", request_data['savedData'], file=sys.stderr)
@@ -159,13 +167,13 @@ def forecast():
 				year = 5
 
 			if request_data['tableData'][i][1] == u'Fall':
-				term = 1
+				term = 0
 			elif request_data['tableData'][i][1] == u'Winter':
-				term = 2
+				term = 1
 			elif request_data['tableData'][i][1] == u'Spring':
-				term = 3
+				term = 2
 			elif request_data['tableData'][i][1] == u'Summer':
-				term = 4
+				term = 3
 
 			student_obj.add_course(request_data['tableData'][i][0], year, term)
 
