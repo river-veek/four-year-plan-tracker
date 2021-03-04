@@ -40,7 +40,7 @@ def generate_plan(student):
     #initialize unmet_courses
     unmet_courses = []
     for degree in student.degree_list:
-        degree_core_list_copy = degree.core_courses.copy()
+        degree_core_list_copy = degree.core_courses[:]
 
         #check for repeat courses between degrees
         for course in degree_core_list_copy:
@@ -186,7 +186,7 @@ def add_courses_to_forecast(plan, unmet_courses, current_term, student):
     else:
         term_cap = 2
 
-    forecasted_courses_taken = student.courses_taken.copy()
+    forecasted_courses_taken = student.courses_taken[:]
     current_term_buffer = []
 
     #loop until unmet_courses is empty
@@ -204,7 +204,7 @@ def add_courses_to_forecast(plan, unmet_courses, current_term, student):
             current_term += 1
 
             #add buffered courses into forecasted_courses_taken
-            forecasted_courses_taken += current_term_buffer.copy()
+            forecasted_courses_taken += current_term_buffer[:]
             #reset current_term_buffer
             current_term_buffer = []
 
@@ -224,7 +224,7 @@ def add_courses_to_forecast(plan, unmet_courses, current_term, student):
                 current_term += 1
 
                 #add buffered courses into forecasted_courses_taken
-                forecasted_courses_taken += current_term_buffer.copy()
+                forecasted_courses_taken += current_term_buffer[:]
                 #reset current_term_buffer
                 current_term_buffer = []
 

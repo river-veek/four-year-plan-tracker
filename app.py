@@ -101,11 +101,9 @@ def forecast():
 		#
 		# 	student_obj.add_course(request_data['tableData'][i][0], year, term)
 		#
-		# # TODO -- is this the proper way to get the plan?
-		# # forecast = dp.generate_plan(student_obj)
 		# forecast_dict = student_obj.get_plan()
 		# forecast_adjusted = format_rows_to_columns(forecast_dict)
-		#
+		# 
 		# pkl.save_record(student_obj.identifier, student_obj)
 		#
 		# return render_template('forecast.html', forecast_rows=forecast_adjusted)
