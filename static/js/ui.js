@@ -1,6 +1,9 @@
 
 
 function toggleLogin (name) {
+	"""
+	HEADER
+	"""
   // get elements of DOM
   const main = document.getElementById('main-space')
   const add = document.getElementById('add')
@@ -38,12 +41,18 @@ function toggleLogin (name) {
 
 // Wrapper for main toggleLogin for when user inputs new student ID
 function toggleLoginNew () {
+	"""
+	HEADER
+	"""
   const input = document.getElementById('studentCreateInput').value
   return toggleLogin(input)
 }
 
 // Takes current option value - adds it to table
 function addClass () {
+	"""
+	HEADER
+	"""
   // get Course Dropdown
   const courseOption = document.getElementById('courses')
   // save Course selected
@@ -80,7 +89,10 @@ function addClass () {
   }
 }
 
-function removeClass () {
+function removeClass() {
+	"""
+	HEADER
+	"""
   // get Course Dropdown
   const courseOption = document.getElementById('courses')
   // save Course selected
@@ -116,7 +128,12 @@ function removeClass () {
 }
 
 function saveTable () {
-  // Rough draft
+	"""
+	Function gets Table object and collects its rows cell by cell, then clears 
+	table and can return data for a POST to backend
+	"""
+	
+  // gets current table data and deletes it from table on page
   const theData = document.getElementById('course-rows').rows
   const tableData = []
   for (let x = 0; x < theData.length; x++) {
@@ -130,14 +147,19 @@ function saveTable () {
   const len = table.rows.length
   for (let z = 0; z < len; z++) { table.deleteRow(0) }
 
-   return tableData
+  return tableData
 }
 
+// returns Id being passed from new user 
 function saveID () {
 	return document.getElementById('studentCreateInput').value
 }
 
+// Used for case of existing user, passes Jinja value to POST and Sets up main page 
 function existingUser(name){
+	"""
+	HEADER
+	"""
 	var stringName = {'login': name}
 	console.log(stringName)
 	toggleLogin(name)
@@ -158,4 +180,68 @@ function existingUser(name){
 	  	}
   	});
 }
+
+// All Ajax calls placed here for quick lookup and code alteration
+$(document).ready(function() {
+	$('#display').on('click', function() {
+		const tableData = saveTable()
+		var tblData = {'tableData': tableData}
+		$.ajax({
+			type: "POST",
+			url: '/forecast',
+			data: JSON.stringify(tblData),
+			contentType: 'application/json; charset=utf-8',
+	  		success: function(data){
+	  		// alert('Saving... Ready to Display!')
+	  		document.write(data)
+	  		console.log("Success!")
+	  		},
+	  		error: function(request, error) {
+			console.log(arguments)
+			alert("Error: " + error)
+	  		}
+  			});
+  		});
+
+  	$('#save').on('click', function() {
+		const tableData = saveTable()
+		var tblData = {'savedData': tableData}
+		console.log(tblData)
+		$.ajax({
+			type: "POST",
+			url: '/forecast',
+			data: JSON.stringify(tblData),
+			contentType: 'application/json; charset=utf-8',
+	  		success: function(data){
+	 		// alert('Saved Progress')
+	  		console.log("saved successfully")
+	  		console.log(data)
+	  		},
+	  		error: function(request, error) {
+			console.log(arguments)
+			alert("Error: " + error)
+	  		}
+  		});
+  	});
+
+  	$('#newstudent').on('click', function() {
+		var studentID = saveID()
+		var studentData = {'login': studentID}
+		$.ajax({
+			type: "POST",
+			url: '/forecast',
+			data: JSON.stringify(studentData),
+			contentType: 'application/json; charset=utf-8',
+  			success: function(data){
+  			// alert("Log in sent")
+  			console.log("login successfully")
+  			console.log("Success!")
+  			},
+  			error: function(request, error) {
+			console.log(arguments)
+			alert("Error: " + error)
+  			}
+ 		});
+  	});
+});
 
