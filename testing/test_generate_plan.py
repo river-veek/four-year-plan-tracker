@@ -95,11 +95,12 @@ def main():
 	student_A = Student("student_A")
 	student_A.add_degree(CIS_major)
 	student_A.add_degree(GEN_Ed)
-	student_A.add_course("MATH 112 Elementary Functions", 2, 0)
-	student_A.add_course("CIS 443 User Interfaces", 1, 1)
+	#student_A.add_course("CIS 110 Fluency with Information Technology", 1, 1)
+	student_A.add_course("WR 121 College Composition I", 1, 0)
+	#student_A.add_course("Arts and Letters Elective", 1, 1)
+
 	# student_A.add_course("CIS 322 Introduction to Software Engineering", 1, 1)
 	# student_A.add_course("CIS 322 Introduction to Software Engineering", 1, 1)
 	forecast_plan = student_A.get_plan()
-
 
 main()

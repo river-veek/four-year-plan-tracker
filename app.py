@@ -65,10 +65,10 @@ def forecast():
 
 		if student_obj == None:
 			student_obj = Student(id)
-			gen_ed = ge.create_Gen_Ed()
-			student_obj.add_degree(gen_ed)
 			deg = cd.create_CIS_major()
 			student_obj.add_degree(deg)
+			gen_ed = ge.create_Gen_Ed()
+			student_obj.add_degree(gen_ed)
 		return "Logged in"
 
 	if tmp[0] == 'tableData':
@@ -104,6 +104,9 @@ def forecast():
 
 			forecast_dict = student_obj.get_plan()
 			forecast_adjusted = format_rows_to_columns(forecast_dict)
+
+			# print(forecast_dict, file=sys.stderr)
+			# print(forecast_adjusted, file=sys.stderr)
 
 			# path = './pickles/' + student_obj.identifier
 			# print("pickle file path: ", path, file=sys.stderr)
