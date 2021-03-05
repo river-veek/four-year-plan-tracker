@@ -47,7 +47,7 @@ Last modified: 3/2/2021
 								<!-- Populates existing student dropdown -->
 								<!--when clicked will remove button and display class options and buttons -->
 								{% for name in names %}
-								<li class="dropdown-content" id="prevstudent"><a onclick="toggleLogin({{name}})">{{name}}</a> </li>
+								<li class="dropdown-content" id="prevstudent"><a onclick="existingUser({{name}})">{{name}}</a> </li>
 								{% endfor %}
 
 	  					</ul>
