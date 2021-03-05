@@ -140,73 +140,7 @@ Last modified: 3/2/2021
 						<!-- Save buttons will grab table data and send to backend- optional redirect -->
 
 						<button class="btn btn-success" id="save" style="display: none;" onclick="">Save</button>
-						<button class="btn btn-success" id="display" style="display: none;" type="button" name="save&display">Save and Display</button>
-						<!-- Script for sending POST on sava & display -->
-						<script>
-							$(document).ready(function() {
-								$('#display').on('click', function() {
-									const tableData = saveTable()
-									var tblData = {'tableData': tableData}
-									$.ajax({
-									type: "POST",
-									url: '/forecast',
-									data: JSON.stringify(tblData),
-									contentType: 'application/json; charset=utf-8',
-	  								success: function(data){
-	  								// alert('Saving... Ready to Display!')
-	  								document.write(data)
-	  								console.log("Success!")
-	  								},
-	  								error: function(request, error) {
-									console.log(arguments)
-									alert("Error: " + error)
-	  								}
-  									});
-  								});
-
-  								$('#save').on('click', function() {
-									const tableData = saveTable()
-									var tblData = {'savedData': tableData}
-									console.log(tblData)
-									$.ajax({
-									type: "POST",
-									url: '/forecast',
-									data: JSON.stringify(tblData),
-									contentType: 'application/json; charset=utf-8',
-	  								success: function(data){
-	  								// alert('Saved Progress')
-	  								console.log("saved successfully")
-	  								console.log(data)
-	  								},
-	  								error: function(request, error) {
-									console.log(arguments)
-									alert("Error: " + error)
-	  								}
-  									});
-  								});
-
-  								$('#newstudent').on('click', function() {
-									var studentID = saveID()
-									var studentData = {'login': studentID}
-									$.ajax({
-									type: "POST",
-									url: '/forecast',
-									data: JSON.stringify(studentData),
-									contentType: 'application/json; charset=utf-8',
-	  								success: function(data){
-	  								// alert("Log in sent")
-	  								console.log("login successfully")
-	  								console.log("Success!")
-	  								},
-	  								error: function(request, error) {
-									console.log(arguments)
-									alert("Error: " + error)
-	  								}
-  									});
-  								});
-  							});
-  						</script>
-
+						<button class="btn btn-success" id="display" style="display: none;" type="button" name="save&display">Save and Display</button>						
 						<!-- Perhaps a clear changes button? May be a future addition -->
 						<br><br>
 						</div>
