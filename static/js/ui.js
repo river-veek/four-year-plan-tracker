@@ -34,23 +34,7 @@ function toggleLogin (name) {
   tInfo.style.display = 'inline'
 
   // for previous student send data back
-  var stringName = {'login': name}
-  $.ajax({
-		type: "POST",
-		url: '/forecast',
-		data: JSON.stringify(stringName),
-		contentType: 'application/json; charset=utf-8',
-	  	success: function(data){
-	  	//alert("Log in sent")
-	  	console.log("login successfully")
-	  	console.log("Success!")
-	  	},
-	  	error: function(request, error) {
-		console.log(arguments)
-		alert("Error: " + error)
-	  	}
-  	});
-}
+ }
 
 // Wrapper for main toggleLogin for when user inputs new student ID
 function toggleLoginNew () {
@@ -152,3 +136,26 @@ function saveTable () {
 function saveID () {
 	return document.getElementById('studentCreateInput').value
 }
+
+function existingUser(name){
+	var stringName = {'login': name}
+	console.log(stringName)
+	toggleLogin(name)
+	var stringName = {'login': name}
+  $.ajax({
+		type: "POST",
+		url: '/forecast',
+		data: JSON.stringify(stringName),
+		contentType: 'application/json; charset=utf-8',
+	  	success: function(data){
+	  	//alert("Log in sent")
+	  	console.log("login successfully")
+	  	console.log("Success!")
+	  	},
+	  	error: function(request, error) {
+		console.log(arguments)
+		alert("Error: " + error)
+	  	}
+  	});
+}
+
