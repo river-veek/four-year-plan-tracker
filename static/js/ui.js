@@ -1,9 +1,7 @@
 
 
 function toggleLogin (name) {
-	"""
-	HEADER
-	"""
+   //HEADER
   // get elements of DOM
   const main = document.getElementById('main-space')
   const add = document.getElementById('add')
@@ -41,18 +39,15 @@ function toggleLogin (name) {
 
 // Wrapper for main toggleLogin for when user inputs new student ID
 function toggleLoginNew () {
-	"""
-	HEADER
-	"""
+
+	//HEADER
   const input = document.getElementById('studentCreateInput').value
   return toggleLogin(input)
 }
 
 // Takes current option value - adds it to table
 function addClass () {
-	"""
-	HEADER
-	"""
+	//Header
   // get Course Dropdown
   const courseOption = document.getElementById('courses')
   // save Course selected
@@ -90,9 +85,7 @@ function addClass () {
 }
 
 function removeClass() {
-	"""
-	HEADER
-	"""
+	//Header 
   // get Course Dropdown
   const courseOption = document.getElementById('courses')
   // save Course selected
@@ -128,10 +121,10 @@ function removeClass() {
 }
 
 function saveTable () {
-	"""
-	Function gets Table object and collects its rows cell by cell, then clears 
-	table and can return data for a POST to backend
-	"""
+	
+	//Function gets Table object and collects its rows cell by cell, then clears 
+	//table and can return data for a POST to backend
+	
 	
   // gets current table data and deletes it from table on page
   const theData = document.getElementById('course-rows').rows
@@ -157,9 +150,7 @@ function saveID () {
 
 // Used for case of existing user, passes Jinja value to POST and Sets up main page 
 function existingUser(name){
-	"""
-	HEADER
-	"""
+	//Header
 	var stringName = {'login': name}
 	console.log(stringName)
 	toggleLogin(name)
