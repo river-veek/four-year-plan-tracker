@@ -58,10 +58,9 @@ def forecast():
 		print("ID", request_data['login'], file=sys.stderr)
 
 		# Quirk where code will reach this block and 'login' is not a valid key
-		if 'login' in request_data.keys():
-			id = request_data['login']
-			student_obj = pkl.load_record(str(id))
-			logged_in = 1
+		id = request_data['login']
+		student_obj = pkl.load_record(str(id))
+		logged_in = 1
 
 		if student_obj == None:
 			student_obj = Student(id)
@@ -76,86 +75,71 @@ def forecast():
 		print("Clicked Save/Display", file=sys.stderr),
 		print("Saved Classes: ", request_data['tableData'], file=sys.stderr)
 
-		if 'tableData' in request_data.keys():
-			for i in range(len(request_data['tableData'])):
+		for i in range(len(request_data['tableData'])):
+			year = 1
+			term = 1
+			if request_data['tableData'][i][2] == u'1st':
 				year = 1
+			elif request_data['tableData'][i][2] == u'2nd':
+				year = 2
+			elif request_data['tableData'][i][2] == u'3rd':
+				year = 3
+			elif request_data['tableData'][i][2] == u'4th':
+				year = 4
+			elif request_data['tableData'][i][2] == u'5th':
+				year = 5
+
+			if request_data['tableData'][i][1] == u'Fall':
+				term = 0
+			elif request_data['tableData'][i][1] == u'Winter':
 				term = 1
-				if request_data['tableData'][i][2] == u'1st':
-					year = 1
-				elif request_data['tableData'][i][2] == u'2nd':
-					year = 2
-				elif request_data['tableData'][i][2] == u'3rd':
-					year = 3
-				elif request_data['tableData'][i][2] == u'4th':
-					year = 4
-				elif request_data['tableData'][i][2] == u'5th':
-					year = 5
+			elif request_data['tableData'][i][1] == u'Spring':
+				term = 2
+			elif request_data['tableData'][i][1] == u'Summer':
+				term = 3
 
-				if request_data['tableData'][i][1] == u'Fall':
-					term = 0
-				elif request_data['tableData'][i][1] == u'Winter':
-					term = 1
-				elif request_data['tableData'][i][1] == u'Spring':
-					term = 2
-				elif request_data['tableData'][i][1] == u'Summer':
-					term = 3
+			student_obj.add_course(request_data['tableData'][i][0], year, term)
 
-				student_obj.add_course(request_data['tableData'][i][0], year, term)
+		forecast_dict = student_obj.get_plan()
+		forecast_adjusted = format_rows_to_columns(forecast_dict)
 
-			forecast_dict = student_obj.get_plan()
-			forecast_adjusted = format_rows_to_columns(forecast_dict)
+		pkl.save_record(student_obj.identifier, student_obj)
 
-			# print(forecast_dict, file=sys.stderr)
-			# print(forecast_adjusted, file=sys.stderr)
-
-			# path = './pickles/' + student_obj.identifier
-			# print("pickle file path: ", path, file=sys.stderr)
-			# path = str(path)
-			# with open(path, "wb") as pickle_out:
-			# 	pickle.dump("teststring", pickle_out)
-			# pickle_out = open(path, "wb")
-			# print(pickle_out, file=sys.stderr)
-			# pickle.dump(student_obj, pickle_out)
-			# pickle_out.close()
-
-			pkl.save_record(student_obj.identifier, student_obj)
-
-			return render_template('forecast.html', forecast_rows=forecast_adjusted)
+		return render_template('forecast.html', forecast_rows=forecast_adjusted)
 
 	elif tmp[0] == 'savedData':
 		print('Clicked Save', file=sys.stderr)
 		print("Saved Classes: ", request_data['savedData'], file=sys.stderr)
 
-		if 'tableData' in request_data.keys():
-			for i in range(len(request_data['tableData'])):
+		for i in range(len(request_data['savedData'])):
+			year = 1
+			term = 1
+
+			if request_data['savedData'][i][2] == u'1st':
 				year = 1
+			elif request_data['savedData'][i][2] == u'2nd':
+				year = 2
+			elif request_data['savedData'][i][2] == u'3rd':
+				year = 3
+			elif request_data['savedData'][i][2] == u'4th':
+				year = 4
+			elif request_data['savedData'][i][2] == u'5th':
+				year = 5
+
+			if request_data['savedData'][i][1] == u'Fall':
+				term = 0
+			elif request_data['savedData'][i][1] == u'Winter':
 				term = 1
+			elif request_data['savedData'][i][1] == u'Spring':
+				term = 2
+			elif request_data['savedData'][i][1] == u'Summer':
+				term = 3
 
-				if request_data['tableData'][i][2] == u'1st':
-					year = 1
-				elif request_data['tableData'][i][2] == u'2nd':
-					year = 2
-				elif request_data['tableData'][i][2] == u'3rd':
-					year = 3
-				elif request_data['tableData'][i][2] == u'4th':
-					year = 4
-				elif request_data['tableData'][i][2] == u'5th':
-					year = 5
+			student_obj.add_course(request_data['savedData'][i][0], year, term)
 
-				if request_data['tableData'][i][1] == u'Fall':
-					term = 0
-				elif request_data['tableData'][i][1] == u'Winter':
-					term = 1
-				elif request_data['tableData'][i][1] == u'Spring':
-					term = 2
-				elif request_data['tableData'][i][1] == u'Summer':
-					term = 3
+		pkl.save_record(student_obj.identifier, student_obj)
 
-				student_obj.add_course(request_data['tableData'][i][0], year, term)
-
-			pkl.save_record(student_obj.identifier, student_obj)
-
-			return "Saved Successfully"
+		return "Saved Successfully"
 
 	#prints to browser console it has been saved
 	return "Saved Successfully"
