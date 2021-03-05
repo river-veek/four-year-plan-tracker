@@ -190,6 +190,11 @@ def add_courses_to_forecast(plan, unmet_courses, current_term, student):
     forecasted_courses_taken = student.courses_taken[:]
     current_term_buffer = []
 
+    #check that if the current_term is summer it is allowed
+    if (current_term == 3) and (student.summer == False):
+        current_term = 0
+        current_year = increment_year(plan, current_year)
+
     #loop until unmet_courses is empty
     while(unmet_courses):
 
