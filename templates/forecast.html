@@ -4,7 +4,7 @@ Displays tables showing the course plan generated from the backend
 
 Author: Zeke Petersen
 Group: TBD
-Last modified: 3/2/2021
+Last modified: 3/5/2021
 
 -->
 
@@ -32,7 +32,7 @@ Last modified: 3/2/2021
 					<h2>Four-Year Forecast</h2>
 					<hr>
 
-					<p>Each table displayed represents one year of courses subdivided by 
+					<p>Each table displayed represents one year of courses subdivided by
 						term. It displays all courses taken and all courses required to be
 						taken before completion of all degrees.</p>
 
@@ -50,7 +50,7 @@ Last modified: 3/2/2021
 
 								<div class="table-responsive" style="max-width: 800px;">
 
-								{% for year in forecast_rows %} <!-- Outer loop -->
+								{% for year in forecast_rows %} <!-- Outer loop, passed in by backend -->
 									<table class="table table-hover table-bordered">
 										<thead>
 										<tr class="table-primary">

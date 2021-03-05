@@ -4,16 +4,16 @@ File containing the routing for application logic
 
 Author: JT Kashuba, Logan Levitre, Zeke Petersen
 Group: TBD
-Last Modified: 3/3/21
+Last Modified: 3/5/21
 --------------------------------------------------------------------------------
 """
+
 from __future__ import print_function # In python 2.7
 from flask import Flask, render_template, abort, request, jsonify, json, redirect, url_for
 import random
 import sys
-sys.path.append('./degree_logic')
 
-import pickle
+sys.path.append('./degree_logic') # Required to find the following degree logic modules
 import degree_planning as dp
 import pickling as pkl
 import CIS_degree as cd
@@ -22,46 +22,55 @@ from student_objects import *
 
 app = Flask(__name__)
 
-
 @app.route("/")
 @app.route("/index", methods=['POST'])
 def index():
 	"""
 	Landing page
+
+	Populates dropdowns of the main user interface
 	"""
-	names = pkl.create_studentID_list()
+	names = pkl.create_studentID_list()  # Gather the existing student objects
 	courses = gen_courses()  # All possible courses from the CIS/GenEd major objects
 
+	# Pass all info pertaining to dropdowns, some are globals
 	return render_template('ui.html', names=names, terms=terms, years=years, courses=courses)
 
-# Going off JT's project creating route, including GET/POST methods
+# Creating route, including POST method
 @app.route("/forecast", methods=['POST'])
 def forecast():
 	"""
 	Forecast page
 
+	Handles a login, save (without displaying), and save (with a forecast display)
 	"""
 	# using JSON to get data from form - gets string of list - needs to be passed to render_temp
-	global logged_in
-	global student_obj
 	request_data = request.get_json()
-	print(request_data, file=sys.stderr)
-	print(request_data.keys(), file=sys.stderr)
+
+	# Debug statements
+	# print(request_data, file=sys.stderr)
+	# print(request_data.keys(), file=sys.stderr)
+
+	global student_obj
 
 	# only has one key
 	tmp = request_data.keys()
-	# will need to use to designate what button was called tableData - Save and display
-	# savedData - Save button - will need global variable to contain all saved data and add each time most likely?
-	# if tmp[0] == 'login' and logged_in == 0:
-	if tmp[0] == 'login' and logged_in == 0:
-		print("LOGIN", file=sys.stderr)
-		print("ID", request_data['login'], file=sys.stderr)
 
-		# Quirk where code will reach this block and 'login' is not a valid key
+	# Handle which button was called based on the keys in the JSON
+
+	# 'Create' button or ID selected from dropdown
+	if tmp[0] == 'login':
+		# used for testing data transfer
+		# print("LOGIN", file=sys.stderr)
+		# print("ID", request_data['login'], file=sys.stderr)
+
+		# Get the student id from the front end
 		id = request_data['login']
-		student_obj = pkl.load_record(str(id))
-		logged_in = 1
 
+		# Attempt to load a record, returns None if it isn't in our records
+		student_obj = pkl.load_record(str(id))
+
+		# If we don't have a student already (new student was selected), then make a new default object
 		if student_obj == None:
 			student_obj = Student(id)
 			deg = cd.create_CIS_major()
@@ -70,14 +79,18 @@ def forecast():
 			student_obj.add_degree(gen_ed)
 		return "Logged in"
 
-	if tmp[0] == 'tableData':
+	# Save and Display
+	elif tmp[0] == 'tableData':
 		# used for testing data transfer
-		print("Clicked Save/Display", file=sys.stderr),
-		print("Saved Classes: ", request_data['tableData'], file=sys.stderr)
+		# print("Clicked Save/Display", file=sys.stderr),
+		# print("Saved Classes: ", request_data['tableData'], file=sys.stderr)
 
+		# Add each course in the table
 		for i in range(len(request_data['tableData'])):
 			year = 1
 			term = 1
+
+			# add_course expects ints, convert based on the strings populating the frontend (globals terms and years)
 			if request_data['tableData'][i][2] == u'1st':
 				year = 1
 			elif request_data['tableData'][i][2] == u'2nd':
@@ -100,21 +113,30 @@ def forecast():
 
 			student_obj.add_course(request_data['tableData'][i][0], year, term)
 
+		# Generate a forecast
 		forecast_dict = student_obj.get_plan()
+
+		# Parse it in a format that HTML/Jinja can easily handle
 		forecast_adjusted = format_rows_to_columns(forecast_dict)
 
+		# Save the record after all courses are added
 		pkl.save_record(student_obj.identifier, student_obj)
 
+		# Give the forecast to the HTML, one table for each year in the forecast
 		return render_template('forecast.html', forecast_rows=forecast_adjusted)
 
+	# Save
 	elif tmp[0] == 'savedData':
-		print('Clicked Save', file=sys.stderr)
-		print("Saved Classes: ", request_data['savedData'], file=sys.stderr)
+		# used for testing data transfer
+		# print('Clicked Save', file=sys.stderr)
+		# print("Saved Classes: ", request_data['savedData'], file=sys.stderr)
 
+		# Add each course in the table
 		for i in range(len(request_data['savedData'])):
 			year = 1
 			term = 1
 
+			# add_course expects ints, convert based on the strings populating the frontend (globals terms and years)
 			if request_data['savedData'][i][2] == u'1st':
 				year = 1
 			elif request_data['savedData'][i][2] == u'2nd':
@@ -137,20 +159,13 @@ def forecast():
 
 			student_obj.add_course(request_data['savedData'][i][0], year, term)
 
+		# Save the student record after all courses are added
 		pkl.save_record(student_obj.identifier, student_obj)
 
 		return "Saved Successfully"
 
-	#prints to browser console it has been saved
+	# prints to browser console it has been saved
 	return "Saved Successfully"
-
-def get_data(data):
-	# print("IN GET DATA", data, file=sys.stderr)
-	# print(len(data), file=sys.stderr)
-	# needs to be formatted to correct list format for forecasting page
-	arr = (data['tableData'])
-	print(arr, file=sys.stderr)
-	return arr
 
 def format_rows_to_columns(forecast_dict):
 	"""
@@ -205,8 +220,7 @@ def format_rows_to_columns(forecast_dict):
 	# Year 2 Summer Term the student is taking no courses
 
 	# Assumes a maximum of 4 courses allowed per term
-	formatted_columns = [
-						  ]
+	formatted_columns = []
 	for year in student_plan:
 		# This is hardcoding the max number of courses taken each term (4 lists
 		# of empty strings to be in line with the established 16 credit max set in student_objects)
@@ -255,6 +269,13 @@ def format_rows_to_columns(forecast_dict):
 	return formatted_columns
 
 def gen_courses():
+	"""
+	Helper function to populate the course dropdown. Creates a list of every course
+	in every degree necessary for a CIS student.
+
+	Currently static since this app only supports CIS students. Can be changed later
+	to create a dropdown list for a different type of student in future development.
+	"""
 	dummy_student = Student("951234567")
 	dummy_gen_ed = ge.create_Gen_Ed()
 	dummy_student.add_degree(dummy_gen_ed)
@@ -264,23 +285,14 @@ def gen_courses():
 
 if __name__ == "__main__":
 
-	global logged_in
+	# Global objects that the app wants to track or populate for the user
 	global student_obj
 	global terms
 	global years
-	global forecast_rows
-	# Dummy info for passing to html
-	#names = ["951234567", "951234568", "951234569"]
+
+	# Can add more elements if we wish to extend how many years users can add courses to
 	terms = ["Fall", "Winter", "Spring", "Summer"]
 	years = ["1st", "2nd", "3rd", "4th", "5th"]
-
-	# Starting with this class arrangement (by row instead of year) just to make it easier
-	# to make sure django code in the HTML is working (we can parse the python to match this if absolutely necessary)
-	forecast_rows = [
-				[["CIS 210", "CIS 211", "CIS 212", ""],["CIS 110", "CIS 111", "CIS 199", ""]],
-				[["CIS 313", "CIS 315", "CIS 425", ""],["CIS 314", "MATH 343", "CIS 471", ""]]
-				]
-	logged_in = 0
-
 	student_obj = None
+
 	app.run(threaded=False,debug=True,host='0.0.0.0')

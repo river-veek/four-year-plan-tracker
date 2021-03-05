@@ -2,9 +2,9 @@
 --------------------------------------------------------------------------------
 File for saving and loading pickle objects
 
-Author - Zeke Petersen
+Author - Zeke Petersen, River Veek
 Group - TBD
-Last Modified - 2/17/21
+Last Modified - 3/5/21
 --------------------------------------------------------------------------------
 """
 
@@ -59,7 +59,7 @@ def create_studentID_list():
     for file in os.listdir(dir):
         path = dir + file
         if os.path.exists(path):
-            if not path == "./pickles/tmp.txt":  # temp file to make pickles/ a nonempty directory
+            if not path == "./pickles/tmp.txt" and not path == "./pickles/.DS_Store":  # temp file to make pickles/ a nonempty directory
                 studentID_list.append(file)
     return studentID_list
 
