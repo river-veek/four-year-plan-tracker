@@ -60,7 +60,7 @@ def forecast():
 		# Quirk where code will reach this block and 'login' is not a valid key
 		if 'login' in request_data.keys():
 			id = request_data['login']
-			student_obj = pkl.load_record(id)
+			student_obj = pkl.load_record(str(id))
 			logged_in = 1
 
 		if student_obj == None:
@@ -115,7 +115,7 @@ def forecast():
 			# pickle.dump(student_obj, pickle_out)
 			# pickle_out.close()
 
-			# pkl.save_record(student_obj.identifier, student_obj)
+			pkl.save_record(student_obj.identifier, student_obj)
 
 			return render_template('forecast.html', forecast_rows=forecast_adjusted)
 
