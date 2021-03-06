@@ -14,6 +14,7 @@ from degree_objects import *
 
 
 class Test_degree_object:
+    """Tests for degree_objects.py"""
 
     def test_add_course_not_core(self):
         """Test adding single non-core course to dummy degree object."""
@@ -61,6 +62,13 @@ class Test_degree_object:
         deg = Degree("TEST")
         term1 = Term("Fall")
         deg.add_course("Course 1", 101, 4, [], [term1], is_core=True)
+        deg.remove_course("Course 1")
+
+        assert len(deg.courses) == 0
+
+    def test_remove_course(self):
+        """Test removing course that does not exist from dummy degree object."""
+        deg = Degree("TEST")
         deg.remove_course("Course 1")
 
         assert len(deg.courses) == 0

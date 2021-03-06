@@ -124,7 +124,7 @@ class Degree():
         #remove from core list
         for course in self.core_courses:
             if course.name == name:
-                self.courses.remove(course)
+                self.core_courses.remove(course)
 
     # def get_course(self, target_course_name: str):
     def get_course(self, target_course_name):
