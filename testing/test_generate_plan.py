@@ -21,16 +21,16 @@ GEN_Ed = create_Gen_Ed()
 
 def test_create_student():
 	student_A = Student("student_A")
-	studnet_A.add_degree(CIS_major)
+	student_A.add_degree(CIS_major)
 
 	student_B = Student("student_B", summer=True)
-	studnet_B.add_degree(CIS_major)
+	student_B.add_degree(CIS_major)
 
 	student_C = Student("student_C", desired_grad_date = ("Fifth", 2))
-	studnet_C.add_degree(CIS_major)
+	student_C.add_degree(CIS_major)
 
 	student_D = Student("student_D", summer=True, desired_grad_date = ("Fifth", 2))
-	studnet_D.add_degree(CIS_major)
+	student_D.add_degree(CIS_major)
 
 def test_add_class():
 	pass
