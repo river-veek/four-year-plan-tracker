@@ -1,7 +1,11 @@
 
 
 function toggleLogin (name) {
-   //HEADER
+  /**
+	* @desc On users input, restructures DOM to present main functions used to create a four year plan 
+	* @param string name - user's student Id number to be displayed
+	* @return None
+  */
   // get elements of DOM
   const main = document.getElementById('main-space')
   const add = document.getElementById('add')
@@ -33,21 +37,24 @@ function toggleLogin (name) {
   document.getElementById('button-row').style.display = 'inline-flex'
   dInfo.style.display = 'inline'
   tInfo.style.display = 'inline'
-
-  // for previous student send data back
  }
 
-// Wrapper for main toggleLogin for when user inputs new student ID
-function toggleLoginNew () {
-
-	//HEADER
+function toggleLoginNewUser () {
+  /**
+	* @desc collects input of new user's Id, then passes it to toggleLogin. 	
+    * @param None
+	* @return None
+  */
   const input = document.getElementById('studentCreateInput').value
-  return toggleLogin(input)
+  toggleLogin(input)
 }
 
-// Takes current option value - adds it to table
 function addClass () {
-	//Header
+  /**
+	* @desc creates Table row and adds the user's current selection of Course, Term and Year to that row
+    * @param None
+	* @return None
+  */
   // get Course Dropdown
   const courseOption = document.getElementById('courses')
   // save Course selected
@@ -65,7 +72,7 @@ function addClass () {
 
   // if Trying to add dummy value - display not an option
   if (cVal === 'Course Name' || tVal === 'Term' || yVal === 'Year') {
-    alert('Not an Option :)')
+    showAlert("Not an Option! please review your current choice!", "alert-warning")
   } else {
     // else insert new row
     const row = table.insertRow()
@@ -85,7 +92,11 @@ function addClass () {
 }
 
 function removeClass() {
-	//Header 
+  /**
+	* @desc Finds and deletes Row containing the Course, Term and Year selected from the table 
+    * @param None
+	* @return None
+  */
   // get Course Dropdown
   const courseOption = document.getElementById('courses')
   // save Course selected
@@ -121,21 +132,25 @@ function removeClass() {
 }
 
 function saveTable () {
-	
-	//Function gets Table object and collects its rows cell by cell, then clears 
-	//table and can return data for a POST to backend
-	
-	
+  /**
+	* @desc collects the data within the table to an List of Lists & clears table of data
+    * @param None
+	* @return List - List of Lists containing 3 indexes - Course, Term, Year
+  */
   // gets current table data and deletes it from table on page
   const theData = document.getElementById('course-rows').rows
+  // List to contain all the rows as lists
   const tableData = []
   for (let x = 0; x < theData.length; x++) {
+	// get current Row
     const tmp = theData[x].children
     const current = []
+    // push all the cells data into the temp
     for (let v = 0; v < tmp.length; v++) { current.push(tmp[v].innerText) }
+    // push the List into the original List
     tableData.push(current)
   }
-
+  // Clear the table of the data
   const table = document.getElementById('course-rows')
   const len = table.rows.length
   for (let z = 0; z < len; z++) { table.deleteRow(0) }
@@ -143,15 +158,43 @@ function saveTable () {
   return tableData
 }
 
-// returns Id being passed from new user 
+
 function saveID () {
+  /**
+	* @desc gets the input value the user enters for their student Id
+    * @param None
+	* @return string - studentId numbers
+  */
 	return document.getElementById('studentCreateInput').value
 }
 
-// Used for case of existing user, passes Jinja value to POST and Sets up main page 
+
+function showAlert(message, alerttype) {
+  /**
+	* @desc creates Bootstrap Alerts 
+	* @param string message - Message to be displayed in Alert
+	* @param string alerttype - will create type of alert depending on param input
+	* @return div - Alert box lasting 3 seconds before disappearing
+  */
+  	// inserts alert div within the heading container, containing the alert message
+	$('#heading').append( $('#heading').append(
+	'<div id="alertdiv" class="alert alert-danger alert-dismissible fade show style="text-align: center; justify content: center;"' + alerttype + '">' + 
+		'<a class="close" data-dismiss="alert" aria-label="close" >x</a>' + '<span>' + message +
+		'</span>' + '</div>')
+	);
+	// sets alert box to remove itself after 3 seconds 
+	setTimeout(function() {
+		$('#alertdiv').remove();}, 3000);
+}
+
+ 
 function existingUser(name){
-	//Header
-	var stringName = {'login': name}
+  /**
+	* @desc sends data from jinja to flask using Ajax
+	* @param string name - the students Id number being sent 
+	* @return None
+  */	
+    var stringName = {'login': name}
 	console.log(stringName)
 	toggleLogin(name)
 	var stringName = {'login': name}
@@ -161,9 +204,8 @@ function existingUser(name){
 		data: JSON.stringify(stringName),
 		contentType: 'application/json; charset=utf-8',
 	  	success: function(data){
-	  	//alert("Log in sent")
-	  	console.log("login successfully")
-	  	console.log("Success!")
+	  	console.log("login successfull!")
+	  	
 	  	},
 	  	error: function(request, error) {
 		console.log(arguments)
@@ -172,8 +214,13 @@ function existingUser(name){
   	});
 }
 
-// All Ajax calls placed here for quick lookup and code alteration
+
 $(document).ready(function() {
+	/**
+	  * @desc on document load, sets Ajax to send data - depending on which 
+		button was pressed - with Ajax to flask 
+	  * @return None
+  	*/
 	$('#display').on('click', function() {
 		const tableData = saveTable()
 		var tblData = {'tableData': tableData}
@@ -183,7 +230,6 @@ $(document).ready(function() {
 			data: JSON.stringify(tblData),
 			contentType: 'application/json; charset=utf-8',
 	  		success: function(data){
-	  		// alert('Saving... Ready to Display!')
 	  		document.write(data)
 	  		console.log("Success!")
 	  		},
