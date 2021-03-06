@@ -53,21 +53,8 @@ class Degree():
                     #remove pre_req_course from temp list
                     temp.remove(pre_req_course)
 
-            # print(course," ---\n")
-            # for course in self.courses:
-            #     print(course, course.pre_reqs_num)
-            # print("------\n")
-
         return None
 
-    # def add_course(self,
-    #                name: str,
-    #                course_num: int,
-    #                num_credits: int,
-    #                pre_reqs: list,
-    #                terms: list,
-    #                is_core = False,
-    #                difficulty = 2):
     def add_course(self,
                    name,
                    course_num,
@@ -105,9 +92,6 @@ class Degree():
 
         #error check to confirm all pre_req were found in the degree object
         if len(pre_req_objects) != len(pre_reqs):
-            # print(pre_req_objects, len(pre_req_objects))
-            # print(pre_reqs, len(pre_reqs))
-            # print(f"Error adding {name}: could not find all of the pre-reqs in the degree")
             print("Error adding {name}: could not find all of the pre-reqs in the degree")
             return None
 
@@ -137,11 +121,10 @@ class Degree():
             if course.name == name:
                 self.courses.remove(course)
 
-        #remove from required_courses
-        for requirement_type in self.required_courses:
-            for course in self.core_courses:
-                if course.name == name:
-                    self.courses.remove(course)
+        #remove from core list
+        for course in self.core_courses:
+            if course.name == name:
+                self.courses.remove(course)
 
     # def get_course(self, target_course_name: str):
     def get_course(self, target_course_name):
