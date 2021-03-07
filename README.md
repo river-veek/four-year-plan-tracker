@@ -1,9 +1,7 @@
 Author: JT Kashuba
-
 Group: TBD
-
 Last Modified: 3/7/21
---------------------------------------------------------------------------------
+
 
 # Getting Started
 
