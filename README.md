@@ -44,7 +44,7 @@ If you aren't familiar with Dockerfile or bash scripts, make sure you use these 
 
 * Once you've deleted previous containers and images, use the following command to build and run your new docker container (run.sh is included in the repo):
 
-*Note: make sure to give the run.sh script r/w/e permissions by using the `chmod 777 run.sh` command in the terminal, otherwise it will not be seen as a valid command*
+*Note: make sure to give the run.sh script r/w/e permissions by first using the `chmod 777 run.sh` command in the terminal, otherwise it will not be seen as a valid command*
 
   ```
   ./run.sh
