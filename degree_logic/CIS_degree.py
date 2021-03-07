@@ -4,7 +4,7 @@ File for generating the standard CIS degree
 
 Author - JT Kashuba, Noah Kruss, River Veek
 Group - TBD
-Last Modified - 2/24/21
+Last Modified - 3/7/21
 ----------------------------------------------------------------------------------------
 """
 from degree_objects import *
