@@ -6,18 +6,18 @@ Last Modified: 3/7/21
 
 # Getting Started
 
-# Install Instructions
+## Install Instructions
 --------------------------------------------------------------------------------
 Refer to (wherever we end up putting Install Instructions pdf)
 
 
 
-# User Instructions
+## User Instructions
 --------------------------------------------------------------------------------
 Refer to (wherever we end up putting User Instructions pdf)
 
 
-# Docker
+## Docker
 --------------------------------------------------------------------------------
 If you haven't used docker before, here are a couple useful tips to get started.
 
