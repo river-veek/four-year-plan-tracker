@@ -4,7 +4,7 @@ File containing nose tests for degree_objects.py.
 
 Author: River Veek
 Group: TBD
-Last Modified: 2/28/21
+Last Modified: 3/6/21
 --------------------------------------------------------------------------------
 """
 import nose
@@ -14,7 +14,7 @@ from degree_objects import *
 
 
 class Test_degree_object:
-    """Tests for degree_objects.py"""
+    """Tests for degree_objects.py."""
 
     def test_add_course_not_core(self):
         """Test adding single non-core course to dummy degree object."""

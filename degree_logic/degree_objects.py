@@ -4,7 +4,7 @@ File for the defining the Degree class object and Course class object
 
 Authors - JT Kashuba, Noah Kruss
 Group - TBD
-Last Modified - 2/22/21
+Last Modified - 3/6/21
 ----------------------------------------------------------------------------------------
 """
 from enum import Enum

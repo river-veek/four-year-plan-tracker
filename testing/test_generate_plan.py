@@ -2,9 +2,9 @@
 ----------------------------------------------------------------------------------------
 File for defining functions for generating a degree plan
 
-Authors - Noah Kruss
+Authors - Noah Kruss, River Veek
 Group - TBD
-Last Modified - 2/24/21
+Last Modified - 3/6/21
 ----------------------------------------------------------------------------------------
 """
 
@@ -103,4 +103,45 @@ def main():
 	# student_A.add_course("CIS 322 Introduction to Software Engineering", 1, 1)
 	forecast_plan = student_A.get_plan()
 
-main()
+# main()
+
+
+
+class Test_degree_planning:
+	"""Tests for degree_planning.py."""
+
+	def test__generate_plan(self):
+		"""Verify that all required courses (from dummy degree object) end up in generated plan."""
+		test_deg = create_test_degree()
+		student = Student("Firstname Lastname")
+		student.add_degree(test_deg)
+		# student.add_degree(GEN_Ed)
+		forecasted_plan = student.get_plan()
+
+		for course in test_deg.core_courses:
+			cur_check = False
+			for key in forecasted_plan:
+				for group in forecasted_plan[key]:
+					if course in group:
+						cur_check = True
+			assert cur_check
+
+	def test_added_courses_generate_plan(self):
+		"""
+		Verify that all required courses (from dummy degree object) and extra course
+		end up in generated plan.
+		"""
+		test_deg = create_test_degree()
+		student = Student("Firstname Lastname")
+		test_deg.add_course("Non-Core Class", 101, 4, [], [Term("Fall")])
+		student.add_degree(test_deg)
+		# student.add_course("Generic Non-Core Course 101", 1, 0)
+		forecasted_plan = student.get_plan()
+		# print(test_deg)
+		cur_check = False
+		for key in forecasted_plan:
+			for group in forecasted_plan[key]:
+				print(group)
+				if "Non-Core Class" in group:
+					cur_check = True
+		assert cur_check
