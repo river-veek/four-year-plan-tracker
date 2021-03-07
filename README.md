@@ -54,4 +54,3 @@ If you aren't familiar with Dockerfile or bash scripts, make sure you use these 
   ```
   localhost:5000
   ```
---------------------------------------------------------------------------------
