@@ -42,13 +42,13 @@ If you haven't used docker before, here are a couple useful tips to get started.
 
 If you aren't familiar with Dockerfile or bash scripts, make sure you use these command from inside the /tbd/ directory in order to avoid any start-up issues.
 
-*Note: make sure to give the run.sh script r/w/e permissions by using the `chmod 777 run.sh` command in the terminal (run.sh is included in the repo), otherwise `./run.sh` will not be seen as a valid command*
-
 * Once you've deleted previous containers and images, use the following command to build and run your new docker container:
 
   ```
   ./run.sh
   ```
+
+*Note: make sure to give the run.sh script r/w/e permissions by using the `chmod 777 run.sh` command in the terminal (run.sh is included in the repo), otherwise `./run.sh` will not be seen as a valid command*
 
 * You will now be able to view and use the app! From a browser, enter the following URL:
 
