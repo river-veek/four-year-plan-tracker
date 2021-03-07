@@ -48,7 +48,7 @@ If you aren't familiar with Dockerfile or bash scripts, make sure you use these 
   ./run.sh
   ```
 
-*Note: make sure to give the run.sh script r/w/e permissions by using the `chmod 777 run.sh` command in the terminal, otherwise `./run.sh` will not be seen as a valid command*
+        * *Note: make sure to give the run.sh script r/w/e permissions by using the `chmod 777 run.sh` command in the terminal, otherwise `./run.sh` will not be seen as a valid command*
 
 * You will now be able to view and use the app! From a browser, enter the following URL:
 
