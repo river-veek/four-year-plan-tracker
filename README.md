@@ -14,11 +14,15 @@ Refer to (wherever we end up putting Install Instructions pdf)
 test format
 --------------------------------------------------------------------------------
 
+
 # User Instructions
 
 --------------------------------------------------------------------------------
 Refer to (wherever we end up putting User Instructions pdf)
+
+idk why this text is so big
 --------------------------------------------------------------------------------
+
 
 # Docker
 --------------------------------------------------------------------------------
