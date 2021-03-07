@@ -7,21 +7,14 @@ Last Modified: 3/7/21
 # Getting Started
 
 # Install Instructions
-
 --------------------------------------------------------------------------------
 Refer to (wherever we end up putting Install Instructions pdf)
 
-test format
---------------------------------------------------------------------------------
 
 
 # User Instructions
-
 --------------------------------------------------------------------------------
 Refer to (wherever we end up putting User Instructions pdf)
-
-idk why this text is so big
---------------------------------------------------------------------------------
 
 
 # Docker
