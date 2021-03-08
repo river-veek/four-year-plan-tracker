@@ -45,15 +45,15 @@ Refer to (wherever we end up putting User Instructions pdf)
     * student_objects.py - A file containing the definition of the Student class object
 * pickles - A directory to hold the user's unique pickle files (essentially working as cookies)
     * tmp.txt - A placeholder file to maintain the pickle directory on the repo. Other files will populate this directory as the user creates Student objects using the website application
-* static - Flask looks for /static/ directory by default as the location where css and js files are stored
+* static - Flask looks for the /static/ directory by default as the location where css and js files are stored
     * css - As mentioned above, Flask will default to looking in /static/css for all .css files
         * ui.css - A file containing the css for the website's UI
     * js - As mentioned above, Flask will default to looking in /static/js for all .js files
         * ui.js - A file containing the js for the website's UI
-* templates - Flask looks for /templates/ directory by default as the location where html files are stored
+* templates - Flask looks for the /templates/ directory by default as the location where html files are stored
     * forecast.html - A file containing the html that displays on the webpage after the user clicks "Save & Display" to view their unique Four-Year Plan
     * ui.html - A file containing the landing page html
-* testing - nosetests looks for /testing/ directory by default as the location where files used for nosetests are stored
+* testing - nosetests looks for the /testing/ directory by default as the location where files used for nosetests are stored
     * test_degree_objects.py - A file containing the nosetests to test the Degree object
     * test_generate_plan.py - A file containing the nosetests to test Degree planning logic
     * test_pickling.py - A file containing the nosetests to test pickled files
