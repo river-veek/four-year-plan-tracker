@@ -4,6 +4,15 @@ Group: TBD
 
 Last Modified: 3/7/21
 
+# CIS 422 - Project 2
+# Four-Year Plan Tracker
+
+## System Description
+
+This system is a web application that provides functionality for processing, projecting,
+and visualizing a Four-Year Plan for CIS Majors at UO. Ultimately this system can be
+modularized to include all degree paths at UO, and theoretically any university (given
+the time and resources to maintain this scale of implementation).
 
 # Getting Started
 
@@ -12,10 +21,21 @@ Last Modified: 3/7/21
 Refer to (wherever we end up putting Install Instructions pdf)
 
 
+## Software Dependencies
+--------------------------------------------------------------------------------
+Docker (detail on how to install docker in Installation Instructions)
+
+See requirements.txt for a full list of dependencies
+
 
 ## User Instructions
 --------------------------------------------------------------------------------
 Refer to (wherever we end up putting User Instructions pdf)
+
+
+## Repo Organization
+--------------------------------------------------------------------------------
+
 
 
 ## Docker
