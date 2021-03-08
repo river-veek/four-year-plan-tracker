@@ -45,8 +45,9 @@ def generate_plan(student):
 
         #check for repeat courses between degrees
         for course in degree_core_list_copy:
-            if course in unmet_courses:
-                degree_core_list_copy.remove(course)
+            for unmet_course in unmet_courses:
+                if course.name == unmet_course.name:
+                    degree_core_list_copy.remove(course)
 
         unmet_courses += degree_core_list_copy
 
@@ -85,8 +86,8 @@ def generate_plan(student):
     unmet_courses.sort(key=sort_pre_req)
     unmet_courses.reverse()
 
-    # for course in unmet_courses:
-    #     print(course, course.pre_reqs_num)
+    for course in unmet_courses:
+        print(course, course.pre_reqs_num)
 
     #add courses to forecast_plan
     add_courses_to_forecast(forecast_plan, unmet_courses, current_term, student)

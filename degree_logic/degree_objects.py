@@ -92,7 +92,7 @@ class Degree():
 
         #error check to confirm all pre_req were found in the degree object
         if len(pre_req_objects) != len(pre_reqs):
-            print("Error adding {name}: could not find all of the pre-reqs in the degree")
+            print("Error adding ", name, ": could not find all of the pre-reqs in the degree")
             return None
 
         #generate Course object
