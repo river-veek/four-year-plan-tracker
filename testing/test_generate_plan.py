@@ -4,45 +4,14 @@ File for defining functions for generating a degree plan
 
 Authors - Noah Kruss, River Veek
 Group - TBD
-Last Modified - 3/6/21
+Last Modified - 3/7/21
 ----------------------------------------------------------------------------------------
 """
 
-import numpy as np
 import sys
 sys.path.append("./degree_logic")
-
 from student_objects import *
-from CIS_degree import *
-from Gen_Ed import *
-
-CIS_major = create_CIS_major()
-GEN_Ed = create_Gen_Ed()
-
-def test_create_student():
-	student_A = Student("student_A")
-	student_A.add_degree(CIS_major)
-
-	student_B = Student("student_B", summer=True)
-	student_B.add_degree(CIS_major)
-
-	student_C = Student("student_C", desired_grad_date = ("Fifth", 2))
-	student_C.add_degree(CIS_major)
-
-	student_D = Student("student_D", summer=True, desired_grad_date = ("Fifth", 2))
-	student_D.add_degree(CIS_major)
-
-def test_add_class():
-	pass
-
-def test_change_grad_date():
-	pass
-
-def test_change_summer():
-	pass
-
-def test_create_plan():
-	pass
+from degree_objects import *
 
 def create_test_degree():
 	test_major = Degree("Test Major")
@@ -74,43 +43,31 @@ def create_test_degree():
 	test_major.add_course("CIS 315 Intermediate Algorithms", 315, 4, ["CIS 313 Intermediate Data Structures"], [Term("Winter"), Term("Spring")], is_core = True)
 	test_major.add_course("CIS 322 Introduction to Software Engineering", 322, 4, ["CIS 212 Computer Science III"], [Term("Fall"), Term("Spring")])
 	test_major.add_course("CIS 330 C/C++ & Unix", 330, 4, ["CIS 314 Computer Organization"], [Term("Winter"), Term("Spring")], is_core = True)
+	# --------------------------------------------------------------------------
 
 	################# Upper Division (400 level) CIS courses ###################
 	# --------------------------------------------------------------------------
 	test_major.add_course("CIS 415 Operating Systems", 415, 4, ["CIS 313 Intermediate Data Structures", "CIS 330 C/C++ & Unix"], [Term("Fall"), Term("Spring")], is_core = True)
 	test_major.add_course("CIS 429 Computer Architecture", 431, 4, ["CIS 330 C/C++ & Unix"], [Term("Spring")])
+	# --------------------------------------------------------------------------
 
 	################# CIS Electives (400/300 level) ###################
 	# --------------------------------------------------------------------------
 	test_major.add_course("CIS Elective 400+", 400, 4, ["CIS 212 Computer Science III"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
 	test_major.add_course("CIS Elective 300+", 300, 4, ["CIS 212 Computer Science III"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+	# --------------------------------------------------------------------------
 
 	################# MATH Electives (300 level) ###################
 	# --------------------------------------------------------------------------
 	test_major.add_course("MATH Elective 300+", 300, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+	# --------------------------------------------------------------------------
 
 	return test_major
-
-def main():
-	student_A = Student("student_A")
-	student_A.add_degree(CIS_major)
-	student_A.add_degree(GEN_Ed)
-	#student_A.add_course("CIS 110 Fluency with Information Technology", 1, 1)
-	student_A.add_course("WR 121 College Composition I", 1, 0)
-	#student_A.add_course("Arts and Letters Elective", 1, 1)
-
-	# student_A.add_course("CIS 322 Introduction to Software Engineering", 1, 1)
-	# student_A.add_course("CIS 322 Introduction to Software Engineering", 1, 1)
-	forecast_plan = student_A.get_plan()
-
-# main()
-
-
 
 class Test_degree_planning:
 	"""Tests for degree_planning.py."""
 
-	def test__generate_plan(self):
+	def test_generate_plan(self):
 		"""Verify that all required courses (from dummy degree object) end up in generated plan."""
 		test_deg = create_test_degree()
 		student = Student("Firstname Lastname")
@@ -135,13 +92,56 @@ class Test_degree_planning:
 		student = Student("Firstname Lastname")
 		test_deg.add_course("Non-Core Class", 101, 4, [], [Term("Fall")])
 		student.add_degree(test_deg)
-		# student.add_course("Generic Non-Core Course 101", 1, 0)
+		student.add_course("Non-Core Class", 1, 0)
 		forecasted_plan = student.get_plan()
-		# print(test_deg)
 		cur_check = False
+
 		for key in forecasted_plan:
 			for group in forecasted_plan[key]:
-				print(group)
-				if "Non-Core Class" in group:
-					cur_check = True
+				for course in group:
+					if course.name == "Non-Core Class":
+						cur_check = True
 		assert cur_check
+
+	def test_added_300_upper_division_generate_plan(self):
+		"""
+		Verify that added 300-level upper division course replaces generic CIS 300-level upper division
+		elective from generated plan.
+		"""
+		test_deg = create_test_degree()
+		student = Student("Firstname Lastname")
+		# test_deg.add_course("Non-Core Class", 101, 4, [], [Term("Fall")])
+		student.add_degree(test_deg)
+		student.add_course("CIS 322 Introduction to Software Engineering", 1, 0)
+		forecasted_plan = student.get_plan()
+		cur_check = True
+
+		for key in forecasted_plan:
+			for group in forecasted_plan[key]:
+				for course in group:
+					if course.name == "CIS Elective 300+":
+						cur_check = False
+		assert cur_check
+
+	def test_added_400_upper_division_generate_plan(self):
+		"""
+		Verify that added 400-level upper division course replaces generic CIS 400-level upper division
+		elective from generated plan.
+		"""
+		test_deg = create_test_degree()
+		student = Student("Firstname Lastname")
+		# test_deg.add_course("Non-Core Class", 101, 4, [], [Term("Fall")])
+		student.add_degree(test_deg)
+		student.add_course("CIS 429 Computer Architecture", 1, 0)
+		forecasted_plan = student.get_plan()
+		cur_check = True
+		check_300_exists = False
+
+		for key in forecasted_plan:
+			for group in forecasted_plan[key]:
+				for course in group:
+					if course.name == "CIS Elective 400+":
+						cur_check = False
+					if course.name == "CIS Elective 300+":
+						check_300_exists = True
+		assert cur_check and check_300_exists
