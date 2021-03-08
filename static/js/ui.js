@@ -72,7 +72,7 @@ function addClass () {
 
   // if Trying to add dummy value - display not an option
   if (cVal === 'Course Name' || tVal === 'Term' || yVal === 'Year') {
-    showAlert("Not an Option! Please review your current selections!", "alert-warning")
+    showAlert("Not an Option! please review your current choice!", "alert-warning")
   } else {
     // else insert new row
     const row = table.insertRow()
@@ -233,7 +233,7 @@ $(document).ready(function() {
 			data: JSON.stringify(tblData),
 			contentType: 'application/json; charset=utf-8',
 	  		success: function(data){
-	  		window.location.href='forecast',
+	  		document.write(data)
 	  		console.log("Success!")
 	  		},
 	  		error: function(request, error) {
@@ -253,7 +253,6 @@ $(document).ready(function() {
 			data: JSON.stringify(tblData),
 			contentType: 'application/json; charset=utf-8',
 	  		success: function(data){
-	 		// alert('Saved Progress')
 	  		console.log("saved successfully")
 	  		console.log(data)
 	  		},
@@ -273,7 +272,6 @@ $(document).ready(function() {
 			data: JSON.stringify(studentData),
 			contentType: 'application/json; charset=utf-8',
   			success: function(data){
-  			// alert("Log in sent")
   			console.log("login successfully")
   			console.log("Success!")
   			},
