@@ -26,6 +26,8 @@ def create_Gen_Ed():
     Gen_Ed.add_course("Social Science Elective", 100, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
 
     # Writing 121 and 122
+    # These have been commented out of the Gen_Ed object in order to properly use WR 122 as the pre-req for WR 320/321 in the CIS_degree object
+    # This will need to be handled if/when the system is taken to further iterations that handle multiple different degree paths.
     #Gen_Ed.add_course("WR 121 College Composition I", 121, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
     #Gen_Ed.add_course("WR 122 College Composition II", 121, 4, ["WR 121 College Composition I"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
 
