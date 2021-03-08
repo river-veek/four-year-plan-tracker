@@ -38,6 +38,32 @@ Refer to (wherever we end up putting User Instructions pdf)
 ## Repo Organization
 --------------------------------------------------------------------------------
 
+* degree_logic - A directory containing files where objects are defined and instantiated
+    * CIS_degree.py - A file containing the instantiated degree object containing all courses specific to the CIS Major
+    * Gen_Ed.py - A file containing the instantiated degree object containing all general education courses
+    * degree_objects.py - A file containing the definitions of the Degree, Course, and Term class objects
+    * degree_planning.py - A file containing the functions used to generate a Four-Year Plan
+    * student_objects.py - A file containing the definition of the Student class object
+* pickles - A directory to hold the user's unique pickle files (essentially working as cookies)
+    * tmp.txt - A placeholder file to maintain the pickle directory on the repo. Other files will populate this directory as the user creates Student objects using the website application
+* static - Flask looks for /static/ by default as the location where css and js files are stored
+    * css - As mentioned above, Flask will default to looking in /static/css for all .css files
+        * ui.css - A file containing the css for the website's UI
+    * js - As mentioned above, Flask will default to looking in /static/js for all .js files
+        * ui.js - A file containing the js for the website's UI
+* templates - Flask looks for /templates/ by default as the location where html files are stored
+    * forecast.html - A file containing the html that displays on the webpage after the user clicks "Save & Display" to view their unique Four-Year Plan
+    * ui.html - A file containing the landing page html
+* testing - nosetests looks for /testing/ by default as the location where files used for nosetests are stored
+    * test_degree_objects.py - A file containing the nosetests to test the Degree object
+    * test_generate_plan.py - A file containing the nosetests to test Degree planning logic
+    * test_pickling.py - A file containing the nosetests to test pickled files
+* Dockerfile - A standard Dockerfile used to build a docker container
+* README.md - A brief overview of how to get started using this repo & the system therein
+* app.py - A file containing the Flask routing and back end logic that populates the front end UI
+* pickling.py - A file for saving and loading pickle objects
+* requirements.txt - Document that denotes what libraries need to be imported by the user for the project to work (the user will not need to perform extra actions to import these libraries, building the docker container will automatically import the libraries contained in requirements.txt)
+* run.sh - A bash script used to build and run the docker container in order to use the application via browser. Detailed steps on this process at the end of the "Docker" section below
 
 
 ## Docker
