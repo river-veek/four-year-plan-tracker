@@ -229,7 +229,7 @@ $(document).ready(function() {
 		var tblData = {'tableData': tableData}
 		$.ajax({
 			type: "POST",
-			url: '/work',
+			url: '/forecast',
 			data: JSON.stringify(tblData),
 			contentType: 'application/json; charset=utf-8',
 	  		success: function(data){
@@ -249,7 +249,7 @@ $(document).ready(function() {
 		console.log(tblData)
 		$.ajax({
 			type: "POST",
-			url: '/work',
+			url: '/forecast',
 			data: JSON.stringify(tblData),
 			contentType: 'application/json; charset=utf-8',
 	  		success: function(data){
@@ -269,7 +269,7 @@ $(document).ready(function() {
 		var studentData = {'login': studentID}
 		$.ajax({
 			type: "POST",
-			url: '/work',
+			url: '/forecast',
 			data: JSON.stringify(studentData),
 			contentType: 'application/json; charset=utf-8',
   			success: function(data){
