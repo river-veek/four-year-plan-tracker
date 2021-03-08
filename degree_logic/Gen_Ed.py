@@ -34,8 +34,9 @@ def create_Gen_Ed():
     # --------------------------------------------------------------------------
     # TODO: How do we handle this case, where a student needs to pick 1 elective
     # from 2 of these 3 options. Unsure how to implement so included all 3 below.
-    # Eventually it needs to recognize these 3 distinct options, but for now it
-    # will be handled by making them generic electives
+    # Now commented out.
+    # Eventually it needs to recognize these 3 distinct options, but for now it's
+    # been handled by making them generic electives
     # --------------------------------------------------------------------------
 
     # 8 credits for multicultural requirement (must pick from 2 of 3 categories AC, IP, IC)
