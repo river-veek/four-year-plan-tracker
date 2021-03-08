@@ -2,7 +2,7 @@
 ----------------------------------------------------------------------------------------
 File for defining functions for generating a degree plan
 
-Authors - JT Kashuba, Noah Kruss
+Authors - Noah Kruss
 Group - TBD
 Last Modified - 3/3/21
 ----------------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ import copy
 def generate_plan(student):
     """
     Function for generating a forecast degree plan for a student to meet all
-    requirments of their degrees
+    requirements of their degrees
 
     Inputs:
         student - Student object of the student to generate the plan for
@@ -71,7 +71,7 @@ def generate_plan(student):
 
                         #if core_course is an elective
                         if elective_str == "Elective":
-                            #if cources are the same major and level requirment it hit
+                            #if cources are the same major and level requirement it hit
                             if (course_degree_name == core_course_degree_name) and \
                                (course.course_num >= core_course.course_num):
 
