@@ -18,26 +18,25 @@ the time and resources to maintain this scale of implementation).
 
 # Getting Started
 
-## Install Instructions
 --------------------------------------------------------------------------------
+## Install Instructions
 Refer to (wherever we end up putting Install Instructions pdf)
 
 
-## Software Dependencies
 --------------------------------------------------------------------------------
+## Software Dependencies
 Docker (detail on how to install docker in Installation Instructions)
 
 See requirements.txt for a full list of dependencies
 
 
-## User Instructions
 --------------------------------------------------------------------------------
+## User Instructions
 Refer to (wherever we end up putting User Instructions pdf)
 
 
-## Repo Organization
 --------------------------------------------------------------------------------
-
+## Repo Organization
 * degree_logic - A directory containing files where objects are defined and instantiated
     * CIS_degree.py - A file containing the instantiated degree object containing all courses specific to the CIS Major
     * Gen_Ed.py - A file containing the instantiated degree object containing all general education courses
@@ -66,8 +65,8 @@ Refer to (wherever we end up putting User Instructions pdf)
 * run.sh - A bash script used to build and run the docker container in order to use the application via browser. Detailed steps on this process at the end of the "Docker" section below
 
 
-## Docker
 --------------------------------------------------------------------------------
+## Docker
 If you haven't used docker before, here are a couple useful tips to get started.
 
 * List of docker containers running on your machine can be found using
