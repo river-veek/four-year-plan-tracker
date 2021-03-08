@@ -14,8 +14,8 @@ def create_CIS_major():
 
     ################# Writing and Math Pre-Requisites ##########################
     # --------------------------------------------------------------------------
-    CIS_major.add_course("WR 121 College Composition I", 121, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")])
-    CIS_major.add_course("WR 122 College Composition II", 121, 4, ["WR 121 College Composition I"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")])
+    CIS_major.add_course("WR 121 College Composition I", 121, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+    CIS_major.add_course("WR 122 College Composition II", 121, 4, ["WR 121 College Composition I"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
 
     # TODO: MATH 101 + 112 are not explicitly required if the student has an adequate placement test score - this needs handling
     CIS_major.add_course("MATH 101 Foundations of Algebra and Mathematical Modeling", 101, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
@@ -107,7 +107,7 @@ def create_CIS_major():
     CIS_major.add_course("CIS 410 Multi-agent Systems", 410, 4, [], [Term("Spring")])
     CIS_major.add_course("CIS 410 Natural Language Processing", 410, 4, [], [Term("Winter")])
     CIS_major.add_course("CIS 410 Program Analysis and Transformation", 410, 4, [], [Term("Spring")])
-    CIS_major.add_course("CIS 410 Secure Software Development", 410, 4, ["CIS 330 C/C++ & Unix", "CIS 399 Applied Cryptography"], [Term("Spring")])
+    CIS_major.add_course("CIS 410 Secure Software Development", 410, 4, ["CIS 330 C/C++ & Unix"], [Term("Spring")])
     CIS_major.add_course("CIS 410 Selected Topics on Optimization", 410, 4, [], [Term("Fall")])
     # --------------------------------------------------------------------------
 
