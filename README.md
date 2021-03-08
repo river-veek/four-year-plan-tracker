@@ -23,7 +23,6 @@ the time and resources to maintain this scale of implementation).
 Refer to (wherever we end up putting Install Instructions pdf)
 
 
---------------------------------------------------------------------------------
 ## Software Dependencies
 
 Docker (detail on how to install docker in Installation Instructions)
@@ -31,13 +30,11 @@ Docker (detail on how to install docker in Installation Instructions)
 See requirements.txt for a full list of dependencies
 
 
---------------------------------------------------------------------------------
 ## User Instructions
 
 Refer to (wherever we end up putting User Instructions pdf)
 
 
---------------------------------------------------------------------------------
 ## Repo Organization
 
 * degree_logic - A directory containing files where objects are defined and instantiated
@@ -68,7 +65,6 @@ Refer to (wherever we end up putting User Instructions pdf)
 * run.sh - A bash script used to build and run the docker container in order to use the application via browser. Detailed steps on this process at the end of the "Docker" section below
 
 
---------------------------------------------------------------------------------
 ## Docker
 
 If you haven't used docker before, here are a couple useful tips to get started.
