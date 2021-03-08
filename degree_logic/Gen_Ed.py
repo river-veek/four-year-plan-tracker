@@ -26,8 +26,8 @@ def create_Gen_Ed():
     Gen_Ed.add_course("Social Science Elective", 100, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
 
     # Writing 121 and 122
-    Gen_Ed.add_course("WR 121 College Composition I", 121, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
-    Gen_Ed.add_course("WR 122 College Composition II", 121, 4, ["WR 121 College Composition I"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+    #Gen_Ed.add_course("WR 121 College Composition I", 121, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+    #Gen_Ed.add_course("WR 122 College Composition II", 121, 4, ["WR 121 College Composition I"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
 
     # --------------------------------------------------------------------------
     # Question for Noah since he's the architect: How do we handle this case, where
