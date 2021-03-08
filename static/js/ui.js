@@ -72,7 +72,7 @@ function addClass () {
 
   // if Trying to add dummy value - display not an option
   if (cVal === 'Course Name' || tVal === 'Term' || yVal === 'Year') {
-    showAlert("Not an Option! please review your current choice!", "alert-warning")
+    showAlert("Not an Option! Please review your current selections!", "alert-warning")
   } else {
     // else insert new row
     const row = table.insertRow()
@@ -125,9 +125,12 @@ function removeClass() {
       if (currRow[0].innerText === cVal && currRow[1].innerText === tVal && currRow[2].innerText === yVal) {
         found = true
         // set bool and delete row
+     
         table.deleteRow(idx)
       } else { idx++ }
     }
+    if(idx >= len && !found)
+      { showAlert("Error Removing Course: could not find given course at specified year, term.", "alert-warning")}
   }
 }
 
@@ -226,11 +229,11 @@ $(document).ready(function() {
 		var tblData = {'tableData': tableData}
 		$.ajax({
 			type: "POST",
-			url: '/forecast',
+			url: '/work',
 			data: JSON.stringify(tblData),
 			contentType: 'application/json; charset=utf-8',
 	  		success: function(data){
-	  		document.write(data)
+	  		window.location.href='forecast',
 	  		console.log("Success!")
 	  		},
 	  		error: function(request, error) {
@@ -246,7 +249,7 @@ $(document).ready(function() {
 		console.log(tblData)
 		$.ajax({
 			type: "POST",
-			url: '/forecast',
+			url: '/work',
 			data: JSON.stringify(tblData),
 			contentType: 'application/json; charset=utf-8',
 	  		success: function(data){
@@ -266,7 +269,7 @@ $(document).ready(function() {
 		var studentData = {'login': studentID}
 		$.ajax({
 			type: "POST",
-			url: '/forecast',
+			url: '/work',
 			data: JSON.stringify(studentData),
 			contentType: 'application/json; charset=utf-8',
   			success: function(data){
