@@ -14,8 +14,8 @@ def create_CIS_major():
 
     ################# Writing and Math Pre-Requisites ##########################
     # --------------------------------------------------------------------------
-    CIS_major.add_course("WR 121 College Composition I", 121, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
-    CIS_major.add_course("WR 122 College Composition II", 121, 4, ["WR 121 College Composition I"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+    #CIS_major.add_course("WR 121 College Composition I", 121, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
+    #CIS_major.add_course("WR 122 College Composition II", 121, 4, ["WR 121 College Composition I"], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
 
     # TODO: MATH 101 + 112 are not explicitly required if the student has an adequate placement test score - this needs handling
     CIS_major.add_course("MATH 101 Foundations of Algebra and Mathematical Modeling", 101, 4, [], [Term("Fall"), Term("Winter"), Term("Spring"), Term("Summer")], is_core = True)
@@ -114,7 +114,8 @@ def create_CIS_major():
 
     ######################### Writing elective #################################
     # --------------------------------------------------------------------------
-    CIS_major.add_course("Writing 320/321", 320, 4, ["WR 122 College Composition II"], [Term("Fall"), Term("Winter"), Term("Spring")], is_core = True)
+    #CIS_major.add_course("Writing 320/321", 320, 4, ["WR 122 College Composition II"], [Term("Fall"), Term("Winter"), Term("Spring")], is_core = True)
+    CIS_major.add_course("Writing 320/321", 320, 4, ["CIS 330 C/C++ & Unix"], [Term("Fall"), Term("Winter"), Term("Spring")], is_core = True)
     # --------------------------------------------------------------------------
 
 
