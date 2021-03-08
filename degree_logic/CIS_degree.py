@@ -115,7 +115,7 @@ def create_CIS_major():
     ######################### Writing elective #################################
     # --------------------------------------------------------------------------
     #CIS_major.add_course("Writing 320/321", 320, 4, ["WR 122 College Composition II"], [Term("Fall"), Term("Winter"), Term("Spring")], is_core = True)
-    CIS_major.add_course("Writing 320/321", 320, 4, [], [Term("Fall"), Term("Winter"), Term("Spring")], is_core = True)
+    CIS_major.add_course("Writing 320/321", 320, 4, ["CIS 330 C/C++ & Unix"], [Term("Fall"), Term("Winter"), Term("Spring")], is_core = True)
     # --------------------------------------------------------------------------
 
 
