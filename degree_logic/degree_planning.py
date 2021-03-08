@@ -45,9 +45,11 @@ def generate_plan(student):
 
         #check for repeat courses between degrees
         for course in degree_core_list_copy:
-            for unmet_course in unmet_courses:
-                if course.name == unmet_course.name:
-                    degree_core_list_copy.remove(course)
+            if course in unmet_courses:
+                degree_core_list_copy.remove(course)
+            # for unmet_course in unmet_courses:
+            #     if course.name == unmet_course.name:
+            #         degree_core_list_copy.remove(course)
 
         unmet_courses += degree_core_list_copy
 
