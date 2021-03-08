@@ -18,13 +18,14 @@ the time and resources to maintain this scale of implementation).
 
 # Getting Started
 
---------------------------------------------------------------------------------
+
 ## Install Instructions
 Refer to (wherever we end up putting Install Instructions pdf)
 
 
 --------------------------------------------------------------------------------
 ## Software Dependencies
+
 Docker (detail on how to install docker in Installation Instructions)
 
 See requirements.txt for a full list of dependencies
@@ -32,11 +33,13 @@ See requirements.txt for a full list of dependencies
 
 --------------------------------------------------------------------------------
 ## User Instructions
+
 Refer to (wherever we end up putting User Instructions pdf)
 
 
 --------------------------------------------------------------------------------
 ## Repo Organization
+
 * degree_logic - A directory containing files where objects are defined and instantiated
     * CIS_degree.py - A file containing the instantiated degree object containing all courses specific to the CIS Major
     * Gen_Ed.py - A file containing the instantiated degree object containing all general education courses
@@ -67,6 +70,7 @@ Refer to (wherever we end up putting User Instructions pdf)
 
 --------------------------------------------------------------------------------
 ## Docker
+
 If you haven't used docker before, here are a couple useful tips to get started.
 
 * List of docker containers running on your machine can be found using
