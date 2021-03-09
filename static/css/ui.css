@@ -1,3 +1,10 @@
+/* 
+	- Document: UI Styling
+	- Version:  1.0.0
+	- Authors:   Zeke Petersen, Logan Levitre   
+*/
+
+/* ==[ Global Settings ]== */
 html {
   height: 100%;
   width: 100%;
@@ -12,11 +19,8 @@ body {
   background-color:rgba(180, 176, 176, 0.53)
 }
 
-.page_wrapper {
-	width:auto;
-	height:auto;
-}
 
+/* ==[ Dropdown ]== */
 .dropdown-content a {
 	color: black;
 	padding: 4px 10px;
@@ -41,60 +45,18 @@ body {
 	min-width: 150px;
 }
 
+/* ==[ Forms ]== */
 .form-group input {
 	width: 150px;
 	margin: 0 auto;
 	float: 0;
 }
 
-.show {display:block;}
-
-/* Table stuff that may be superseded by Bootstrap classes
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  display: table;
-}
-*/
-
-/*
-td, th {
-	border: 1px solid black;
-	text-align: left;
-	padding: 8px;
-}
-*/
-
-/* May be replaced by table-striped
-tr:nth-child(even) {background-color: green;} */
-	 /*
-	 tr:nth-child(odd) {background-color:#FBE021}
-
-	 tr:nth-child(4n+1){background-color: #f71111}
-
-	 */
-/*
-tr:nth-child(4n+1){background-color: #FBE021} */
-
-#choice-list, #term-list, #year-list {
-	width: 130px;
-	display: inline-block;
-	text-align: center;
-	margin: 50px;
-	position: relative;
-}
-
-#matrix {
-	width: 200px;
-}
-
-/*--- Bootstrap Padding Fix --*/
+/* ==[ Bootstrap ]== */
 [class*="col-"] {
     padding: 1rem;
 }
 
-/*--- Bootstrap Mobile Gutter Fix --*/
 .row, .container-fluid {
   margin-left: 0px !important;
   margin-right: 0px !important;
