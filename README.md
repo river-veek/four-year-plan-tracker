@@ -26,6 +26,7 @@ Refer to Installation_Instructions.pdf
 ## Software Dependencies
 
 Docker (detail on how to install docker in Installation Instructions)
+
 Docker Desktop App
 
 See requirements.txt for a full list of dependencies
