@@ -2,7 +2,7 @@ Author: JT Kashuba
 
 Group: TBD
 
-Members: JT Kashuba, Noah Kruss, Logan Levitre, Zeke Peterson, River Veek
+Members: JT Kashuba, Noah Kruss, Logan Levitre, Zeke Petersen, River Veek
 
 Last Modified: 3/10/21
 
@@ -20,6 +20,7 @@ the time and resources to maintain this scale of implementation)
 
 
 ## Install Instructions
+
 Refer to Installation_Instructions.pdf
 
 
@@ -51,7 +52,7 @@ Refer to User_Instructions.pdf
     * Project_Plan.pdf - Team TBD's Four-Year Plan Tracker Project Plan presented as a 3-Page-Summary
     * SDS.pdf - Software Design Specification
     * SRS.pdf - Software Requirements Specification
-    * TeamTDB.pdf - Documentation of Team TBD's progress in Excel format, tracked hours of work - organized by week
+    * TeamTBD.pdf - Documentation of Team TBD's progress in Excel format, tracked hours of work - organized by week
 * pickles - A directory to hold the user's unique pickle files (essentially working as cookies)
     * tmp.txt - A placeholder file to maintain the pickle directory on the repo. Other files will populate this directory as the user creates Student objects using the website application
 * static - Flask looks for the /static/ directory by default as the location where css and js files are stored
