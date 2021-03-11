@@ -20,19 +20,20 @@ the time and resources to maintain this scale of implementation).
 
 
 ## Install Instructions
-Refer to (wherever we end up putting Install Instructions pdf)
+Refer to Installation_Instructions.pdf
 
 
 ## Software Dependencies
 
 Docker (detail on how to install docker in Installation Instructions)
+Docker Desktop App
 
 See requirements.txt for a full list of dependencies
 
 
 ## User Instructions
 
-Refer to (wherever we end up putting User Instructions pdf)
+Refer to User_Instructions.pdf
 
 
 ## Repo Organization
@@ -45,13 +46,11 @@ Refer to (wherever we end up putting User Instructions pdf)
     * student_objects.py - A file containing the definition of the Student class object
 * documentation - A directory containing the following pieces of documentation
     * Agenda_MtgNotes.pdf - Documentation of Team TBD meeting agendas
-    * Installation_Instructions.pdf - Document that provides the User instructions on how to install the system in this repository
     * Programmer_Documentation.pdf - Programmer Documentation for the entire system
     * Project_Plan.pdf - Team TBD's Four-Year Plan Tracker Project Plan presented as a 3-Page-Summary
     * SDS.pdf - Software Design Specification
     * SRS.pdf - Software Requirements Specification
     * TeamTDB.pdf - Documentation of Team TBD's progress in Excel format, tracked hours of work - organized by week
-    * User_Instructions.pdf - Document that provides the User a step-by-step walkthrough of how to use the Four-Year Plan Tracker application
 * pickles - A directory to hold the user's unique pickle files (essentially working as cookies)
     * tmp.txt - A placeholder file to maintain the pickle directory on the repo. Other files will populate this directory as the user creates Student objects using the website application
 * static - Flask looks for the /static/ directory by default as the location where css and js files are stored
@@ -67,7 +66,9 @@ Refer to (wherever we end up putting User Instructions pdf)
     * test_generate_plan.py - A file containing the nosetests to test Degree planning logic
     * test_pickling.py - A file containing the nosetests to test pickled files
 * Dockerfile - A standard Dockerfile used to build a docker container
+* Installation_Instructions.pdf - Document that provides the User instructions on how to install the system in this repository
 * README.md - A brief overview of how to get started using this repo & the system therein
+* User_Instructions.pdf - Document that provides the User a step-by-step walkthrough of how to use the Four-Year Plan Tracker application
 * app.py - A file containing the Flask routing and back end logic that populates the front end UI
 * pickling.py - A file for saving and loading pickle objects
 * requirements.txt - Document that denotes what libraries need to be imported by the user for the project to work (the user will not need to perform extra actions to import these libraries, building the docker container will automatically import the libraries contained in requirements.txt)
