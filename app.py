@@ -205,8 +205,8 @@ def format_rows_to_columns(forecast_dict):
 
 	# For example:
 	# example = [
-	#       [["CIS 210", "CIS 211", "CIS 212", ""],["CIS 110", "CIS 111", "CIS 199", ""]],
-	#       [["CIS 313", "CIS 315", "CIS 425", ""],["CIS 314", "MATH 343", "CIS 471", ""]]
+	#       [["CIS 210", "CIS 211", "CIS 212", ""], ["CIS 110", "CIS 111", "CIS 199", ""]],
+	#       [["CIS 313", "CIS 315", "CIS 425", ""], ["CIS 314", "MATH 343", "CIS 471", ""]]
 	#                 ]
 	# This example list represents a possible course-plan for the 1st and 2nd year,
 	# where Year 1 Fall Term the student is taking CIS 210 and CIS 110
