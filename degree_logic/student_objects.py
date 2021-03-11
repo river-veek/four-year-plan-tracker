@@ -12,7 +12,7 @@ import degree_planning as d_p
 
 class Student():
     """
-    Class object to store a student's infomation such a desired graduation date,
+    Class object to store a student's information such a desired graduation date,
     if they are willing to take classes over the summer, and what courses they
     completed
     """
@@ -157,7 +157,7 @@ class Student():
         the requirments for the degrees they are taking
 
         Returns:
-            plan - dictonary of plan infomation in the following form
+            plan - dictionary of plan information in the following form
 
                 {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
                  2: [[], [], [], []],
@@ -184,7 +184,7 @@ class Student():
             course_list - list of course names
         """
 
-        #initilize list
+        #initialize list
         course_list =[]
 
         #loop through degrees
