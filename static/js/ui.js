@@ -72,7 +72,7 @@ function addClass () {
 
   // if Trying to add dummy value - display not an option
   if (cVal === 'Course Name' || tVal === 'Term' || yVal === 'Year') {
-    showAlert("Not an Option! please review your current choice!", "alert-warning")
+    showAlert("Error Adding Course: Could not find given course at specified Year and Term!", "alert-warning")
   } else {
     // else insert new row
     const row = table.insertRow()
@@ -130,7 +130,7 @@ function removeClass() {
       } else { idx++ }
     }
     if(idx >= len && !found)
-      { showAlert("Error Removing Course: could not find given course at specified year, term.", "alert-warning")}
+      { showAlert("Error Removing Course: Could not find given course at specified Year and Term!", "alert-warning")}
   }
 }
 
@@ -174,14 +174,14 @@ function saveID () {
 
 function showAlert(message, alerttype) {
   /**
-	* @desc creates Bootstrap Alerts 
+	* @desc creates and inserts Bootstrap Alerts into HTML for 3 seconds, then removes it 
 	* @param string message - Message to be displayed in Alert
 	* @param string alerttype - will create type of alert depending on param input
 	* @return div - Alert box lasting 3 seconds before disappearing
   */
   	// inserts alert div within the heading container, containing the alert message
 	$('#heading').append( $('#heading').append(
-	'<div id="alertdiv" class="alert alert-danger alert-dismissible fade show style="text-align: center; justify content: center;"' + alerttype + '">' + 
+	'<div id="alertdiv" class="alert alert-danger alert-dismissible fade show"' + alerttype + '">' + 
 		'<a class="close" data-dismiss="alert" aria-label="close" >x</a>' + '<span>' + message +
 		'</span>' + '</div>')
 	);

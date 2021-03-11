@@ -43,6 +43,11 @@ Refer to (wherever we end up putting User Instructions pdf)
     * degree_objects.py - A file containing the definitions of the Degree, Course, and Term class objects
     * degree_planning.py - A file containing the functions used to generate a Four-Year Plan
     * student_objects.py - A file containing the definition of the Student class object
+* documentation - A directory containing the following pieces of documentation
+    * Installation_Instructions.pdf - Document that provides the User instructions on how to install the system in this repository
+    * SDS.pdf - Software Design Specification
+    * SRS.pdf - Software Requirements Specification
+    * User_Instructions.pdf - Document that provides the User a step-by-step walkthrough of how to use the Four-Year Plan Tracker application
 * pickles - A directory to hold the user's unique pickle files (essentially working as cookies)
     * tmp.txt - A placeholder file to maintain the pickle directory on the repo. Other files will populate this directory as the user creates Student objects using the website application
 * static - Flask looks for the /static/ directory by default as the location where css and js files are stored
