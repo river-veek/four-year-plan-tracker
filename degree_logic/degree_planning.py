@@ -21,10 +21,10 @@ def generate_plan(student):
     Returns:
         forecast_plan - dictionary of plan infomation in the following form
 
-            {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
-             2: [[], [], [], []],
-             3: [[], [], [], []],
-             4: [[], [], [], []],
+            {1: [ [course_1, course_2, ...], [course_3, course_4, ...], [], [] ],
+             2: [ [], [], [], [] ],
+             3: [ [], [], [], [] ],
+             4: [ [], [], [], [] ],
              ...
             }
 
@@ -101,8 +101,8 @@ def generate_plan(student):
 
 def sort_pre_req(course):
     """
-    Function for specifing the paremeter to sort a course list by. This function
-    give a sort key of course.pre_reqs_num
+    Function for specifing the parameter to sort a course list by. This function
+    gives a sort key of course.pre_reqs_num
 
     Inputs:
         course - Course object
@@ -120,10 +120,10 @@ def print_plan(plan):
     Inputs:
         plan - degree plan dictionary to be printed. plan has the following form
 
-            {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
-             2: [[], [], [], []],
-             3: [[], [], [], []],
-             4: [[], [], [], []],
+            {1: [ [course_1, course_2, ...], [course_3, course_4, ...], [], [] ],
+             2: [ [], [], [], [] ],
+             3: [ [], [], [], [] ],
+             4: [ [], [], [], [] ],
              ...
             }
                 Notes: course objects are stored within the lists
@@ -157,10 +157,10 @@ def add_courses_to_forecast(plan, unmet_courses, current_term, student):
 
     Inputs:
         plan - degree plan to be adding courses to. plan has the following form
-            {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
-             2: [[], [], [], []],
-             3: [[], [], [], []],
-             4: [[], [], [], []],
+            {1: [ [course_1, course_2, ...], [course_3, course_4, ...], [], [] ],
+             2: [ [], [], [], [] ],
+             3: [ [], [], [], [] ],
+             4: [ [], [], [], [] ],
              ...
             }
                 Notes: course objects are stored within the lists
@@ -305,10 +305,10 @@ def increment_year(plan, year):
     Inputs:
         plan - degree plan dictionary. plan has the following form
 
-            {1: [[course_1, course_2, ...], [course_3, course_4, ...], [], []],
-             2: [[], [], [], []],
-             3: [[], [], [], []],
-             4: [[], [], [], []],
+            {1: [ [course_1, course_2, ...], [course_3, course_4, ...], [], [] ],
+             2: [ [], [], [], [] ],
+             3: [ [], [], [], [] ],
+             4: [ [], [], [], [] ],
              ...
             }
                 Notes: course objects are stored within the lists
