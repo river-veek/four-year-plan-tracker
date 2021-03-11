@@ -44,9 +44,13 @@ Refer to (wherever we end up putting User Instructions pdf)
     * degree_planning.py - A file containing the functions used to generate a Four-Year Plan
     * student_objects.py - A file containing the definition of the Student class object
 * documentation - A directory containing the following pieces of documentation
+    * Agenda_MtgNotes.pdf - Documentation of Team TBD meeting agendas
     * Installation_Instructions.pdf - Document that provides the User instructions on how to install the system in this repository
+    * Programmer_Documentation.pdf - Programmer Documentation for the entire system
+    * Project_Plan.pdf - Team TBD's Four-Year Plan Tracker Project Plan presented as a 3-Page-Summary
     * SDS.pdf - Software Design Specification
     * SRS.pdf - Software Requirements Specification
+    * TeamTDB.pdf - Documentation of Team TBD's progress in Excel format, tracked hours of work - organized by week
     * User_Instructions.pdf - Document that provides the User a step-by-step walkthrough of how to use the Four-Year Plan Tracker application
 * pickles - A directory to hold the user's unique pickle files (essentially working as cookies)
     * tmp.txt - A placeholder file to maintain the pickle directory on the repo. Other files will populate this directory as the user creates Student objects using the website application
