@@ -187,7 +187,7 @@ function showAlert(message, alerttype) {
 	);
 	// sets alert box to remove itself after 3 seconds 
 	setTimeout(function() {
-		$('#alertdiv').remove();}, 3000);
+		$('#alertdiv').remove();}, 3500);
 }
 
  
@@ -198,9 +198,7 @@ function existingUser(name){
 	* @return None
   */	
     var stringName = {'login': name}
-	console.log(stringName)
 	toggleLogin(name)
-	var stringName = {'login': name}
   $.ajax({
 		type: "POST",
 		url: '/forecast',
@@ -246,7 +244,6 @@ $(document).ready(function() {
   	$('#save').on('click', function() {
 		const tableData = saveTable()
 		var tblData = {'savedData': tableData}
-		console.log(tblData)
 		$.ajax({
 			type: "POST",
 			url: '/forecast',
@@ -254,7 +251,6 @@ $(document).ready(function() {
 			contentType: 'application/json; charset=utf-8',
 	  		success: function(data){
 	  		console.log("saved successfully")
-	  		console.log(data)
 	  		},
 	  		error: function(request, error) {
 			console.log(arguments)
@@ -272,8 +268,7 @@ $(document).ready(function() {
 			data: JSON.stringify(studentData),
 			contentType: 'application/json; charset=utf-8',
   			success: function(data){
-  			console.log("login successfully")
-  			console.log("Success!")
+  			console.log("Login successful")
   			},
   			error: function(request, error) {
 			console.log(arguments)
