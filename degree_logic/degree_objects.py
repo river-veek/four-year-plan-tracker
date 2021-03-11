@@ -75,8 +75,8 @@ class Degree():
             pre_reqs - (list) is a list of course names that are required to
                         be taken by a Student before this one
             terms - (list) is a list of Term objects
-            is_core - (bool) a string denoting what type of requirment the
-                            core course to complete the major. Defaults to False
+            is_core - (bool) indicator denoting what if the course is required to
+                      be taken in order nto complete the major. Defaults to False
             difficulty - (int) is a integer repersenting how difficult the course
                          is on a scale of 1 to 5
 
@@ -132,10 +132,6 @@ class Degree():
             if course.name == target_course_name:
                 print(course.name)
                 return course
-
-    def save_degree(self):
-        self.calc_pre_rec_nums()
-        pass
 
 
 class Course():

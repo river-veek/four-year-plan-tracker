@@ -36,7 +36,11 @@ class Student():
             identifier - (str) student ID of student
             summer - (bool) a boolean indicator of whether or not the student is
                      willing to take courses over the summer (defaults to False)
-            desired_grad_date - (tuple) a tuple in the form (year: str, term: int)
+            desired_grad_date - (tuple) a tuple in the form (year: int, term: int)
+                                (defaults to (4,2))
+            max_credits_per_term - (int) an int that tells the system what the
+                                   max number of credits the student will want
+                                   in each term of their generated plan
         """
 
         self.identifier = identifier
