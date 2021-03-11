@@ -4,7 +4,7 @@ Group: TBD
 
 Members: JT Kashuba, Noah Kruss, Logan Levitre, Zeke Peterson, River Veek
 
-Last Modified: 3/7/21
+Last Modified: 3/10/21
 
 # CIS 422 - Project 2
 # Four-Year Plan Tracker
@@ -14,7 +14,7 @@ Last Modified: 3/7/21
 This system is a web application that provides functionality for processing, projecting,
 and visualizing a Four-Year Plan for CIS Majors at UO. Ultimately this system can be
 modularized to include all degree paths at UO, and theoretically any university (given
-the time and resources to maintain this scale of implementation).
+the time and resources to maintain this scale of implementation)
 
 # Getting Started
 
