@@ -14,7 +14,7 @@ class Degree():
     # def __init__(self, name: str):
     def __init__(self, name):
         """
-        required_courses - (list) is a list of course_num / levels
+        name - string identifier of the degree object
         """
 
         self.name = name
@@ -104,7 +104,7 @@ class Degree():
         if is_core:
             self.core_courses.append(new_course)
 
-    # def remove_course(self, name: str):
+    #IMORTANT NOTE - This function could break system if prereq courses are removed
     def remove_course(self, name):
         """
         Function to remove a course with course.name == name from degree object
@@ -136,7 +136,6 @@ class Degree():
 
 class Course():
 
-    # def __init__(self, name: str, course_num: int, num_credits: int, pre_reqs: list, terms: list, difficulty: int):
     def __init__(self, name, course_num, num_credits, pre_reqs, terms, difficulty):
         """
         Function to initialize a Course object

@@ -16,12 +16,6 @@ class Student():
     if they are willing to take classes over the summer, and what courses they
     completed
     """
-    # def __init__(self,
-    #              identifier: str,
-    #              summer = False,
-    #              desired_grad_date = (4, 2),
-    #              max_credits_per_term = 12
-    #              ):
 
     def __init__(self,
                  identifier,
