@@ -199,13 +199,20 @@ def add_courses_to_forecast(plan, unmet_courses, current_term, student):
     while(unmet_courses):
 
         # get next course and remove it from unmet_courses
-        next_course = get_next_course(forecasted_courses_taken, unmet_courses, current_term)
+        next_course, incr = get_next_course(forecasted_courses_taken, unmet_courses, current_term, 0)
         # print()
-        # print(plan)
+        #print(plan)
         # print(next_course)
         # print(current_term)
 
-        if next_course == None:
+        #find num credits taken and term_difficulty for current term
+        num_credits = 0
+        term_difficulty = 0
+        for course in plan[current_year][current_term]:
+            num_credits += course.num_credits
+            term_difficulty += course.difficulty
+
+        if (next_course == None) or (num_credits >= student.max_credits_per_term):
             #increment term
             current_term += 1
 
@@ -219,40 +226,47 @@ def add_courses_to_forecast(plan, unmet_courses, current_term, student):
                 current_term = 0
                 current_year = increment_year(plan, current_year)
         else:
-            #find num credits taken in current term
-            num_credits = 0
-            for course in plan[current_year][current_term]:
-                num_credits += course.num_credits
 
-            #TODO update this section to have logic for rechecking the possible courses for a new replacement
-            ##this is also where difficulty logic should be added
-            
-            #check if adding new courses to term will pass max_credits_per_term
-            if (num_credits + next_course.num_credits) > student.max_credits_per_term:
-                #increment term
-                current_term += 1
+            while (next_course != None):
+                #print("Currently at", num_credits, term_difficulty)
+                #print("Considering", next_course.name, next_course.num_credits, next_course.difficulty)
 
-                #add buffered courses into forecasted_courses_taken
-                forecasted_courses_taken += current_term_buffer[:]
-                #reset current_term_buffer
-                current_term_buffer = []
+                to_many_credits = (num_credits + next_course.num_credits) > student.max_credits_per_term
+                #NOTE this is currently being hard coded to be a 16 credit max system
+                to_difficult = (term_difficulty + next_course.difficulty) > 16
 
-                #check if number is past term_cap
-                if current_term > term_cap:
-                    current_term = 0
-                    current_year = increment_year(plan, current_year)
+                if (to_many_credits == False) and (to_difficult == False):
+                    unmet_courses.remove(next_course)
+                    unmet_courses.sort(key=sort_pre_req)
+                    unmet_courses.reverse()
+                    #add courses to term
+                    plan[current_year][current_term].append(next_course)
 
-            else:
-                unmet_courses.remove(next_course)
-                unmet_courses.sort(key=sort_pre_req)
-                unmet_courses.reverse()
-                #add courses to term
-                plan[current_year][current_term].append(next_course)
+                    #add course to current_term_buffer
+                    current_term_buffer.append(next_course)
+                    break
+                #term increment condition
+                if next_course == None:
+                    #increment term
+                    current_term += 1
 
-                #add course to current_term_buffer
-                current_term_buffer.append(next_course)
+                    #add buffered courses into forecasted_courses_taken
+                    forecasted_courses_taken += current_term_buffer[:]
+                    #reset current_term_buffer
+                    current_term_buffer = []
 
-def get_next_course(forecasted_courses_taken, unmet_course_list, current_term):
+                    #check if number is past term_cap
+                    if current_term > term_cap:
+                        current_term = 0
+                        current_year = increment_year(plan, current_year)
+
+                    break
+
+                # If end contions haven't been met look at next viable course for the current term
+                next_course, incr = get_next_course(forecasted_courses_taken, unmet_courses, current_term, incr + 1)
+
+
+def get_next_course(forecasted_courses_taken, unmet_course_list, current_term, incr):
     """
     Function for determining what course should be added to a student plan next
 
@@ -267,18 +281,22 @@ def get_next_course(forecasted_courses_taken, unmet_course_list, current_term):
                             1 = Winter
                             2 = Spring
                             3 = Summer
+        incr - (int) incrementer number for offsetting current position within
+               the unmet course list. On first pass for a term will start at 0.
+               If course found with that start point doesn't work for term
+               difficulty and or term max number of credits this function will
+               be re-run at (incr + 1)
     Returns:
         next_course - Course object of the next course that should be taken
     """
 
-    incr = 0
     done = False
     while(done == False):
         done = True
 
         #condition where no course can be found for current term
         if incr >= len(unmet_course_list):
-            return None
+            return None, None
 
         next_course = unmet_course_list[incr]
         #check that all pre-reqs have been taken
@@ -296,7 +314,7 @@ def get_next_course(forecasted_courses_taken, unmet_course_list, current_term):
 
         incr += 1
 
-    return next_course
+    return (next_course, incr)
 
 # def increment_year(plan, year: int):
 def increment_year(plan, year):
