@@ -224,6 +224,9 @@ def add_courses_to_forecast(plan, unmet_courses, current_term, student):
             for course in plan[current_year][current_term]:
                 num_credits += course.num_credits
 
+            #TODO update this section to have logic for rechecking the possible courses for a new replacement
+            ##this is also where difficulty logic should be added
+            
             #check if adding new courses to term will pass max_credits_per_term
             if (num_credits + next_course.num_credits) > student.max_credits_per_term:
                 #increment term
