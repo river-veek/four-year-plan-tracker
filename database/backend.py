@@ -6,9 +6,9 @@ Date: 29 July 2021
 
 from mysql.connector import *
 
+#--------------------DEFINE DATABASE TABLES (and Name)--------------------------
+DB_NAME = "4YP_DataBase"
 TABLES = {}
-
-# TODO: Double check correctness of 'foreign key' constraint where necessary
 
 # Users table
 TABLES['Users'] = (
@@ -121,3 +121,7 @@ TABLES['Courses_Taken'] = (
     ")"
 
 )
+
+
+# cnx = mysql.connector.connect(user='Creator')
+# cursor = cnx.cursor()
