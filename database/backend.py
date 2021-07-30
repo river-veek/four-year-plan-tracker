@@ -8,7 +8,7 @@ from mysql.connector import *
 
 TABLES = {}
 
-# TODO: add 'foreign key' constraint where necessary
+# TODO: Double check correctness of 'foreign key' constraint where necessary
 
 # Users table
 TABLES['Users'] = (
@@ -39,13 +39,17 @@ TABLES['Degrees'] = (
     ")"
 )
 
+#example Specific degree table
 TABLES['CIS_Major'] = (
 
     "CREATE TABLE `CIS_Major` ("
     "   `Core_ID` INT(3) NOT NULL AUTO_INCREMENT,"
     "   `Course_ID_FK` INT(7) NOT NULL,"
     "   PRIMARY KEY(`Core_ID`),"
-    "   UNIQUE(`Core_ID`)"
+    "   UNIQUE(`Core_ID`),"
+    "   FOREIGN KEY (`Course_ID_FK`) "
+    "       REFERENCES Courses(`Course_ID`)"
+    "       ON DELETE CASCADE"
     ")"
 )
 
@@ -58,6 +62,12 @@ TABLES['Pursued_Degrees'] = (
     "   `Degree_ID_FK` INT(4) NOT NULL,"
     "   PRIMARY KEY(`Pursued_ID`),"
     "   UNIQUE(`Pursued_ID`)"
+    "   FOREIGN KEY (`User_ID_FK`) "
+    "       REFERENCES Users(`User_ID`)"
+    "       ON DELETE CASCADE,"
+    "   FOREIGN KEY (`Degree_ID_FK`) "
+    "       REFERENCES Degrees(`Degree_ID`)"
+    "       ON DELETE CASCADE"
     ")"
 )
 
@@ -82,6 +92,12 @@ TABLES['Prereqs'] = (
     "   `Course_ID_Dependent_FK` NOT NULL,"
     "   PRIMARY KEY(`Prereq_ID`),"
     "   UNIQUE(`Prereq_ID`)"
+    "   FOREIGN KEY (`Course_ID_FK`) "
+    "       REFERENCES Courses(`Course_ID`)"
+    "       ON DELETE CASCADE,"
+    "   FOREIGN KEY (`Course_ID_Dependent_FK`) "
+    "       REFERENCES Courses(`Course_ID`)"
+    "       ON DELETE CASCADE"
     ")"
 
 )
@@ -96,6 +112,12 @@ TABLES['Courses_Taken'] = (
     "   `Term_Taken` INT(2) NOT NULL,"
     "   PRIMARY KEY(`Taken_ID`),"
     "   UNIQUE(`Taken_ID`)"
+    "   FOREIGN KEY (`User_ID_FK`) "
+    "       REFERENCES Users(`User_ID`)"
+    "       ON DELETE CASCADE,"
+    "   FOREIGN KEY (`Course_ID_FK`) "
+    "       REFERENCES Courses(`Course_ID`)"
+    "       ON DELETE CASCADE"
     ")"
 
 )
