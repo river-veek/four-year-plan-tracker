@@ -122,6 +122,43 @@ TABLES['Courses_Taken'] = (
 
 )
 
+#--------------------CREATE THE DATABASE---------------------------------
+#create database function: gotten from the following webpage
+    #(https://dev.mysql.com/doc/connector-python/en/connector-python-example-ddl.html)
+def create_database(cursor):
+    try:
+        cursor.execute(
+            "CREATE DATABASE {} DEFAULT CHARACTER SET 'utf8'".format(DB_NAME))
+    except mysql.connector.Error as err:
+        print("Failed creating database: {}".format(err))
+        exit(1)
 
-# cnx = mysql.connector.connect(user='Creator')
-# cursor = cnx.cursor()
+cnx = mysql.connector.connect(user='Creator')
+cursor = cnx.cursor()
+
+#try to connect to database
+try:
+    cursor.execute("USE {}".format(DB_NAME))
+#if database does not exist call create_database() to make it
+except mysql.connector.Error as err:
+    if err.errno == errorcode.ER_BAD_DB_ERROR:
+        create_database(cursor)
+        cnx.database = DB_NAME
+    else:
+        exit(1)
+
+#initilize the tables that will comprise the database
+for table_name in TABLES:
+    table_description = TABLES[table_name]
+    try:
+        cursor.execute(table_description)
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
+            print("already exists.")
+        else:
+            print(err.msg)
+    else:
+        print("OK")
+
+cursor.close()
+cnx.close()
