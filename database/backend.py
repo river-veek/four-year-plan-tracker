@@ -122,43 +122,77 @@ TABLES['Courses_Taken'] = (
 
 )
 
+##DONT THINK THIS IS NEEDED
 #--------------------CREATE THE DATABASE---------------------------------
 #create database function: gotten from the following webpage
     #(https://dev.mysql.com/doc/connector-python/en/connector-python-example-ddl.html)
-def create_database(cursor):
-    try:
-        cursor.execute(
-            "CREATE DATABASE {} DEFAULT CHARACTER SET 'utf8'".format(DB_NAME))
-    except mysql.connector.Error as err:
-        print("Failed creating database: {}".format(err))
-        exit(1)
+# def create_database(cursor):
+#     try:
+#         cursor.execute(
+#             "CREATE DATABASE {} DEFAULT CHARACTER SET 'utf8'".format(DB_NAME))
+#     except mysql.connector.Error as err:
+#         print("Failed creating database: {}".format(err))
+#         exit(1)
+#
+# cnx = mysql.connector.connect(user='Creator')
+# cursor = cnx.cursor()
+#
+# #try to connect to database
+# try:
+#     cursor.execute("USE {}".format(DB_NAME))
+# #if database does not exist call create_database() to make it
+# except mysql.connector.Error as err:
+#     if err.errno == errorcode.ER_BAD_DB_ERROR:
+#         create_database(cursor)
+#         cnx.database = DB_NAME
+#     else:
+#         exit(1)
 
-cnx = mysql.connector.connect(user='Creator')
-cursor = cnx.cursor()
+#--------------------CREATE THE DATABASE STRUCTURE------------------------------
+def create_DB_tables():
+    cnx = mysql.connector.connect(user='FYPT_admin', password='330_PTSD_', database='test-database-1')
+    cursor = cnx.cursor()
 
-#try to connect to database
-try:
-    cursor.execute("USE {}".format(DB_NAME))
-#if database does not exist call create_database() to make it
-except mysql.connector.Error as err:
-    if err.errno == errorcode.ER_BAD_DB_ERROR:
-        create_database(cursor)
-        cnx.database = DB_NAME
-    else:
-        exit(1)
-
-#initilize the tables that will comprise the database
-for table_name in TABLES:
-    table_description = TABLES[table_name]
-    try:
-        cursor.execute(table_description)
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-            print("already exists.")
+    #initilize the tables that will comprise the database
+    for table_name in TABLES:
+        table_description = TABLES[table_name]
+        try:
+            cursor.execute(table_description)
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
+                print("already exists.")
+            else:
+                print(err.msg)
         else:
-            print(err.msg)
-    else:
-        print("OK")
+            print("OK")
 
-cursor.close()
-cnx.close()
+    cursor.close()
+    cnx.close()
+
+#--------------------STATEMENTS FOR ADDING NEW ROWS TO THE TABLES
+    #modled off of https://dev.mysql.com/doc/connector-python/en/connector-python-example-cursor-transaction.html
+add_user = ("INSERT INTO Users "
+            "(User_ID, Username, Password, Auth_Level, Max_Credits, Summer_Courses) "
+            "VALUES (%d, %s, %s, %d, %d)")
+
+add_Degree = ("INSERT INTO Degrees "
+               "(Degree_ID, Degree_Name, Req_300_Credits, Req_400_Credits) "
+               "VALUES (%d, %s, %d, %d)")
+
+add_Pursued_Degree = ("INSERT INTO Pursued_Degrees "
+               "(Pursued_ID, User_ID_FK, Degree_ID_FK) "
+               "VALUES (%d, %d, %d)")
+
+add_Course = ("INSERT INTO Courses "
+               "(Course_ID, Course_Name, Has_Prereqs) "
+               "VALUES (%d, %s, %d)")
+
+add_Prereq = ("INSERT INTO Prereqs "
+               "(Prereq_ID, Course_ID_FK, Course_ID_Dependent_FK) "
+               "VALUES (%d, %d, %d)")
+
+add_Course_Taken = ("INSERT INTO Courses_Taken "
+               "(Taken_ID, User_ID_FK, Course_ID_FK, Term_Taken) "
+               "VALUES (%d, %d, %d, %d)")
+
+#need to create function for making table creating statement and row adding statement for new degree table
