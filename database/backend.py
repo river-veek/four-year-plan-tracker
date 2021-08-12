@@ -78,6 +78,7 @@ TABLES['Courses'] = (
     "   `Course_ID` INT(7) NOT NULL AUTO_INCREMENT,"
     "   `Course_Name` VARCHAR(50) NOT NULL,"
     "   `Has_Prereqs` INT(1) NOT NULL DEFAULT 0,"
+    "   `Difficulty_Level` INT(2) NOT NULL DEFAULT 5,"
     "   PRIMARY KEY(`Course_ID`),"
     "   UNIQUE(`Course_ID`, `Course_Name`)"
     ")"
@@ -184,8 +185,8 @@ add_Pursued_Degree = ("INSERT INTO Pursued_Degrees "
                "VALUES (%d, %d, %d)")
 
 add_Course = ("INSERT INTO Courses "
-               "(Course_ID, Course_Name, Has_Prereqs) "
-               "VALUES (%d, %s, %d)")
+               "(Course_ID, Course_Name, Has_Prereqs, Difficulty_Level) "
+               "VALUES (%d, %s, %d, %d)")
 
 add_Prereq = ("INSERT INTO Prereqs "
                "(Prereq_ID, Course_ID_FK, Course_ID_Dependent_FK) "
