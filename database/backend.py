@@ -94,8 +94,11 @@ def create_DB_tables():
         "CREATE TABLE `Courses` ("
         "   `Course_ID` INT(7) NOT NULL AUTO_INCREMENT,"
         "   `Course_Name` VARCHAR(50) NOT NULL,"
+        "   `Course_Number` INT(8) NOT NULL,"
         "   `Has_Prereqs` INT(1) NOT NULL DEFAULT 0,"
         "   `Difficulty_Level` INT(2) NOT NULL DEFAULT 5,"
+        "   `Terms` INT(2) NOT NULL DEFAULT 0,"
+        "   `Num_Credits` INT(2) NOT NULL DEFAULT 4,"
         "   PRIMARY KEY(`Course_ID`),"
         "   UNIQUE(`Course_ID`, `Course_Name`)"
         ")"
@@ -190,26 +193,11 @@ def create_degree_table(degree_name):
 #--------------------STATEMENTS FOR ADDING NEW ROWS TO THE TABLES
     #modled off of https://dev.mysql.com/doc/connector-python/en/connector-python-example-cursor-transaction.html
 
-add_Degree = ("INSERT INTO Degrees "
-               "(Degree_ID, Degree_Name, Req_300_Credits, Req_400_Credits) "
-               "VALUES (%s, %s, %s, %s)")
-
-add_Pursued_Degree = ("INSERT INTO Pursued_Degrees "
-               "(Pursued_ID, User_ID_FK, Degree_ID_FK) "
-               "VALUES (%s, %s, %s)")
-
-add_Course = ("INSERT INTO Courses "
-               "(Course_ID, Course_Name, Has_Prereqs, Difficulty_Level) "
-               "VALUES (%s, %s, %s, %s)")
-
-add_Prereq = ("INSERT INTO Prereqs "
-               "(Prereq_ID, Course_ID_FK, Course_ID_Dependent_FK) "
-               "VALUES (%s, %s, %s)")
-
 add_Course_Taken = ("INSERT INTO Courses_Taken "
                "(Taken_ID, User_ID_FK, Course_ID_FK, Term_Taken) "
                "VALUES (%s, %s, %s, %s)")
 
+#need to add functionality to encript the user password (should use a hash)
 def add_user(User_ID, Username, Password, Auth_Level, Max_Credits, Summer_Courses):
     """
     Function for accessing the system database and updating a new row of data to
@@ -271,13 +259,157 @@ def add_degree(Degree_ID, Degree_Name, Req_300_Credits, Req_400_Credits):
     cnx = mysql.connector.connect(user='FYPT_admin', password='330_PTSD_', database='test-database-1')
     cursor = cnx.cursor()
 
-    new_user = (Degree_ID, Degree_Name, Req_300_Credits, Req_400_Credits)
+    new_degree = (Degree_ID, Degree_Name, Req_300_Credits, Req_400_Credits)
 
     add_degree_statement = ("INSERT INTO Degrees "
                             "(Degree_ID, Degree_Name, Req_300_Credits, Req_400_Credits) "
                             "VALUES (%s, %s, %s, %s)")
 
-    cursor.execute(add_user_statement, new_user)
+    cursor.execute(add_degree_statement, new_degree)
+
+    # Make sure data is committed to the database
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+def add_pursued_degree(Pursued_ID, User_ID_FK, Degree_ID_FK):
+    """
+    Function for accessing the system database and updating a new row of data to
+    the Pursued Degree table
+
+    Inputs:
+        Pursued_ID - (int) Unique number identifier connected with the pursued degree
+        User_ID_FK - (int) Foreign key into the Users table to the student
+                     pursuing the degree
+        Degree_ID_FK - (int) Foreign key into the Degree table of the degree the
+                        student is pursuing
+
+    Returns:
+        None
+    """
+
+    #connect to the DB
+    cnx = mysql.connector.connect(user='FYPT_admin', password='330_PTSD_', database='test-database-1')
+    cursor = cnx.cursor()
+
+    new_pursued_degree = (Pursued_ID, User_ID_FK, Degree_ID_FK)
+
+    add_pursued_degree_statement = ("INSERT INTO Pursued_Degrees "
+                                    "(Pursued_ID, User_ID_FK, Degree_ID_FK) "
+                                    "VALUES (%s, %s, %s)")
+
+    cursor.execute(add_pursued_degree_statement, new_pursued_degree)
+
+    # Make sure data is committed to the database
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+def add_course(Course_ID, Course_Name, Course_Number, Has_Prereqs, Difficulty_Level, Terms, Num_Credits):
+    """
+    Function for accessing the system database and updating a new row of data to
+    the Course table
+
+    Inputs:
+        Course_ID  - (int) Unique number identifier connected with the course
+        Course_Name - (str) String identifier for the course
+        Course_Number - (int) The Course number assigned to the course by the university
+        Has_Prereqs - (int) A boolean indicator of whether or not the course
+                      possesses any courses that must be taken before it. If the
+                      Prereq column stores a 1 then the system will need to refer to
+                      the Prerequisite table to trace all of the course requirements.
+        Difficulty_Level - (int) Value on a scale of 1-5 of how difficult the
+                           course is considered to be
+        Terms - (int) 4 digit binary number repersenting what terms the course is
+                offered during.
+                      1  -   1    -   1    -   1
+                    Fall - Winter - Spring - Summer
+        Num_Credits - (int) Value of the number of credits the course is
+
+    Returns:
+        None
+    """
+
+    #connect to the DB
+    cnx = mysql.connector.connect(user='FYPT_admin', password='330_PTSD_', database='test-database-1')
+    cursor = cnx.cursor()
+
+    new_course = (Course_ID, Course_Name, Course_Number, Has_Prereqs, Difficulty_Level, Terms, Num_Credits)
+
+    add_course_statement = ("INSERT INTO Courses "
+                            "(Course_ID, Course_Name, Course_Number, Has_Prereqs, Difficulty_Level, Terms, Num_Credits) "
+                            "VALUES (%s, %s, %s, %s, %s, %s, %s)")
+
+    cursor.execute(add_course_statement, new_course)
+
+    # Make sure data is committed to the database
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+def add_prereq(Prereq_ID, Course_ID_FK, Course_ID_Dependent_FK):
+    """
+    Function for accessing the system database and updating a new row of data to
+    the Prereq table
+
+    Inputs:
+        Prereq_ID - (int) Unique number identifier connected with the prereq
+        Course_ID_FK - (int) Foreign key into the Course table to course that IS
+                        the prereq
+        Course_ID_Dependent_FK - (int) Foreign key into the Course table to course
+                                that the prereq is dependent on
+
+    Returns:
+        None
+    """
+
+    #connect to the DB
+    cnx = mysql.connector.connect(user='FYPT_admin', password='330_PTSD_', database='test-database-1')
+    cursor = cnx.cursor()
+
+    new_prereq = (Prereq_ID, Course_ID_FK, Course_ID_Dependent_FK)
+
+    add_prereq_statement = ("INSERT INTO Prereqs "
+                   "(Prereq_ID, Course_ID_FK, Course_ID_Dependent_FK) "
+                   "VALUES (%s, %s, %s)")
+
+    cursor.execute(add_prereq_statement, new_prereq)
+
+    # Make sure data is committed to the database
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+def add_course_taken(Taken_ID, User_ID_FK, Course_ID_FK, Term_Taken) :
+    """
+    Function for accessing the system database and updating a new row of data to
+    the Pursued Degree table
+
+    Inputs:
+        Taken_ID - (int) Unique number identifier connected with the prereq
+        User_ID_FK - (int) Foreign key into the Users table to the student
+                     taking the course
+        Course_ID_FK - (int) Foreign key into the Course table to course that is
+                        being taken by the student
+        Term_Taken - (str) a string in the form (year, term). For example “10”
+                     represents freshman year fall term, “33” represents junior
+                     year summer term.
+
+    Returns:
+        None
+    """
+
+    #connect to the DB
+    cnx = mysql.connector.connect(user='FYPT_admin', password='330_PTSD_', database='test-database-1')
+    cursor = cnx.cursor()
+
+    new_course_take = (Taken_ID, User_ID_FK, Course_ID_FK, Term_Taken)
+
+    add_course_taken_statement = ("INSERT INTO Courses_Taken "
+                                  "(Taken_ID, User_ID_FK, Course_ID_FK, Term_Taken) "
+                                "VALUES (%s, %s, %s, %s)")
+
+    cursor.execute(add_course_take_statement, new_course_take)
 
     # Make sure data is committed to the database
     cnx.commit()
